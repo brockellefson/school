@@ -1,0 +1,106 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{CSCI 305 HW0}
+\author{Brock Ellefson}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Regular Expressions and DFA}
+Either nothing or exactly one a followed by exactly one b; the ab pattern can be repeated. Example outputs: ab, ababababab, ababab
+
+$\varepsilon$
+$\vert$(ab)*
+\section{Set Operations}
+	\subsection{A $\cup$ B}
+	$\{$1,2,2,3,3,5$\}$
+	\subsection{A $\cap$ B}
+	$\{$2,3$\}$
+	\subsection{A $\backslash$ B}
+	$\{$1$\}$
+\section{Symbolic Notation}
+For all x's that are real, there exists a y that x that is greater than y and y in the subset z
+\section{Basic Algorithms and Data Structures}
+Assuming these are sorted least to greatest
+\subsection {}
+If L is empty then make the node as head and return it.
+
+
+If value of the element is smaller than the head node then this element to be inserted will now be the head.
+
+
+In a loop starting at the head, check current value of each node, iterate until you find a node with a value greater than this new element to be inserted. Insert new node before node of greater value
+
+This will be completed in O$(\,$n$)\,$
+\subsection{}
+This can be achieved by using Binary Search.  O$(\,$logn$)\,$
+
+Check the value of the middle element of the array
+
+If it is greater than mid value, check the value of the middle of mid and end of array.
+
+
+If it is less than mid value, check the value of the middle of mid and beggining of array 
+
+
+repeat until 'mid' is equal to element you are trying to find, if it is never equal, the value does not exist in the array.
+
+\section{Code Understanding}
+This code takes a array (size 12 in this case) with each element being a random size of 1-10 and finds the largest and smallest value.
+
+\end{document}
