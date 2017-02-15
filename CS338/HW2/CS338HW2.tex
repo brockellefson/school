@@ -132,9 +132,37 @@
 \newpage
 \section{Finite Automata to Regular Expression}
 %Problem 1.21a 
-
+(a$^{\ast}$ba$^{\ast}$) U (a$^{\ast}$ba$^{\ast}$b)$^{\ast}$a$^{\ast}$ba$^{\ast}$
 
 \section{Pumping Lemma}
 \subsection{A = $\{$a$^{n}$$^{3}$$\mid$n$\geq$0$\}$}
+Assume that A is a regular language. S = a$^{p}$$^{3}$\\
+By the pumping lemma, S can be decomposed into xyz such that\\
+ xy$^{i}$z $\in$ A \\
+ $\mid$y$\mid$ $>$ 0 \\
+ $\mid$xy$\mid$ $\leq$ P\\
+As  xy$^{i}$z $\in$ A , y can only contains 1 'a' per pump\\
+So, if we pump 2 times (i = 2),\\
+xyz:\\
+00000000\\
+xyyz:\\
+000000000\\
+Then there will be 9 'a's after the second pump. This is not in the language.\\
+This contradicts the pumping lemma\\
+Therefore B is not a regular language.
+
 \subsection{B = $\{$0$^{n}$1$^{m}$0$^{n}$$\mid$m,n$\geq$0$\}$}
+
+Assume that B is a regular language. S = 0$^{p}$10$^{p}$\\
+By the pumping lemma, S can be decomposed into xyz such that\\
+ xy$^{i}$z $\in$ A \\
+ $\mid$y$\mid$ $>$ 0 \\
+ $\mid$xy$\mid$ $\leq$ P\\
+ \\
+As $\mid$xy$\mid$ $\leq$ P, y can only contains k $>$ 0 amount of 0's.\\
+So, if we pump 0 times (i = 0),\\
+xy$^{0}$z\\
+Then there will be 0$^{p-k}$ on the first set of 0's and 0$^{p}$ on the second set of 0's\\
+This contradicts the pumping lemma\\
+Therefore B is not a regular language.
 \end{document}

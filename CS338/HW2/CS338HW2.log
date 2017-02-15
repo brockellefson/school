@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.21)  14 FEB 2017 14:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.21)  14 FEB 2017 22:06
 entering extended mode
 **./CS338HW2.tex
 (CS338HW2.tex
@@ -703,25 +703,32 @@ File: dfa8.png Graphic file (type png)
 <use dfa8.png>
 Package pdftex.def Info: dfa8.png used on input line 128.
 (pdftex.def)             Requested size: 399.74246pt x 181.23917pt.
- [3 <./dfa7.png> <./dfa8.png>] [4] (CS338HW2.aux) ) 
+ [3 <./dfa7.png> <./dfa8.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 156--168
+
+ []
+
+[4] (CS338HW2.aux) ) 
 Here is how much of TeX's memory you used:
  4338 strings out of 493333
  64006 string characters out of 3139194
- 135582 words of memory out of 3000000
+ 136582 words of memory out of 3000000
  7804 multiletter control sequences out of 15000+200000
  9705 words of font info for 34 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,10n,43p,244b,304s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on CS338HW2.pdf (4 pages, 173752 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmsy8.pfb>
+Output written on CS338HW2.pdf (4 pages, 193083 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
+ 68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
