@@ -1,0 +1,45 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Brock Ellefson}
+\title{CSCI 305 HW2}
+\begin{document}
+\maketitle
+\* Discussed ideas with Trent Baker \*
+\section{Operational Semantics}
+
+\section{Scoping}
+Mark 1:\\
+Definition 1: a\\
+Definition 2: b,c,d\\\\
+Mark 2:\\
+Definition 1: a\\
+Definition 2: b\\
+Definition 3: c,d,e\\\\
+Mark 3:\\
+Definition 1: a\\
+Definition 2: b,c,d\\\\
+Mark 4:\\
+Definition 1: a,b,c
+\section{Conditional Expressions}
+k will equal 3 at the end of the loop\\
+Because of short-circuit evaluation, in the line:
+\begin{verbatim}
+if (i % 2 == 0 && foo() % 2 == 0)
+\end{verbatim}
+foo() will not be executed if i is odd, thus causing j to not be called. This makes k to not increment as frequently. 
+\section{Array Representations}
+
+\section{Primitive Data Types}
+1. Primitives are not mutable, meaning that you can reassign the variable. This is a really frustrating problem to deal with especially in interpreted languages. \\
+2. Undoes polymorphism. In other words, int is required except in special cases, Integer is requested \\
+3. Floating types cannot be completely accurate. 
+\section{Loops}
+
+\section{Bibliography}
+Alpert, S. R. (1998). Primitive Types Considered Harmful [Abstract]. Java Report, 3, 11. Retrieved February 23, 2017, from https://www.research.ibm.com/people/a/alpert/ptch/ptch.html
+
+\end{document}
