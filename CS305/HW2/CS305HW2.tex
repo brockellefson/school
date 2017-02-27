@@ -5,11 +5,12 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \author{Brock Ellefson}
-\title{CSCI 305 HW2}
+\title{CSCI305 HW2}
 \begin{document}
 \maketitle
-\* Discussed ideas with Trent Baker \*
+$\ast$ Discussed ideas with Trent Baker $\ast$
 \section{Operational Semantics}
+
 
 \section{Scoping}
 Mark 1:\\
@@ -31,15 +32,38 @@ Because of short-circuit evaluation, in the line:
 if (i % 2 == 0 && foo() % 2 == 0)
 \end{verbatim}
 foo() will not be executed if i is odd, thus causing j to not be called. This makes k to not increment as frequently. 
+
 \section{Array Representations}
+
+Ragged (or Jagged) array can be created by the following
+\begin{verbatim}
+int jArray[][] = new int[2][]; //create an array with 2 rows and null columns 
+jArray[0] = new int[5]; //this row will have 5 columns
+jArray[1] = new int[7]; //this row will have 7 columns
+\end{verbatim}
+So basically, create a(in this example) 2-d array, then iterate through each row and and define how many columns each row has. Now it should act similar to a normal array I.E. if I tried to access jArray[0][6] it will throw an ArrayIndexOutOfBoundsException. However if I enter say, jArray[0][1] it will return whatever value is in there.
 
 \section{Primitive Data Types}
 1. Primitives are not mutable, meaning that you can reassign the variable. This is a really frustrating problem to deal with especially in interpreted languages. \\
 2. Undoes polymorphism. In other words, int is required except in special cases, Integer is requested \\
 3. Floating types cannot be completely accurate. 
+
 \section{Loops}
+(found on page 363 of textbook)\\
+1. What are the type and scope of the loop variable?
+
+
+-Whether the loop variable is a normal variable or if it should have some special scope.\\\\
+2. Should it be legal for the loop variable or loop parameters to be changed in the loop, and if so, does the change affect loop control?
+
+-Allowing the user to change the loop variable or parameters in the loop can lead to difficult to understand code. So, is this flexibility worth the extra complexity?\\\\
+3. Should the loop parameters be evaluated only once, or once for every iteration? 
+
+-The number of times and the specific time the loop params are evaluated 
 
 \section{Bibliography}
 Alpert, S. R. (1998). Primitive Types Considered Harmful [Abstract]. Java Report, 3, 11. Retrieved February 23, 2017, from https://www.research.ibm.com/people/a/alpert/ptch/ptch.html
+\\\\
+Jagged Array in Java. (2017, February 13). Retrieved February 26, 2017, from http://www.geeksforgeeks.org/jagged-array-in-java/
 
 \end{document}
