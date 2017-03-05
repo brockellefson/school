@@ -7,4 +7,43 @@
 \title{CSCI338 HW3}
 \begin{document}
 \maketitle
+
+\section{Context-Free Grammers}
+\subsection{$\lbrace$ a$^{n}$b$^{m}$ $\mid$ n $\neq$ 2m $\rbrace$}
+	S $\rightarrow$ aaSb $\mid$ A $\mid$ B \\
+	A $\rightarrow$ aA $\mid$ a \\
+	B $\rightarrow$ bB $\mid$ b
+	
+\subsection{$\lbrace$ a$^{i}$ b$^{j}$ c$^{k}$ $\mid$ i, j, k $\geq$ 0 j = k or j = i $\rbrace$}
+	S $\rightarrow$ $S_{1}$ $\mid$ $S_{2}$ \\
+	$S_{1}$  $\rightarrow$ ab$S_{1}$ $\mid$ A $\mid$ $\epsilon$ \\
+	A $\rightarrow$ cA $\mid$ c $\mid$ $\epsilon$ \\
+	$S_{2}$ $\rightarrow$ a $S_{2}$ $\mid$ B $\mid$ $\epsilon$ \\
+	B $\rightarrow$ Bbc $\mid$ bc $\mid$ $\epsilon$
+	
+\subsection{$\lbrace$ a$^{n}$ b$^{m}$ $\mid$ n = 3m $\rbrace$}
+	S $\rightarrow$ aaaSb $\mid$ $\epsilon$ \\
+	
+\subsection{$\lbrace$ a$^{n}$ b$^{m}$ $\mid$ n $\leq$ m + 3 $\rbrace$}	
+	S $\rightarrow$ aSb $\mid$ A \\
+	A $\rightarrow$ a $\mid$ aa $\mid$ aaa $\mid$ B \\
+	B $\rightarrow$ bB  $\mid$ $\epsilon$
+	
+	
+	
+	
+	 \newpage
+	 
+\section{Ambiguous Grammer}
+	Can I construct an identical string using two different paths?\\
+	Lets construct the string aab\\
+	S $\rightarrow$ aaB $\rightarrow$ b $\rightarrow$ aab \\\\
+	S $\rightarrow$ AB:\\
+	A $\rightarrow$ aA $\rightarrow$ aa\\
+	B $\rightarrow$ b\\
+	$\rightarrow$ aab\\
+	This language is ambiguous
+	
+\section{CFG to PDA}
+
 \end{document}
