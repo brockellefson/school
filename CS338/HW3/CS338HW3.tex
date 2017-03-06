@@ -29,11 +29,7 @@
 	A $\rightarrow$ a $\mid$ aa $\mid$ aaa $\mid$ B \\
 	B $\rightarrow$ bB  $\mid$ $\epsilon$
 	
-	
-	
-	
-	 \newpage
-	 
+ 
 \section{Ambiguous Grammer}
 	Can I construct an identical string using two different paths?\\
 	Lets construct the string aab\\
@@ -47,12 +43,54 @@
 \section{CFG to PDA}
 
 
-\section{Pumping Lemma}
+\section{Pumping Lemma with Regular Languages}
 \subsection{}
-	This langauge accepts some amount($\geq$ 0) of 0's followed by atleast 1, but no more than 2 \#, following by some amount ($\geq$ 0) of 0's
+	This langauge accepts some amount($\geq$ 0) of 0's followed by atleast 1, but no more than 2 \#, 			following by some amount ($\geq$ 0) of 0's or some amount of 0's followed by a \# then twice as 			many 0's as before\\
+	$\lbrace$ 0$^{n}$ \# 0$^{2n}$ $\rbrace$
+
 \subsection{}
-If G is a context free then there is a number P (Pumping length) such that S $\in$ and $\mid$S$\mid$ $\geq$ P then S can be decomposed into S = UVXYZ S.T.: \\
-1. uv$^{i}$xy$^{i}$z\\
-2. $\mid$vy$\mid$ $>$ 0 \\ 
-3. $\mid$vxy$\mid$ $\leq$ P
+	If G is a regular then there is a number P (Pumping length) such that S $\in$ and $\mid$S$					\mid$ $\geq$ P then S can be decomposed into S = XYZ S.T.: \\
+		1.xy$^{i}$z $\in$ G\\
+		2. $\mid$y$\mid$ $>$ 0 \\ 
+		3. $\mid$xy$\mid$ $\leq$ P\\
+		
+	S = 0$^{p}$ \#  0$^{2p}$\\
+	000\#000000\\
+	y can only contain either the first set or the second set of 0's. If we pump up y we will have an    	incorrect amount of 0's on either side. Therefore G is not a regular language. 
+	
+\section{Chomsky Normal Form}
+	A $\rightarrow$ BAB $\mid$ B $\mid$ $\epsilon$\\
+	B $\rightarrow$ 00 $\mid$ $\epsilon$\\
+	Add new start variable S$_{1}$ :\\
+		S$_{0}$	$\rightarrow$ A\\
+		A $\rightarrow$ BAB $\mid$ B $\mid$ $\epsilon$\\
+		B $\rightarrow$ 00 $\mid$ $\epsilon$\\		
+	Remove all $\epsilon$ :\\
+		S$_{0}$	$\rightarrow$ A\\
+		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ A $\mid$ B \\
+		B $\rightarrow$ 00\\
+	Remove unit rules:\\
+		S$_{0}$	$\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		B $\rightarrow$ 00\\
+	Add 'U' :\\
+		S$_{0}$	$\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		B $\rightarrow$ UU\\
+		U $\rightarrow$ 0\\
+	Simplify: \\
+		S$_{0}$	$\rightarrow$ BA$_{1}$ $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		A $\rightarrow$ BA$_{2}$ $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
+		B $\rightarrow$ UU\\
+		U $\rightarrow$ 0\\
+		A$_{1}$ $\rightarrow$ SB\\
+		A$_{2}$ $\rightarrow$ SB\\
+		
+\section{Pumping Lemma with Context-Free Languages}
+\subsection{L = $\lbrace$ a$^{n}$ b$^{j}$ c$^{k}$ $\mid$ k = nj $\rbrace$}
+
+
+
+\subsection{L = $\lbrace$ a$^{n}$ b$^{j}$ $\mid$ n $\geq$ (j - 1)$^{3}$ $\rbrace$}
+
 \end{document}
