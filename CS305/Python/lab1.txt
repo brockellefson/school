@@ -1,1 +1,22 @@
 Add your answers to the questions in the assignment
+1. Name something you like about Python. Explain.
+
+    WOW I LOVE INTERPRETED LANGUAGES. It was a little confusing at first, however, once I got the hang of it coding was a breeze.
+
+2. Name something you dislike about Python. Explain.
+
+    I feel like some operations are hard to accomplish. For instance, creating a bigram would have been far easier for me in Java or C.
+    Perhaps its because I am not very experienced in coding in Python
+
+3. Did you enjoy this lab? What aspects did you like/dislike?
+
+    It was fun learning about Python and using its advantages first hand.
+    I did not like getting an error that ive never heard of before and not knowing how to fix it
+
+4. Approximately how many hours did you spend on this lab (including learning Python)?
+
+    About 8 hours
+
+5. Do you think you will use Python again? For what kind of projects?
+
+    Yes. I will probably use it for fun with some side projects in the future

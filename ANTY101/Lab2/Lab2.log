@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.21)  5 MAR 2017 23:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  8 MAR 2017 10:46
 entering extended mode
 **./Lab2.tex
 (Lab2.tex
@@ -450,7 +450,7 @@ LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(C:\Users\brock\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count100
 \scratchdimen=\dimen114
@@ -519,35 +519,122 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 11.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 16.
+
 <house1pic1.png, id=8, 478.78876pt x 318.43968pt>
 File: house1pic1.png Graphic file (type png)
  <use house1pic1.png>
-Package pdftex.def Info: house1pic1.png used on input line 21.
+Package pdftex.def Info: house1pic1.png used on input line 19.
 (pdftex.def)             Requested size: 137.9979pt x 91.7815pt.
 
 <house1pic2.png, id=10, 476.53032pt x 316.93407pt>
 File: house1pic2.png Graphic file (type png)
  <use house1pic2.png>
-Package pdftex.def Info: house1pic2.png used on input line 26.
+Package pdftex.def Info: house1pic2.png used on input line 24.
 (pdftex.def)             Requested size: 137.9979pt x 91.78278pt.
 
-[2 <./house1pic1.png> <./house1pic2.png>] (Lab2.aux) ) 
+<house2pic1.png, id=11, 533.74406pt x 276.28218pt>
+File: house2pic1.png Graphic file (type png)
+ <use house2pic1.png>
+Package pdftex.def Info: house2pic1.png used on input line 36.
+(pdftex.def)             Requested size: 137.9979pt x 71.43117pt.
+
+<house2pic2.png, id=12, 527.72156pt x 307.1475pt>
+File: house2pic2.png Graphic file (type png)
+ <use house2pic2.png>
+Package pdftex.def Info: house2pic2.png used on input line 41.
+(pdftex.def)             Requested size: 137.9979pt x 80.31575pt.
+ [2 <./house1pic1.png> <./house1pic2.png> <./house2pic1.png> <./house2pic2.png>
+]
+<house3pic1.png, id=20, 534.49687pt x 307.90031pt>
+File: house3pic1.png Graphic file (type png)
+ <use house3pic1.png>
+Package pdftex.def Info: house3pic1.png used on input line 54.
+(pdftex.def)             Requested size: 137.9979pt x 79.4931pt.
+
+<house3pic2.png, id=21, 517.935pt x 302.63063pt>
+File: house3pic2.png Graphic file (type png)
+ <use house3pic2.png>
+Package pdftex.def Info: house3pic2.png used on input line 59.
+(pdftex.def)             Requested size: 137.9979pt x 80.6308pt.
+
+<house4pic1.jpg, id=22, 4047.12pt x 3035.34pt>
+File: house4pic1.jpg Graphic file (type jpg)
+ <use house4pic1.jpg>
+Package pdftex.def Info: house4pic1.jpg used on input line 70.
+(pdftex.def)             Requested size: 86.25pt x 64.65643pt.
+
+Underfull \hbox (badness 1694) in paragraph at lines 71--71
+[]\OT1/cmr/m/n/10 Figure 7: Bax-ter
+ []
+
+<house4pic2.jpg, id=23, 351.3125pt x 457.71pt>
+File: house4pic2.jpg Graphic file (type jpg)
+ <use house4pic2.jpg>
+Package pdftex.def Info: house4pic2.jpg used on input line 75.
+(pdftex.def)             Requested size: 86.25pt x 112.36691pt.
+
+Underfull \hbox (badness 1694) in paragraph at lines 76--76
+[]\OT1/cmr/m/n/10 Figure 8: Bax-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--92
+
+ []
+
+
+Overfull \hbox (73.91762pt too wide) in paragraph at lines 80--92
+\OT1/cmr/m/n/10 http://www.searchbozemanareahomes.com/homes/mt/bozeman/gallmtre
+sad217654217654/719-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--92
+
+ []
+
+
+Overfull \hbox (73.91762pt too wide) in paragraph at lines 80--92
+\OT1/cmr/m/n/10 http://www.searchbozemanareahomes.com/homes/mt/bozeman/gallmtre
+sad216381216381/725-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--92
+
+ []
+
+
+Overfull \hbox (73.91762pt too wide) in paragraph at lines 80--92
+\OT1/cmr/m/n/10 http://www.searchbozemanareahomes.com/homes/mt/bozeman/gallmtre
+sad218566218566/711-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--92
+
+ []
+
+[3 <./house3pic1.png> <./house3pic2.png> <./house4pic1.jpg> <./house4pic2.jpg>]
+[4] (Lab2.aux) ) 
 Here is how much of TeX's memory you used:
- 2680 strings out of 493333
- 33383 string characters out of 3139194
- 92754 words of memory out of 3000000
- 6171 multiletter control sequences out of 15000+200000
+ 2711 strings out of 493333
+ 33961 string characters out of 3139194
+ 94754 words of memory out of 3000000
+ 6195 multiletter control sequences out of 15000+200000
  8584 words of font info for 33 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,7n,25p,470b,281s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr17.pfb>
-Output written on Lab2.pdf (2 pages, 1217414 bytes).
+ 40i,7n,25p,803b,283s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on Lab2.pdf (4 pages, 7039534 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
+ 42 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
