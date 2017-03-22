@@ -15,8 +15,24 @@ Add your answers to the questions in the assignment
 
 4. Approximately how many hours did you spend on this lab (including learning Python)?
 
-    About 8 hours
+    About 5 hours
 
 5. Do you think you will use Python again? For what kind of projects?
 
     Yes. I will probably use it for fun with some side projects in the future
+
+
+I had a lot of help from the following:
+    https://docs.python.org/2/library/collections.html#collections.defaultdict
+
+    https://docs.python.org/3/library/functions.html#zip
+
+    https://docs.python.org/3/library/re.html
+
+    https://docs.python.org/2/library/itertools.html
+
+    https://docs.python.org/3/library/itertools.html#itertools.islice
+
+    https://docs.python.org/2/library/collections.html#collections.Counter
+
+    http://stackoverflow.com/questions/12488722/counting-bigrams-pair-of-two-words-in-a-file-using-python
