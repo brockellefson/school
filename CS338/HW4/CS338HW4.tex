@@ -13,7 +13,7 @@
 \section*{Question 1}
 Let $\beta$ be the set of all infinite sequences over $\lbrace$a,b$\rbrace$. Show that $\beta$ is uncountable,
 using a proof by diagonalization.\\
-Assume that $\beta$ is countable, then we can list them as $\beta$$_{1}$ $\beta$$_{1}$
+Assume that $\beta$ is countable, then we can list them as $\beta$$_{1}$ , $\beta$$_{2}$
 \begin{table}[h]
 \centering
 \begin{tabular}{l|lll}
@@ -28,17 +28,21 @@ i & {\ul } & f(i) &     \\ \hline
 \centering
 \begin{tabular}{l|lll}
 i & {\ul } & f(i) &   \\ \hline
-1 & 0      & 0 & 0... \\
-2 & 1      & 0 & 1... \\
-3 & 1      & 1 & 1...
+1 & a      & a & a... \\
+2 & b      & a & b... \\
+3 & b      & b & b...
 \end{tabular}
 \end{table}
-\\Lets define x as x = (1, 1, 0...) thus making x $\neq$ $\beta$ for any i$^{th}$ sequence in the i$^{th}$ bit. Therefore $\beta$ is uncountable.
+\\Lets define x as x = (b, b, a...) thus making x $\neq$ $\beta$ for any i$^{th}$ sequence in the i$^{th}$ bit. Therefore $\beta$ is uncountable.
 
 \section*{Question 2}
+Let T = $\lbrace$(i,j,k)$\mid$ i,j,k $\epsilon$ N $\rbrace$. Show that T is countable.\\
 
 \section*{Question 3}
+Show that INFINITE$_{PDA}$ is decidable\\
+To decide INFINITE$_{PDA}$ convert PDA into equivalent CFG, let P be the pumping length. Construct regular language R that accepts strings longer than P. Intersect of CFL and regular languages is a CFL. Test this intersection for emptiness, accept if L of the intersection is empty, reject otherwise.
 \section*{Question 4}
+
 \section*{Question 5}
 Show that EQ$_{CFG}$ is undecidable.\\
 Assume that EQ$_{CFG}$ is decideable\\
@@ -59,8 +63,10 @@ Construct CFG T such that L(T) = $\Sigma$$^{\ast}$
 R decides if L(G) = L(T). S decides ALL$_{CFG}$ but it is undecidable, therefore EQ$_{CFG}$ must also be undecidable 
 
 \section*{Question 6}
-
-
+Show that EQ$_{CFG}$ is co-Turing-recognizable.\\\\
+A language is co-turning recognizable if and only if its complement is a turning-recognizable language.\\
+\\
+Convert G and H into Chomsky normal form. Begin iterating through the strings in $\Sigma$$^{\ast}$. If both G or H can generate or not generate the string a TM will continue on the interation of strings, however, if one CFG accepts a string and the other does not, that means that the CFG's are not equvilent and the TM accepts. Therefore EQ$_{CFG}$  is co-turning recognizeable.
 \section*{Question 7}
 
 \end{document}
