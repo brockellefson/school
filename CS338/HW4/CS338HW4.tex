@@ -41,8 +41,18 @@ By definition, the set T is countable iff:\\
 If there exists an injective function f from T to the natural numbers\\
 If f is surjective\\
 If T has a one-to-one correspondence with natural numbers\\
+\\\\
+Construct a 1-1 and onto function f: T $\rightarrow$ N\\
+We know that A = $\lbrace$(i,j)$\mid$ i,j $\epsilon$ N $\rbrace$ is countable\\
+The function g((i,j),k) = (i + j)(i + j + 1)/2 + j is a 1-1 correspondence from T on N\\
+Assume that f($<$i,j,k$>$) = f($<$i$^{'}$, j$^{'}$, k$^{'}$$>$)\\
+Therefore g($<$g($<$i,j$>$,k)$>$) = g($<$g($<$i$^{'}$,j$^{'}$$>$,k$^{'}$)$>$)\\
+This makes g a 1-1, therefore f is 1-1\\
 \\
- 
+Since n $\epsilon$ N, then g($<$m,k$>$) = n for some m,k that is also in N\\
+g($<$i,j$>$) = m for some i,j in N\\
+Therefore f($<$i,j,k$>$) = g($<$m,k$<$) = g($<$g($<$i,j$>$),k$>$)\\
+Therefore T is countable.
 \section*{Question 3}
 Show that INFINITE$_{PDA}$ is decidable\\
 To decide INFINITE$_{PDA}$ convert PDA into equivalent CFG, let P be the pumping length. Construct regular language R that accepts strings longer than P. Intersect of CFL and regular languages is a CFL. Test this intersection for emptiness, accept if L of the intersection is empty, reject otherwise.
