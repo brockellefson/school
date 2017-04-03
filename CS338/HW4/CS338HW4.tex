@@ -58,7 +58,10 @@ Show that INFINITE$_{PDA}$ is decidable\\
 To decide INFINITE$_{PDA}$ convert PDA into equivalent CFG, let P be the pumping length. Construct regular language R that accepts strings longer than P. Intersect of CFL and regular languages is a CFL. Test this intersection for emptiness, accept if L of the intersection is empty, reject otherwise.
 \section*{Question 4}
 ODD$_{TM}$ = $\lbrace$ $<$M$>$ $\mid$ M is a TM and L(M) contains only strings of odd length $\rbrace$
-Prove that ODD$_{TM}$ is undecidable.
+Prove that ODD$_{TM}$ is undecidable.\\
+\\
+Reduce ALL$_{TM}$ to ODD$_{TM}$\\
+Assume that ODD$_{TM}$ is decidable. Let R be a decider for ODD$_{TM}$ and 
 \section*{Question 5}
 Show that EQ$_{CFG}$ is undecidable.\\
 Assume that EQ$_{CFG}$ is decideable\\
