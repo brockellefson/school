@@ -61,7 +61,11 @@ ODD$_{TM}$ = $\lbrace$ $<$M$>$ $\mid$ M is a TM and L(M) contains only strings o
 Prove that ODD$_{TM}$ is undecidable.\\
 \\
 Reduce ALL$_{TM}$ to ODD$_{TM}$\\
-Assume that ODD$_{TM}$ is decidable. Let R be a decider for ODD$_{TM}$ and 
+Assume that ODD$_{TM}$ is decidable. Let R be a decider for ODD$_{TM}$ and have R decide T on w:\\
+if R accepts, accept\\
+if R rejects, reject\\
+\\
+O(T) us a decuder for ODD$_{TM}$. Now build a decider for A$_{TM}$. This is impossible, therefore ODD$_{TM}$ is undecideable
 \section*{Question 5}
 Show that EQ$_{CFG}$ is undecidable.\\
 Assume that EQ$_{CFG}$ is decideable\\
@@ -87,5 +91,12 @@ A language is co-turning recognizable if and only if its complement is a turning
 \\
 Convert G and H into Chomsky normal form. Begin iterating through the strings in $\Sigma$$^{\ast}$. If both G or H can generate or not generate the string a TM will continue on the interation of strings, however, if one CFG accepts a string and the other does not, that means that the CFG's are not equvilent and the TM accepts. Therefore EQ$_{CFG}$  is co-turning recognizeable.
 \section*{Question 7}
-
+Post Correspondence Problem.\\
+	\begin{figure}[h]
+		\includegraphics[scale = .5]{338q7.png}
+  		\label{fig:PCP}
+	\end{figure}
+A working string is:\\
+11132124234244\\
+ababababababbaababaaabaaa
 \end{document}
