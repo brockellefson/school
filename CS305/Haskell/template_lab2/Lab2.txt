@@ -1,0 +1,17 @@
+Question 1: What did you get when running f with the input above?
+-[13,12,11,10,9,8]
+
+Question 2: What does this function f do?
+-given an array 'list', it will iterate through the list adding k to each element
+
+Question 3: What does [10, 9..5] do?
+-create an array from 10 to 5. [10,9,8,7,6,5]
+
+Question 4: Given a comment that explains the line following (a).
+-if 'list' is empty.
+
+Question 5: Given a comment that explains the line following (b).
+-then return an empty list
+
+Question 6: Given a comment that explains the line following (c).
+-iterate through each element in the array and add k to the value
