@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  4 APR 2017 12:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  5 APR 2017 10:58
 entering extended mode
-**./CS338HW4.tex
-(CS338HW4.tex
+**./PolicyMemo.tex
+(PolicyMemo.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -435,47 +435,35 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-(C:\Users\brock\AppData\Roaming\MiKTeX\2.9\tex\latex\ulem\ulem.sty
-\UL@box=\box28
-\UL@hyphenbox=\box29
-\UL@skip=\skip46
-\UL@hook=\toks22
-\UL@height=\dimen114
-\UL@pe=\count100
-\UL@pixel=\dimen115
-\ULC@box=\box30
-Package: ulem 2012/05/18
-\ULdepth=\dimen116
-)
-(CS338HW4.aux)
-\openout1 = `CS338HW4.aux'.
+(PolicyMemo.aux)
+\openout1 = `PolicyMemo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 
 (C:\Users\brock\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count101
-\scratchdimen=\dimen117
-\scratchbox=\box31
-\nofMPsegments=\count102
-\nofMParguments=\count103
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count104
-\MPscratchDim=\dimen118
-\MPnumerator=\count105
-\makeMPintoPDFobject=\count106
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count100
+\scratchdimen=\dimen114
+\scratchbox=\box28
+\nofMPsegments=\count101
+\nofMParguments=\count102
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count103
+\MPscratchDim=\dimen115
+\MPnumerator=\count104
+\makeMPintoPDFobject=\count105
+\everyMPtoPDFconversion=\toks23
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -521,79 +509,62 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 12.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 12.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 39--56
+Underfull \hbox (badness 10000) in paragraph at lines 10--19
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--56
+Underfull \hbox (badness 10000) in paragraph at lines 22--25
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--56
+Underfull \hbox (badness 10000) in paragraph at lines 27--30
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--38
 
  []
 
 [1
 
-{C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 60--69
+{C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+<groupaval.png, id=11, 506.6428pt x 355.3275pt>
+File: groupaval.png Graphic file (type png)
+ <use groupaval.png>
+Package pdftex.def Info: groupaval.png used on input line 58.
+(pdftex.def)             Requested size: 253.32079pt x 177.6633pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--72
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 60--69
+Underfull \hbox (badness 10000) in paragraph at lines 66--72
 
  []
 
+[3 <./groupaval.png>] (PolicyMemo.aux)
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--94
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--94
-
- []
-
-[2] <338q7.png, id=18, 170.13562pt x 68.50594pt>
-File: 338q7.png Graphic file (type png)
- <use 338q7.png>
-Package pdftex.def Info: 338q7.png used on input line 97.
-(pdftex.def)             Requested size: 85.0676pt x 34.25288pt.
- [3 <./338q7.png>] (CS338HW4.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 2770 strings out of 493333
- 34307 string characters out of 3139194
- 97625 words of memory out of 3000000
- 6254 multiletter control sequences out of 15000+200000
- 10994 words of font info for 44 fonts, out of 3000000 for 9000
+ 2635 strings out of 493333
+ 32814 string characters out of 3139194
+ 95762 words of memory out of 3000000
+ 6145 multiletter control sequences out of 15000+200000
+ 4553 words of font info for 17 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,10n,25p,397b,236s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmsy7.pfb>
-Output written on CS338HW4.pdf (3 pages, 113107 bytes).
+ 40i,6n,25p,1004b,219s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on PolicyMemo.pdf (3 pages, 66246 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 27 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
