@@ -15,3 +15,24 @@ Question 5: Given a comment that explains the line following (b).
 
 Question 6: Given a comment that explains the line following (c).
 -iterate through each element in the array and add k to the value
+
+Question 7:
+-I like how few lines it takes to accomplish something. In other words, pattern matching and list comprehension are very cool.
+
+Question 8:
+-Everything. Even the simplest task took me forever. I understood and knew how to do everything, however it took my forever to look up correct syntaxes for it and overall felt awkward typing out all my methods.
+
+Question 9:
+-About 10 hours honestly :(
+I had to look up a ton of material about intersection and set eq in order to understand how to type these out properly in haskell
+Question 10:
+No
+
+Question 11:
+No
+
+references:
+http://learnyouahaskell.com/syntax-in-functions#pattern-matching
+http://learnyouahaskell.com/recursion#hello-recursion
+https://www.haskell.org/tutorial/classes.html
+http://stackoverflow.com/questions/15542328/checking-to-see-if-a-list-is-ordered-consecutively
