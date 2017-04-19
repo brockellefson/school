@@ -1,8 +1,8 @@
 
 module Lab2
 (f
-, fForIntegral
-, member
+,fForIntegral
+,member
 ,validSet
 ,setEQ
 ,unionEQ
@@ -42,11 +42,11 @@ validSet (a:b:as) = if a == b then False else validSet (b:as) --if head is equal
 -------------------------------------------------------------------------------
     -- Set eq
 setEQ:: (Eq a) => [a] -> [a] -> Bool --take an a list a, another list a, and returns a bool
-setEQ  as bs = [a | a <- as, member a bs] == as --take the intersection of a and b, if this new list is equal to as, then the two lists are the same
+setEQ  as bs = [a | a <- as, member a bs]  == as && length [a | a <- as, member a bs]  == length bs --take the intersection of a and b, if this new list is equal to as, then the two lists are the same
 -------------------------------------------------------------------------------
     -- Union
 unionEQ:: (Eq a) => [a] -> [a] -> [a] --take in 2 lists and returns a list
-unionEQ as bs = as ++ bs --adds both lists together
+unionEQ as bs = nub(as ++ bs) --adds both lists together, removing repeating elements
 
 -------------------------------------------------------------------------------
     -- Intersecton

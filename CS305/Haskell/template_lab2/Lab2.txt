@@ -31,6 +31,8 @@ No
 Question 11:
 No
 
+
+collaborators: Lizzie Andrews
 references:
 http://learnyouahaskell.com/syntax-in-functions#pattern-matching
 http://learnyouahaskell.com/recursion#hello-recursion
