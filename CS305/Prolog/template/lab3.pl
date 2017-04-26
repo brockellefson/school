@@ -46,7 +46,7 @@ byPlane(losAngeles,auckland).
 
 
 travel(A,B):- byCar(A,B); byTrain(A,B); byPlane(A,B).
-travel(A,C):-
+travel(A,B):-
   (byCar(A,C);
   byTrain(A,C);
   byPlane(A,C)),
