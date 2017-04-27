@@ -22,7 +22,7 @@ connected(16,19).
 
 
 path(A,B):- connected(A,B).
-path(A,C):-
+path(A,B):-
   connected(A,C),
   path(C,B).
 
@@ -54,6 +54,20 @@ travel(C,B).
 
 
 % Question 3
-
+travel(A,B,C):- travel(A,B), travel(B,C).
 
 % Extra Credit
+leaf(1).
+leaf(2).
+leaf(3).
+leaf(4).
+leaf(5).
+
+tree(A,B,Tree):- Tree = (A,B).
+
+swap(Tree,MTree):- rev(Tree, MTree).
+
+rev(L,R):-  accRev(L,[],R).
+
+accRev([H|T],A,R):-  accRev(T,[H|A],R).
+accRev([],A,A).
