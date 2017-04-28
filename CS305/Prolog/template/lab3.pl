@@ -21,10 +21,10 @@ connected(14,17).
 connected(16,19).
 
 
-path(A,B):- connected(A,B).
+path(A,B):- connected(A,B). %if A is connected to B, true
 path(A,B):-
   connected(A,C),
-  path(C,B).
+  path(C,B). %if A is connected to C and C is connected to B then A,B must be true
 
 % Question 2
 byCar(auckland,hamilton).
@@ -45,7 +45,7 @@ byPlane(singapore,auckland).
 byPlane(losAngeles,auckland).
 
 
-travel(A,B):- byCar(A,B); byTrain(A,B); byPlane(A,B).
+travel(A,B):- byCar(A,B); byTrain(A,B); byPlane(A,B). %Question 1 reformatted
 travel(A,B):-
   (byCar(A,C);
   byTrain(A,C);
@@ -54,7 +54,7 @@ travel(C,B).
 
 
 % Question 3
-travel(A,B,C):- travel(A,B), travel(B,C).
+travel(A,B,C):- travel(A,B), travel(B,C). %if A connectes to B and B connectes to C then A connectes to C
 
 % Extra Credit
 leaf(1).
@@ -63,11 +63,7 @@ leaf(3).
 leaf(4).
 leaf(5).
 
-tree(A,B,Tree):- Tree = (A,B).
+tree(A,B,C):- C = (A,B). %Tree(C) = A and B
 
-swap(Tree,MTree):- rev(Tree, MTree).
-
-rev(L,R):-  accRev(L,[],R).
-
-accRev([H|T],A,R):-  accRev(T,[H|A],R).
-accRev([],A,A).
+swap(leaf(A),leaf(A)).
+swap(tree(B,C),tree(D,E)) :- swap(B,E), swap(C,D). %switch the first element with the last element and the 2nd element with the 3rd element
