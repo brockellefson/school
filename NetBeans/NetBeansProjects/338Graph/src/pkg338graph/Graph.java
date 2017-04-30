@@ -15,8 +15,17 @@ public class Graph {
     
 public LinkedList<Node> graph;
 
+    public Graph(){
+        graph = new LinkedList<Node>();
+    }
+
     public void addCity(String city){
-        if(!graph.getLast().city.equals(city)){    
+        if(graph.size() == 0){
+            Node newNode = new Node();
+            newNode.city = city;
+            graph.add(newNode);            
+        }       
+        else if(!graph.getLast().city.equals(city)){    
             Node newNode = new Node();
             newNode.city = city;
             graph.add(newNode);

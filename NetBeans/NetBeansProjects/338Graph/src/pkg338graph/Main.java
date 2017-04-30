@@ -11,58 +11,39 @@ package pkg338graph;
  */
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 
 public class Main {
 
 	private static final String file = "city.txt";
 
-	public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
-		BufferedReader br = null;
-		FileReader fr = null;
-                Graph graph = new Graph();
-		try {
-
-			fr = new FileReader(file);
-			br = new BufferedReader(fr);
-
-			String sCurrentLine;
-
-			br = new BufferedReader(new FileReader(file));
-
-			while ((sCurrentLine = br.readLine()) != null) {
-                                String line[] = sCurrentLine.split(" ");
-                                graph.addCity(line[0]);
-                               // graph.addEdge(line[0], line[1], line[3]);
-				System.out.println(sCurrentLine);
-			}
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (br != null)
-					br.close();
-
-				if (fr != null)
-					fr.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-
-		}
-
-	}
-
+        Graph graph = new Graph();
+            
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        int limit = 0;
+        while((line = br.readLine()) != null && limit < 70) {
+            limit++;
+           // System.out.println(line);
+            String lines[] = line.split("  +");
+           // System.out.println("LOG: [0] " + lines[0] + " [1]: " + lines[1] + " [2]: " + lines[2]);
+            graph.addCity(lines[0]);
+            lines[2] = lines[2].replace(" ", "");
+            Integer weight = Integer.valueOf(lines[2]);
+            graph.addEdge(lines[0], lines[1], weight);
+        
+        }
+        
+    }
+        
+        
+        
 }
+
+		
