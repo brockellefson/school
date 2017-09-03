@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Graph.java</file>
-            <file>file:/C:/Users/Brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Main.java</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/city.txt</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Graph.java</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Node.java</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Main.java</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/SteinerTree.java</file>
+            <file>file:/C:/Users/brock/Documents/GitHub/school/NetBeans/NetBeansProjects/338Graph/src/pkg338graph/Tree.java</file>
         </group>
     </open-files>
 </project-private>

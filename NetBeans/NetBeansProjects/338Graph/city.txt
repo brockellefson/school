@@ -276,7 +276,6 @@ Big Timber             White Sulphur Springs        94
 Big Timber             Wibaux                      329
 Big Timber             Winnett                     155
 Big Timber             Wolf Point                  351
-
 Billings               Billings                      0
 Billings               Boulder                     225
 Billings               Bozeman                     142
@@ -475,7 +474,6 @@ Bozeman                White Sulphur Springs        80
 Bozeman                Wibaux                      390
 Bozeman                Winnett                     216
 Bozeman                Wolf Point                  412
-
 Broadus                Broadus                       0
 Broadus                Browning                    514
 Broadus                Butte                       392
@@ -540,7 +538,6 @@ Broadus                White Sulphur Springs       318
 Broadus                Wibaux                      180
 Broadus                Winnett                     237
 Broadus                Wolf Point                  248
-
 Browning               Browning                      0
 Browning               Butte                       236
 Browning               Chester                     100
@@ -604,7 +601,6 @@ Browning               White Sulphur Springs       224
 Browning               Wibaux                      495
 Browning               Winnett                     286
 Browning               Wolf Point                  367
-
 Butte                  Butte                         0
 Butte                  Chester                     273
 Butte                  Chinook                     289
@@ -667,7 +663,6 @@ Butte                  White Sulphur Springs       121
 Butte                  Wibaux                      472
 Butte                  Winnett                     289
 Butte                  Wolf Point                  475
-
 Chester                Chester                       0
 Chester                Chinook                      81
 Chester                Choteau                     117
@@ -729,7 +724,6 @@ Chester                White Sulphur Springs       227
 Chester                Wibaux                      395
 Chester                Winnett                     236
 Chester                Wolf Point                  267
-
 Chinook                Chinook                       0
 Chinook                Choteau                     191
 Chinook                Circle                      239
@@ -790,7 +784,6 @@ Chinook                White Sulphur Springs       233
 Chinook                Wibaux                      314
 Chinook                Winnett                     155
 Chinook                Wolf Point                  186
-
 Choteau                Choteau                       0
 Choteau                Circle                      357
 Choteau                Columbus                    267
@@ -850,7 +843,6 @@ Choteau                White Sulphur Springs       152
 Choteau                Wibaux                      432
 Choteau                Winnett                     214
 Choteau                Wolf Point                  377
-
 Circle                 Circle                        0
 Circle                 Columbus                    282
 Circle                 Conrad                      365
@@ -909,7 +901,6 @@ Circle                 White Sulphur Springs       311
 Circle                 Wibaux                       75
 Circle                 Winnett                     143
 Circle                 Wolf Point                   53
-
 Columbus               Columbus                      0
 Columbus               Conrad                      275
 Columbus               Cooke City                  114
@@ -967,7 +958,6 @@ Columbus               White Sulphur Springs       134
 Columbus               Wibaux                      289
 Columbus               Winnett                     139
 Columbus               Wolf Point                  335
-
 Conrad                 Conrad                        0
 Conrad                 Cooke City                  342
 Conrad                 Culbertson                  388
@@ -1024,7 +1014,6 @@ Conrad                 White Sulphur Springs       160
 Conrad                 Wibaux                      440
 Conrad                 Winnett                     222
 Conrad                 Wolf Point                  334
-
 Cooke City             Cooke City                    0
 Cooke City             Culbertson                  435
 Cooke City             Cut Bank                    389
@@ -1080,7 +1069,6 @@ Cooke City             White Sulphur Springs       182
 Cooke City             Wibaux                      374
 Cooke City             Winnett                     224
 Cooke City             Wolf Point                  420
-
 Culbertson             Culbertson                    0
 Culbertson             Cut Bank                    387
 Culbertson             Deer Lodge                  521
@@ -1135,7 +1123,6 @@ Culbertson             White Sulphur Springs       409
 Culbertson             Wibaux                      117
 Culbertson             Winnett                     241
 Culbertson             Wolf Point                   54
-
 Cut Bank               Cut Bank                      0
 Cut Bank               Deer Lodge                  243
 Cut Bank               Dillon                      309
@@ -1189,7 +1176,6 @@ Cut Bank               White Sulphur Springs       207
 Cut Bank               Wibaux                      461
 Cut Bank               Winnett                     269
 Cut Bank               Wolf Point                  333
-
 Deer Lodge             Deer Lodge                    0
 Deer Lodge             Dillon                       92
 Deer Lodge             East Glacier Park           239
@@ -1242,7 +1228,6 @@ Deer Lodge             White Sulphur Springs       130
 Deer Lodge             Wibaux                      505
 Deer Lodge             Winnett                     298
 Deer Lodge             Wolf Point                  467
-
 Dillon                 Dillon                        0
 Dillon                 East Glacier Park           305
 Dillon                 Ekalaka                     514
@@ -2619,4 +2604,3 @@ Winnett                Winnett                       0
 Winnett                Wolf Point                  196
 
 Wolf Point             Wolf Point                    0
-

@@ -27,18 +27,19 @@ public class Main {
             
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
-        int limit = 0;
-        while((line = br.readLine()) != null && limit < 70) {
+        int limit = 0; //first 20 cities
+        while((line = br.readLine()) != null && limit < 1200) {
             limit++;
            // System.out.println(line);
             String lines[] = line.split("  +");
-           // System.out.println("LOG: [0] " + lines[0] + " [1]: " + lines[1] + " [2]: " + lines[2]);
+           //System.out.println("LOG: [0] " + lines[0] + " [1]: " + lines[1] + " [2]: " + lines[2]);
             graph.addCity(lines[0]);
             lines[2] = lines[2].replace(" ", "");
             Integer weight = Integer.valueOf(lines[2]);
             graph.addEdge(lines[0], lines[1], weight);
         
         }
+        SteinerTree sTree = new SteinerTree(graph.graph);
         
     }
         

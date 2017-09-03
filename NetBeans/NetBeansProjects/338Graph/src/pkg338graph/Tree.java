@@ -6,19 +6,16 @@
 package pkg338graph;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author brock
  */
-public class Node{
-    public String city; //city name
-    public int weight; //weight to parent
-    public List<Node> children;
+public class Tree<T> {
+    public Node root;
 
-    public Node(String inCity, int inWeight){
-        city = inCity;
-        weight = inWeight;
+    public Tree(String city) {
+        root = new Node(city, 0); //the root of each city will have a distance of 0 to itself
+        root.children = new ArrayList<Node>(); //all children and weights
     }
 }
