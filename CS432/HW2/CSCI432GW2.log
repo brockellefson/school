@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  13 SEP 2017 23:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  13 SEP 2017 21:54
 entering extended mode
-**./CSCI432HW2.tex
-(CSCI432HW2.tex
+**./CSCI432GW2.tex
+(CSCI432GW2.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -435,8 +435,8 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-(CSCI432HW2.aux)
-\openout1 = `CSCI432HW2.aux'.
+(CSCI432GW2.aux)
+\openout1 = `CSCI432GW2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
@@ -519,44 +519,30 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 10.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 19--21
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--42
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--42
-
+Overfull \hbox (62.18967pt too wide) in paragraph at lines 24--24
+\OT1/cmr/bx/n/14.4 re-turns a uni-formly ran-dom num-ber in [0,RANDMAX-
  []
 
 [1
 
 {C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-(CSCI432HW2.aux) ) 
+(CSCI432GW2.aux) ) 
 Here is how much of TeX's memory you used:
- 2685 strings out of 493333
- 33482 string characters out of 3139194
- 94750 words of memory out of 3000000
- 6175 multiletter control sequences out of 15000+200000
- 11503 words of font info for 45 fonts, out of 3000000 for 9000
+ 2683 strings out of 493333
+ 33494 string characters out of 3139194
+ 94771 words of memory out of 3000000
+ 6176 multiletter control sequences out of 15000+200000
+ 11797 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,6n,25p,326b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,6n,25p,362b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb>
-Output written on CSCI432HW2.pdf (2 pages, 106922 bytes).
+mbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on CSCI432GW2.pdf (2 pages, 69036 bytes).
 PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
+ 29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

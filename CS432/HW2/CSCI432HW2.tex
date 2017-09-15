@@ -7,6 +7,8 @@
 \author{Brock Ellefson}
 \title{CS432 HW2}
 \begin{document}
+\maketitle
+with collaboration : Seth Severa, Yue Hou
 \section{Prove that the while loop
 in searchFirstOfK in EPI 11.1 (Search a Sorted
 Array for First Occurrence of k) is correct.
@@ -19,9 +21,47 @@ Q: left > right ; return result \\
 
 \subsection{What is the loop guard to the while loop?}
 X: left $<$= right
+
 \subsection{What is the loop invariant?}
-L: 
+L: K $\leq$ A[0] to left and and K $\geq$ A.size - 1
+ 
 \subsection{Show that P $\Rightarrow$ L}
+P $\Rightarrow$ L because if we start with left being the first element and right being the last than K will be always be in between them. 
 
+\subsection{Show that if L is true when you begin an iteration
+of the while loop, then L is true at the end
+of that iteration.}
+If a loop invariant is true it must hold true to three conditions:\\
+1. P $\Rightarrow$ L \\
+2. L $^{\bigwedge}$ X $\Rightarrow$ L \\
+3. L $^{\bigwedge}$ $\sim$ X $\Rightarrow$ Q \\
+\\
+A base case is when the initial mid is K, because we do not need to iterate through the loop again. L is true here.\\
+\\
+If K is not mid, we will iterate through the array, decreasing right or increasing left, making the distance between left and right smaller and smaller, however k is still inbetween the left and high. So no matter what our L will always be true.
 
+\subsubsection{Say, in words, what the following statement
+means: $\sim$ X $\bigwedge$ L $\rightarrow$ Q  }
+The loop terminated, and if L, our loop invariant is true, then the algorithm works.
+
+\subsection{Prove partial correctness}
+Since the loop invariant was proved to be true, we proved partial correctness.
+
+\subsection{A decrementing function is a
+function such that Y is a well-ordered set,
+D(i) is strictly decreasing, and D(i) can be
+interpreted as a function value on the i
+th iteration
+of a loop. What are Y and D in
+searchFirstOfK?
+}
+Y: is the entity of the array
+D: right - left 
+
+\subsection{What is the minimum value of Y}
+It will be 0, because right - left will get smaller and smaller as the distance between them will get shorter 
+\subsection{Show that the loop will terminate in iteration i,
+where D(i) is the minimum value of Y}
+Well when it right-left hits zero that will be the last iteration of the loop, because our loop guard (left $<$= right) will break the loop and not allow another iteration. 
 \end{document}
+
