@@ -1,0 +1,36 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}% http://ctan.org/pkg/lmodern
+\usepackage{algorithmic}
+\author{Brock Ellefson, Seth Sebevera, Yue Hou }
+\title{CSCI 432}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\begin{document}
+\maketitle
+\section{Pseudo-Code(With Seth and Jake)}
+
+\begin{algorithmic}
+\STATE{Algorithm: Binary Search}
+\STATE{Input: Desired Value to search for}
+\STATE{Output: True or False}
+\STATE{max = last element in array}
+\STATE{min = 0}
+
+\WHILE{min $<$= max}
+\STATE{mid = max + min / 2}
+    \IF{array[mid].value == desired value}
+        \STATE return true
+    \ELSIF{array[mid].value $<$ desired value}
+        \STATE min = mid + 1
+    \ELSE
+        \STATE max = mid - 1
+    \ENDIF
+\ENDWHILE
+\STATE{return false}
+\end{algorithmic}
+
+\end{document}
