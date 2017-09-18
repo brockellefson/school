@@ -95,13 +95,13 @@ def main():
         print ("\nReceived from client:\n" + data + "\n")
 
         if response == "404":
-            message = ("HTTP/1.1 404\n%s\n%s\n%s" %(conntype, conttype, contlen))
+            message = ("HTTP/1.1 404\n%s\n%s\n" %(conntype, conttype))
         elif response == "410":
-            message = ("HTTP/1.1 410\n%s\n%s\n%s" %(conntype, conttype, contlen))
+            message = ("HTTP/1.1 410\n%s\n%s\n" %(conntype, conttype))
         elif response == "400":
-            message = ("HTTP/1.1 400\n%s\n%s\n%s" %(conntype, conttype, contlen))
+            message = ("HTTP/1.1 400\n%s\n%s\n" %(conntype, conttype))
         else:
-            message = ("HTTP/1.1\n%s\n%s\n%s\n%s\n" %(conntype, conttype, contlen, response ))
+            message = ("HTTP/1.1 200\n%s\n%s\n%s\n%s\n" %(conntype, conttype, contlen, response ))
 
         print ("\nSent to client:\n" + message + "\n")
         conn.send(bytes(message))
