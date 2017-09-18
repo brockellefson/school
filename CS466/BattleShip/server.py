@@ -3,7 +3,7 @@
 import sys
 import socket
 import requests
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+#from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import re
 
 #----------------------------------------------------
@@ -59,18 +59,30 @@ def hit_or_miss(coordinates):
         ship_health[own_board[x][y]] -= 1
         if ship_health[own_board[x][y]] == 0:
             hit = ('hit=1$sink=%s'%(own_board[x][y]))
-            opponent_board[x][y] = own_board[x][y]
+            #opponent_board[x][y] = own_board[x][y]
             own_board[x][y] = 'x'
             return hit
-        opponent_board[x][y] = own_board[x][y]
+        #opponent_board[x][y] = own_board[x][y]
         own_board[x][y] = 'x'
         return 'hit=1'
 
     if own_board[x][y] == 'x':
         return '410'
     own_board[x][y] = 'x'
-    opponent_board[x][y] = 'x'
+    #opponent_board[x][y] = 'x'
     return 'hit=0'
+
+def hit(data):
+    #hit=0&x=a&y=b
+    match = re.search("hit=\d&x=\d&y=\d", data)
+    dedata = match.group(0) if match else None
+    hit = dedata[4]
+    x = int(data[8])
+    y = int(data[12])
+    if hit == '0':
+        opponent_board[x][y] = 'x'
+    else:
+        opponent_board[x][y] = 'H'
 
 def main():
     port = int(sys.argv[1])
@@ -84,9 +96,14 @@ def main():
         s.listen(1)
         #print ("Socket is listening")
         conn, addr = s.accept()
+        print(addr)
         data = conn.recv(1024)
+        response = 'Thank you'
 
-        response = decode(data)
+        if addr[0] == '127.0.0.1':
+            hit(data)
+        else:
+            response = decode(data)
 
         conntype = 'Connection: close'
         conttype = 'Content-Type: application/x-uuu-form-urlencoded'
