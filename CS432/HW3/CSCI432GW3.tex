@@ -1,0 +1,58 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algorithmic}
+\author{Brock Ellefson, Seth Severa, Yue Hou}
+\title{CSCI 432 Group Work 3}
+\begin{document}
+\maketitle
+\section{Analyze the runtime of randomized quicksort}
+Randomized quicksort and vanilla quicksort are only different in how the elements to pivot around are selected, other than that they are the exact same. So in reality, the runtime will be the exact same as quicksort (nlogn) because they behave the same other than the fact that randomized quicksort randomly picks an element to pivot around and vanilla quicksort does not. So randomized quicksort, in theory, will have a time complexity of nlogn.
+
+\section{Algorithms where we use randomization
+to find a deterministic answer are known as Las Vegas algorithms. Monte Carlo algorithms
+also use randomization, but might not always give the
+right answer; however, they either have a high probability
+of being correct.}
+
+\subsection{Give a Monte Carlo algorithm to estimate $\Pi$}
+
+\begin{algorithmic}
+\STATE{\bf{Algorithmic: Monte Carlo Pi Estimation}}
+\STATE{\bf{Loop Invariant: circleArea $\leq$ squareArea }}
+\STATE{circleArea = 0}
+\STATE{squareArea = 1000000}
+\FOR{i in range(1,1000000)}
+	\STATE{x = randReal(0,1)}
+	\STATE{y = randReal(0,1)}
+	\IF{insideCircle(x,y)}
+		\STATE circleArea ++
+	\ENDIF
+\ENDFOR
+\STATE{pi = 4 * circleArea/squareArea}		
+\STATE{return pi}
+\end{algorithmic}
+
+
+\subsection{Let n be the number of random numbers used by your algorithm. Explain why as n $\rightarrow$ $\infty$ the expectation of the output for your algorithm is $\pi$}
+As we increase our size of n, our estimated value of pi approaches the expected value. Also the more values we generate, the less effect outliers will have on our calculation.
+
+
+\subsection{Implement this algorithm and plot a line graph of the values returned for atleast at 10 values of n}
+\begin{enumerate}
+  \item n = 10:  2.8
+  \item n = 50: 3.04
+  \item n = 100: 3.480
+  \item n = 500: 3.248
+  \item n = 1000: 3.128
+  \item n = 5000: 3.132
+  \item n = 10000: 3.144
+  \item n = 50000: 3.125
+  \item n = 100000: 3.142
+  \item n = 500000: 3.143 
+\end{enumerate}
+
+\end{document}

@@ -18,7 +18,7 @@ s.connect((ip, port)) #connects us to server
 print ("Connected")
 
 #headers
-coordinates = ("x=" + x + "&y=" + y) 
+coordinates = ("x=" + x + "&y=" + y)
 conntype = 'Connection: close'
 conttype = 'Content-Type: application/x-uuu-form-urlencoded'
 user = 'User-Agent: client.py'

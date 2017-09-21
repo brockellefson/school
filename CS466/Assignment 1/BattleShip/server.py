@@ -91,7 +91,7 @@ def main():
 
     while 1:
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        s.bind(("127.0.0.1", port))
+        s.bind(("192.168.1.11", port))
         #print ("Socket binded to port")
         s.listen(1)
         #print ("Socket is listening")

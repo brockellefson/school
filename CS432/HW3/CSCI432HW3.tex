@@ -1,0 +1,36 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Brock Ellefson}
+\title{CSCI432 Homework 3}
+\begin{document}
+\maketitle
+\section{What is the loop invariant of the while loop in dutchFlagPartition?}
+A.subList(0, smaller) $\leq$ A.sublist(smaller, equal) $\leq$ A.sublist(equal, larger) $\leq$ A.(larger, A.size())
+
+\section{Given an array A of n objects
+with boolean-valued keys, what is an algorithm to reorder
+the array so that objects that have a FALSE key
+appear first? The relative ordering of objects with
+the same key should remain the same (in words, this
+should be a stable sorting algorithm). Use O(1) additional
+space and O(n) time.}
+
+\section{Suppose you have an unfair
+coin, where the probability of landing heads (H) is
+25 and the probability of tails (T) is 75.}
+
+\subsection{What is the expected number of coin tosses until one head
+turns up?}
+
+\subsection{What is the expected number of coin tosses
+needed in order to obtain three consecutive heads.}
+
+This is essentially a recurrence relation:\\
+T(n) = T($\frac{n}{4}$) + T($\frac{3n}{4}$) \\
+X = $\dfrac{1-p^{h}}{p^{h}(1-p)}$\\\\
+\textbf{Source:} https://www.khanacademy.org/math/precalculus/prob-comb/compound-probability-of-ind-events-using-mult-rule/v/getting-at-least-one-heads
+\end{document}
