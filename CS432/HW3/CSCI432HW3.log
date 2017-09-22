@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  21 SEP 2017 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.23)  22 SEP 2017 14:47
 entering extended mode
 **./CSCI432HW3.tex
 (CSCI432HW3.tex
@@ -518,41 +518,44 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 10.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 32--36
+) [1
+
+{C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 38--41
 
  []
 
 
-Overfull \hbox (16.7575pt too wide) in paragraph at lines 32--36
-\OT1/cmr/bx/n/10 Source: \OT1/cmr/m/n/10 https://www.khanacademy.org/math/preca
-lculus/prob-comb/compound-
+Underfull \hbox (badness 10000) in paragraph at lines 38--41
+
  []
 
-[1
 
-{C:/Users/brock/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-(CSCI432HW3.aux) ) 
+Overfull \hbox (11.36177pt too wide) in paragraph at lines 38--41
+\OT1/cmr/m/n/10 Source: https://www.quora.com/What-is-the-expected-number-of-co
+in-flips-until-
+ []
+
+[2] (CSCI432HW3.aux) ) 
 Here is how much of TeX's memory you used:
- 2685 strings out of 493333
- 33482 string characters out of 3139194
- 94759 words of memory out of 3000000
- 6175 multiletter control sequences out of 15000+200000
- 11503 words of font info for 45 fonts, out of 3000000 for 9000
+ 2683 strings out of 493333
+ 33461 string characters out of 3139194
+ 93759 words of memory out of 3000000
+ 6174 multiletter control sequences out of 15000+200000
+ 11195 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,6n,25p,421b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb>
-Output written on CSCI432HW3.pdf (2 pages, 100428 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb>
+Output written on CSCI432HW3.pdf (2 pages, 92203 bytes).
 PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
+ 41 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

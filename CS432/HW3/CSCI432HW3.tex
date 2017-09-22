@@ -26,11 +26,17 @@ coin, where the probability of landing heads (H) is
 \subsection{What is the expected number of coin tosses until one head
 turns up?}
 
-\subsection{What is the expected number of coin tosses
-needed in order to obtain three consecutive heads.}
+Well, since theres a 75\% if getting a tails, our expected number of flips is 4 
 
-This is essentially a recurrence relation:\\
-T(n) = T($\frac{n}{4}$) + T($\frac{3n}{4}$) \\
+\section{What is the expected number of coin tosses
+needed in order to obtain three consecutive heads.}
+T = $\frac{3}{4}$ \\
+HT = $\frac{3}{16}$ 
+
+
+
+
 X = $\dfrac{1-p^{h}}{p^{h}(1-p)}$\\\\
-\textbf{Source:} https://www.khanacademy.org/math/precalculus/prob-comb/compound-probability-of-ind-events-using-mult-rule/v/getting-at-least-one-heads
+X = $\dfrac{1-.25^{3}}{.25^{3}(1-.25)}$ = 84\\\\
+Source: https://www.quora.com/What-is-the-expected-number-of-coin-flips-until-you-get-two-heads-in-a-row
 \end{document}
