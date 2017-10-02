@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="EGEN310R" company="Group G6" webLink="http://" view-date="2017-08-20" view-index="0" gantt-divider-location="378" resource-divider-location="377" version="2.8.5" locale="en_US">
+    <description/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Name" width="205" order="0"/>
+        <field id="tpd4" name="Begin date" width="87" order="1"/>
+        <field id="tpd5" name="End date" width="82" order="2"/>
+        <timeline><![CDATA[33]]></timeline>
+        <option id="color.recent"><![CDATA[#33ff00 #ff3333 #ff9933 #ff00cc #f4f4f4 #6666ff #ffcccc #ff99ff #ffcc99 #ff0000]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="187" order="0"/>
+        <field id="1" name="Default role" width="186" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="33" name="EGEN310 Classtime" color="#8cb6ce" meeting="false" start="2017-08-28" duration="25" complete="0" expand="true">
+            <task id="66" name="Leadership Lessons" meeting="false" start="2017-08-28" duration="18" complete="0" expand="true"/>
+            <task id="89" name="Conceptial Design" meeting="false" start="2017-09-25" duration="5" complete="0" expand="true"/>
+        </task>
+        <task id="0" name="Group Meetings" color="#ff3333" meeting="false" start="2017-09-14" duration="11" complete="0" expand="true"/>
+        <task id="21" name="Brainstorming" color="#ff00cc" meeting="false" start="2017-09-15" duration="7" complete="0" expand="true">
+            <task id="69" name="Objective/Function Attributes" color="#ff00cc" meeting="false" start="2017-09-15" duration="2" complete="0" expand="true"/>
+            <task id="37" name="Objective Tree" color="#ff00cc" meeting="false" start="2017-09-18" duration="5" complete="0" expand="true"/>
+            <task id="43" name="Funtional Diagram" color="#ff00cc" meeting="false" start="2017-09-18" duration="5" complete="0" expand="true"/>
+            <task id="57" name="Morph Chart" color="#ff00cc" meeting="false" start="2017-09-22" duration="2" complete="0" expand="true"/>
+            <task id="62" name="Pugh Chart" color="#ff00cc" meeting="false" start="2017-09-22" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="49" name="Research" color="#33ff00" meeting="false" start="2017-08-28" duration="25" complete="0" expand="true">
+            <task id="32" name="Movement Research" color="#33ff00" meeting="false" start="2017-09-14" duration="9" complete="0" expand="true"/>
+            <task id="7" name="Circuit Board Research" color="#33ff00" meeting="false" start="2017-09-25" duration="5" complete="0" expand="true"/>
+            <task id="75" name="Programming Langauge Research" color="#33ff00" meeting="false" start="2017-09-18" duration="6" complete="0" expand="true"/>
+            <task id="78" name="Motor Research" color="#33ff00" meeting="false" start="2017-09-18" duration="6" complete="0" expand="true"/>
+            <task id="80" name="Networking Research" color="#33ff00" meeting="false" start="2017-08-28" duration="25" complete="0" expand="true"/>
+            <task id="85" name="MakerSpace" color="#33ff00" meeting="false" start="2017-09-19" duration="8" complete="0" expand="true"/>
+        </task>
+        <task id="55" name="Design" color="#ff9933" meeting="false" start="2017-09-18" duration="8" complete="0" expand="true">
+            <task id="4" name="Embankment CAD Design" color="#ff9933" meeting="false" start="2017-09-25" duration="3" complete="0" expand="true"/>
+            <task id="11" name="Research Embankment Designs" color="#ff9933" meeting="false" start="2017-09-25" duration="3" complete="0" expand="true"/>
+            <task id="23" name="Vehicle Drawing" color="#ff9933" meeting="false" start="2017-09-18" duration="3" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Chris" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Addie" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Brock" function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="Yalan" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="21" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="33" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="33" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="32" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="33" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="33" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

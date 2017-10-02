@@ -1,0 +1,80 @@
+
+Wireshark DNS answers:
+
+1.) Run nslookup to obtain the IP address of a Web server in Asia. What is its IP address?
+	I ran nslookup on www.ait.ac.th, the Asian Institute of Technology. the IP address is 203.159.12.4.
+
+
+2.) Run nslookup to determine the authoritative DNS servers for DNS.WATCH.
+	I ran nslookup -type=NS on dns.watch, and it’s IP address is 153.90.2.1#53.
+
+
+3.) Run nslookup so that one of the DNS servers obtained in Question 2 is queried for the mail servers for Yahoo! mail. What is it's IP address?
+	I ran nslookup mail.yahoo.com ns30.dns4pro.com, which is one of the DNS servers I got in question 2. I think the IP address is 194.14.219.20#53. It does say that it can’t find mail.yahoo.com because there was no answer.
+
+
+4.) Locate the DNS query and response messages. Are they sent over UDP or TCP?
+	The DNS query and responses are sent over UDP (User Datagram Protocol).	
+
+
+5.) What is the destination port for the DNS query message? What is the source port of DNS response message?
+	The destination port for the query is 53, and the source port of the response is also 53.
+
+
+6.) To what IP address is the DNS query message sent? Use ipconfig to determine the IP address of your local DNS server. Are these two IP addresses the same?
+	The DNS query message is sent to the IP address 153.90.2.1, and the IP address of my local DNS server is also 153.90.2.1.
+
+
+7.) Examine the DNS query message. What "Type" of DNS query is it? Does the query message contain any "answers"?
+	The DNS query method is Standard Query, and it contains 0 answers.
+
+
+8.) Examine the DNS response message. How many "answers" are provided? What do each of these answers contain?
+	There was 1 answer provided of type A. It contained the name, type class, time to live, data length, and the IP address of the response.
+
+
+9.) Consider the subsequent TCP SYN packet sent by your host. Does the destination IP address of the SYN packet correspond to any of the IP addresses provided in the DNS response message?
+	The next SYN packet had a destination IP address of 104.20.0.85, which was the IP address of the answer in the DNS response.
+
+
+10.) This web page contains images. Before retrieving each image, does your host issue new DNS queries?
+	No, the only DNS queries are for the original web page.
+
+
+11.) What is the destination port for the DNS query message? What is the source port of DNS response message?
+	The destination port for the query message is port 53, and the source port of the response is also port 53.
+
+
+12.) To what IP address is the DNS query message sent? Is this the IP address of your default local DNS server?
+	The query message was sent to 153.90.2.1, which is also the IP address of my local DNS server.
+
+
+13.) Examine the DNS query message. What "Type" of DNS query is it? Does the query message contain any "answers"?
+	The query message is a Standard Query, and it does not contain any answers.
+
+
+14.) Examine the DNS response message. How many "answers" are provided? What do each of these answers contain?
+	The DNS response message contains 3 answers. Each answer contains a name, a type, a class, a time to live, and the data length. Two also contain a CNAME, and one contains an IP address.
+
+
+16.) To what IP address is the DNS query message sent? Is this the IP address of your default local DNS server?
+	The query message was sent to 153.90.2.1, which is also the IP address of my local DNS server.
+
+
+17.) Examine the DNS query message. What "Type" of DNS query is it? Does the query message contain any "answers"?
+	The query message is a Standard Query, and it does not contain any answers.
+
+
+18.) Examine the DNS response message. What MIT nameservers does the response message provide? Does this response message also provide the IP addresses of the MIT nameservers?
+	The DNS response message provides 8 nameservers: eur5.akam.net, ns1-37.akam.net, usw2.akam.net, ns1-173.akam.net, use5.akam.net, asia1.akam.net, use2.akam.net, and asia2.akam.net. I did not see any IP addresses associated with any of these nameservers, although from what I heard other people say, there should have been an additional records dropdown that would allow me to see the IP addresses.
+
+20.) To what IP address is the DNS query message sent? Is this the IP address of your default local DNS server? If not, what does the IP address correspond to?
+	The command I ran was nslookup www.aiit.or.kr www.verisign.com. The query message was sent to 72.13.63.55, which is the IP address of the authoritative DNS server at www.verisign.com, according to their website.
+
+
+21.) Examine the DNS query message. What "Type" of DNS query is it? Does the query message contain any "answers"?
+	The DNS query message is a Standard query, and it does not contain any answers.
+
+
+22.) Examine the DNS response message. How many "answers" are provided? What does each of these answers contain?
+	There was one answer in the DNS response message. It contained the name, type, class, time to live, data length, and IP address of the response.

@@ -1,0 +1,46 @@
+6.Some good candidate keys would be:
+
+Course#, Instructor_name, and Semester:
+This would be a good candidate key under the assumption that there are no classes taught by more than one professor and a professor only teaches a single class
+
+Room# and Time_period:
+This would be a good candidate key under the assumption that there cannot be 2 classes teaching at the same room at the same time. 
+
+8.VEHICLE
+| _vin_ | Price | Model | Veh_type |
+
+CAR
+| _vin_ | Engine_size|
+
+TRUCK
+| _vin_ | Tonnage |
+
+SUV
+| _vin_ | No_seats |
+
+SALESPERSON
+| _Sid_ | name |
+
+CUSTOMER
+| _Ssn_ | name | State | Street | City
+
+SALE
+| _Sid_ | _Ssn_ | _vin_ | date |
+
+14.
+Dnumber Dname and Dmgr_ssn is dependent on Ssn, this can cause issues where:
+
+Insertion: We don't need need an employee to have a department, but a department must have an employee in it.
+
+Deletion: We delete all employees to a department and the department must be deleted
+
+Update: If someone gets a promotion, every entity must be updated
+15.
+FD3
+Insertion: Project cannot be added without an employee 
+
+FD3
+Deletion: If every employee is deleted, than the project must be deleted
+
+FD3
+Update: If the location of project changed, all employees must be updated

@@ -1,0 +1,38 @@
+Wireshark Intro:
+
+a.) List three different protocols that appear in the protocol column in the unfiltered packet-listing window in Step 7.
+	ARP, NTP, and DNS
+
+b.) How long did it take from when the HTTP GET message was sent until the HTTP OK reply was received?
+	0.055091 seconds
+
+c.) What is the Internet address of the gaia.cs.umass.edu? What is the Internet address of your computer?
+	gaia.cs.umass.edu IP address: 128.119.245.12
+	My computer: 153.90.31.68
+
+d.) Print the two HTTP messages (GET and OK) referred to in question 2 above. To do so, select Print from the Wireshark File command menu, and select the "Selected Packet Only" and "Print as displayed" radial buttons, and then click OK.
+
+	For the GET message:
+
+8	12:14:24.645935	153.90.31.68	128.119.245.12	HTTP	459	GET /wireshark-labs/INTRO-wireshark-file1.html HTTP/1.1 ,JGET /wireshark-labs/INTRO-wireshark-file1.html HTTP/1.1
+Host: gaia.cs.umass.edu
+Accept-Encoding: gzip, deflate
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17
+Accept-Language: en-us
+Cache-Control: max-age=0
+Connection: keep-alive
+
+	For the OK message:
+
+10	12:14:24.702147	128.119.245.12	153.90.31.68	HTTP	504	HTTP/1.1 200 OK  (text/html)
+HTTP/1.1 200 OK
+Date: Fri, 22 Sep 2017 18:14:24 GMT
+Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/5.4.16 mod_perl/2.0.10 Perl/v5.16.3
+Last-Modified: Fri, 22 Sep 2017 05:59:01 GMT
+ETag: "51-559c0e7ce6d17"
+Accept-Ranges: bytes
+Content-Length: 81
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8

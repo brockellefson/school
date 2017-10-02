@@ -92,7 +92,11 @@ def main():
 
     while 1:
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+<<<<<<< HEAD:CS466/BattleShip/server.py
         s.bind(("192.168.1.2", port))
+=======
+        s.bind(("192.168.1.11", port))
+>>>>>>> bda3088982709b1ecb0b1723e45c2775a70537cb:CS466/Assignment 1/BattleShip/server.py
         #print ("Socket binded to port")
         s.listen(1)
         #print ("Socket is listening")

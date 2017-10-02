@@ -1,0 +1,52 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algorithmic}
+\author{Brock Ellefson}
+\title{CSCI432 Homework 3}
+\begin{document}
+\maketitle
+\section{What is the loop invariant of the while loop in dutchFlagPartition?}
+A.subList(0, smaller) $\leq$ A.sublist(smaller, equal) $\leq$ A.sublist(equal, larger) $\leq$ A.(larger, A.size())
+
+\section{Given an array A of n objects
+with boolean-valued keys, what is an algorithm to reorder
+the array so that objects that have a FALSE key
+appear first? The relative ordering of objects with
+the same key should remain the same (in words, this
+should be a stable sorting algorithm). Use O(1) additional
+space and O(n) time.}
+
+\begin{algorithmic}
+\STATE{\bf{FALSE key order}}
+\STATE{\bf{in:} boolean array}
+\STATE{\bf{out:} stable sorted boolean array}
+\STATE{f = 0}
+\FOR{i in array}
+	\IF{array[i] == FALSE}
+		\STATE{swap(array[f],array[i])}
+		\STATE{f++}
+	\ENDIF
+\ENDFOR
+\end{algorithmic}
+
+
+\section{Suppose you have an unfair
+coin, where the probability of landing heads (H) is
+25 and the probability of tails (T) is 75.}
+
+\subsection{What is the expected number of coin tosses until one head
+turns up?}
+
+Well, since theres a 75\% if getting a tails, our expected number of flips is 4 
+
+\section{What is the expected number of coin tosses
+needed in order to obtain three consecutive heads.}
+
+X = $\dfrac{1-p^{h}}{p^{h}(1-p)}$\\\\
+X = $\dfrac{1-.25^{3}}{.25^{3}(1-.25)}$ = 84\\\\
+Source: https://www.quora.com/What-is-the-expected-number-of-coin-flips-until-you-get-two-heads-in-a-row
+\end{document}
