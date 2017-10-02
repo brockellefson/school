@@ -1,0 +1,83 @@
+1. 
+ra	rb
+a 	1
+
+2.
+
+ra	rb	rc
+a	1	a
+b	1	b
+a	1	c
+c	2	d
+b	1	d
+a	3	d
+
+3. 
+
+ra	rb	rc
+a	1	a
+a	1	c
+
+4.	
+
+r x s = r * s
+
+5.
+
+ra	rb	rc
+b	1	b
+c	2	d
+b	1	d
+
+6.
+
+sa	sb	sc
+a	3	d
+
+7. 
+
+empty
+
+8. 
+
+ra	rb	rc
+a	1	a
+b	1	b
+a	1	c
+c	2	d
+b	1	d
+
+9.
+	
+Zelaya
+Wallace
+English
+
+10.
+
+Smith
+Wong
+Narayan
+English
+
+11.
+
+Smith
+Wong
+Wallace
+
+12.
+
+Smith
+Wong
+Wallace
+Narayan
+English
+
+13.
+	
+Zelaya
+Narayan
+English
+Jabbar
+Borg

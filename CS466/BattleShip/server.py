@@ -73,12 +73,13 @@ def hit_or_miss(coordinates):
     return 'hit=0'
 
 def hit(data):
-    #hit=0&x=a&y=b
-    match = re.search("hit=\d&x=\d&y=\d", data)
+    #x=2&y=0hit=1
+    print(data)
+    match = re.search("x=\d&y=\dhit=\d", data)
     dedata = match.group(0) if match else None
-    hit = dedata[4]
-    x = int(data[8])
-    y = int(data[12])
+    hit = dedata[11]
+    x = int(dedata[2])
+    y = int(dedata[6])
     if hit == '0':
         opponent_board[x][y] = 'x'
     else:
@@ -91,16 +92,15 @@ def main():
 
     while 1:
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        s.bind(("127.0.0.1", port))
+        s.bind(("192.168.1.2", port))
         #print ("Socket binded to port")
         s.listen(1)
         #print ("Socket is listening")
         conn, addr = s.accept()
-        print(addr)
+        print(addr[0])
         data = conn.recv(1024)
         response = 'Thank you'
-
-        if addr[0] == '127.0.0.1':
+        if addr[0] == '192.168.1.2':
             hit(data)
         else:
             response = decode(data)
@@ -118,9 +118,9 @@ def main():
         elif response == "400":
             message = ("HTTP/1.1 400\n%s\n%s\n%s" %(conntype, conttype, contlen))
         else:
-            message = ("HTTP/1.1\n%s\n%s\n%s\n%s\n" %(conntype, conttype, contlen, response ))
+            message = ("HTTP/1.1 200\n%s\n%s\n%s\n%s\n" %(conntype, conttype, contlen, response ))
 
         print ("\nSent to client:\n" + message + "\n")
         conn.send(bytes(message))
-
+        s.close()
 main()

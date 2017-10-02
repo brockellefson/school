@@ -16,7 +16,7 @@ y = sys.argv[4]
 def decode(data):
         match = re.search("hit=\d", data)
         hit = match.group(0) if match else None
-        return (hit + "&")
+        return (hit)
 
 def main():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #creates socket
@@ -34,12 +34,15 @@ def main():
     s.send(bytes("POST / HTTP/1.1\n%s\n%s\n%s\n%s\n%s" %(conntype, conttype, user, contlen, coordinates) )) #post to server
     data = s.recv(1024) #decode data we get back from server
     print (data)
-    hit = decode(data)
+
 
     s.close() #close connection
-    coordinates += hit
-    contlen = 'Content-Length:  %s' %(len(coordinates))
-    s.connect(('127.0.0.1', 5000))
-    s.send(bytes("POST / HTTP/1.1\n%s\n%s\n%s\n%s\n%s" %(conntype, conttype, user, contlen, coordinates) )) #post to server
-    s.close()
+    if 'hit' in data:
+        hit = decode(data)
+        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #creates socket
+        coordinates += hit
+        contlen = 'Content-Length:  %s' %(len(coordinates))
+        s.connect(('192.168.1.2', 5000))
+        s.send(bytes("POST / HTTP/1.1\n%s\n%s\n%s\n%s\n%s" %(conntype, conttype, user, contlen, coordinates) )) #post to server
+        s.close()
 main()
