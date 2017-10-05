@@ -1,0 +1,120 @@
+Brock Ellefson
+Elizabeth Andrews 
+Wireshark lab 2
+
+1.
+
+Client:
+	IP Address: 192.168.1.102
+	TCP Port: 1161
+
+2.
+
+gaia.cs.umass.edu:
+	IP Address: 128.119.245.12
+	TCP Port: 80
+
+3.
+
+Client:
+	IP Address: 192.168.1.2
+	TCP Port: 54260
+
+%Since Liz was in Florida for Grace Hopper, we used tcp-ethereal-trace-1 to study the TCP behavior%
+
+4. 
+The sequence number of the TCP SYN used to iniate a connection is 0.
+In the Transmission Control Protocol, under Flags we can see that the syn flag is set to 1,
+which identifies this segment as a SYN segment .
+
+5.
+The seqence number of the SYNACK sent by gaia.cs.umass.edu is 0.
+The value of the acknowledgement field in the SYNACK is set to 1.
+gaia.cs.umass.edu determines this value by incrementing the sequence number by 1 sent by the client. 
+In the Transmission Control Protocol, under Flags we can see that the syn flag is set to 1,
+and the acknowledgement flag is also set to 1, which together identifies this segment as a SYNACK segment.
+
+6.
+The seqence number of the TCP segment containing HTTP POST is 1.
+
+7.
+
+Client segments:	4 5 7  8  10 11
+gaia.cs.umass.edu ACKS: 6 9 12 14 15 16
+
+Segment:	Sequence Number:	ACK recieved time	RTT(ACKtime - Clienttime )
+1		1			.53937			.027460
+2		566			.0774294		.035557
+3		2026			.124085			.070059
+4		3486			.169118			.114428
+5		4946			.217299			.139894
+6		6406			.267802			.189645
+
+EstimatedRTT = 0.875 * EstimatedRTT + 0.125 * SampleRTT
+
+Segment:	EstimatedRTT:
+1		.027460
+2		.028472
+3		.033670
+4		.043765
+5		.055781
+6		.072514
+
+8.
+
+Segment 1 length: 565
+Segment 2 length: 1460
+Segment 3 length: 1460
+Segment 4 length: 1460
+Segment 5 length: 1460
+Segment 6 length: 1460
+
+9.
+
+The minimum size of the receiver window, as found in the first acknowledgement from the server, is 5840.
+The user is never throttled by a lack of buffer space.
+
+10.
+
+There was not any retransmitted segments in this trace file. We know this because we checked the sequence numbers
+of the trace, and all sequence numbers sent from the client are increasing, which means that there was never a 
+restransmitted segment, because if there was, there would have been a dip in the value of the sequence numbers
+because a retranmistted segment would have a smaller sequence number than the other segments.
+
+11.
+
+The reciever is typically acknowledging about 1460 bytes most of the time, however the ack at number 6 accepted 565 bytes.
+It does not seem that the reciever was ACKing ever other segment.
+
+12.
+The throughput of this data would be the total bits per second, so if we take the time last ACK and subtract the time
+of the first segment being transmitted,
+Last ACT time: (no. 206) 5.651141
+First Segment: (no. 4) .023172
+
+Total Tranmission Time: 5.627969
+Total bytes transmitted: 164091
+
+164091/5.627969 = 29156.3439671 bytes per second
+
+13.
+
+Slow start occurs from 0.0s to .305s
+Congestion Advoidance then takes over from .305s till 5.651s
+
+One big thing about this tcp behavoir is that it never timed out or had 3 ACT duplicates. So, it never needed work
+arounds for those.
+
+14.
+
+Slow start occurs from 0.0s to .09039s
+Congestion Avoidance then takes over from .09039s until a triple ACK duplicate at .4892s and again at.6728s
+It then picks up again at .6728s until 6.445s
+
+------------------------------------------------------------------------------------------------------------------------------------
+What implementation of TCP is being used on my computer?
+
+It seems that the TCP used is Reno because with a triple duplicate ACK, it set ssthresh to cwnd/2,
+and set swnd to ssthresh + 3
+
+
