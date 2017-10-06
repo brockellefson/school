@@ -92,11 +92,11 @@ class RDT:
 
     def rdt_2_1_send(self, msg_S):
         p = Packet(self.seq_num, msg_S)
-        current_seq_num = self.seq_num
+        self.seq_num += 1
 
-        while current_seq_num == self.seq_num: #seq_num has not changed
+        while True:
             self.network.udt_send(p.get_byte_S()) #sending packet
-
+            self.byte_buffer = ''
             response = ''
             while response == '': #waiting for response from reciever
                 response = self.network.udt_receive() #response equals whatever the reciever responds
@@ -105,15 +105,20 @@ class RDT:
             self.byte_buffer = response[length:] #setting buffer
 
             if Packet.corrupt(response[:length]): #checking for corruption
-                self.byte_buffer = '' #ACK/NAK is corrupt
+                print("ACK/NAK packet corrupted")
             else: #packet is not corrupt
                 response = Packet.from_byte_S(response[0:length])
-                if (response.msg_S == '1'): #ACK
+                if(response.seq_num < seq_num):
+                    ack = Packet(response.seq_num, '1') #ACK
+                    self.network.udt_send(ack.get_byte_S())
+                elif (response.msg_S == '1'): #ACK
+                    print("ACK recieved") #succsesfully sent a packet
                     self.seq_num += 1
+                    break
                 elif (response.msg_S == '0') #NAK
-                    self.byte_buffer = ''
-                elif(response.seq_num < seq_num)
-                    
+                    print("NAK recieved") #need to resend packet
+
+
 
     def rdt_2_1_receive(self):
         pass
