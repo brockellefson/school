@@ -1,109 +1,103 @@
-Brock Ellefson
-Elizabeth Andrews 
-Wireshark lab 2
+Wireshark TCP Lab:
 
-1.
+Answers for lab:
 
-Client:
-	IP Address: 192.168.1.102
-	TCP Port: 1161
+1. What is the IP address and TCP port number used by the client computer (source) that is transferring the file to gaia.cs.umass.edu? To answer this question, it’s probably easiest to select an HTTP message and explore the details of the TCP packet used to carry this HTTP message, using the “details of the selected packet header window”.
+	IP address: 192.168.1.102
+	TCP port number: 1161
 
-2.
+2. What is the IP address of gaia.cs.umass.edu? On what port number is it sending and receiving TCP segments for this connection?
+	IP address: 128.119.245.12
+	Port number: 80
 
-gaia.cs.umass.edu:
-	IP Address: 128.119.245.12
-	TCP Port: 80
+3. What is the IP address and TCP port number used by your client computer (source) to transfer the file to gaia.cs.umass.edu?
+	IP address: 192.168.1.2
+	TCP port number: 54260
 
-3.
+%Since I was in Florida for the Grace Hopper conference, we used tcp-ethereal-trace-1 to study the TCP behavior, since we were not able to work together on a trace.%
 
-Client:
-	IP Address: 192.168.1.2
-	TCP Port: 54260
+4. What is the sequence number of the TCP SYN segment that is used to initiate the TCP connection between the client computer and gaia.cs.umass.edu? What is it in the segment that identifies the segment as a SYN segment?
+	Sequence number: 0
+	It is identified as a SYN segment by the flag 1, which is the SYN flag.
 
-%Since Liz was in Florida for Grace Hopper, we used tcp-ethereal-trace-1 to study the TCP behavior%
+5. What is the sequence number of the SYNACK segment sent by gaia.cs.umass.edu to the client computer in reply to the SYN? What is the value of the Acknowledgement field in the SYNACK segment? How did gaia.cs.umass.edu determine that value? What is it in the segment that identifies the segment as a SYNACK segment?
+	Sequence number: 0
+	Value of Acknowledgement field: 1
+	gaia.cs.umass.edu determined that value by incrementing the sequence number sent by the client by 1.
+	It is identified as a SYNACK segment because both the SYN and ACK flags are set to 1, which identifies this as a SYNACK segment.
 
-4. 
-The sequence number of the TCP SYN used to iniate a connection is 0.
-In the Transmission Control Protocol, under Flags we can see that the syn flag is set to 1,
-which identifies this segment as a SYN segment .
+6. What is the sequence number of the TCP segment containing the HTTP POST command?
+	Sequence number: 1
 
-5.
-The seqence number of the SYNACK sent by gaia.cs.umass.edu is 0.
-The value of the acknowledgement field in the SYNACK is set to 1.
-gaia.cs.umass.edu determines this value by incrementing the sequence number by 1 sent by the client. 
-In the Transmission Control Protocol, under Flags we can see that the syn flag is set to 1,
-and the acknowledgement flag is also set to 1, which together identifies this segment as a SYNACK segment.
+7. Consider the TCP segment containing the HTTP POST as the first segment in the TCP connection. What are the sequence numbers of the first six segments in the TCP connection (including the segment containing the HTTP POST)? At what time was each segment sent? When was the ACK for each segment received? Given the difference between when each TCP segment was sent, and when its acknowledgement was received, what is the RTT value for each of the six segments? What is the EstimatedRTT value after the receipt of each ACK? Assume that the value of the EstimatedRTT is equal to the measured RTT for the first segment, and then is computed using the Estimated RTT  equation for all subsequent segments.
+	Segment 1 
+		Sequence number: 1
+		Time sent: 0.026477
+		Time ACK received: 0.53937
+		Estimated RTT: 0.027460
+	Segment 2 
+		Sequence number: 566
+		Time sent: 0.041737
+		Time ACK received: 0.0774294
+		Estimated RTT: 0.028472
+	Segment 3 
+		Sequence number: 2026
+		Time sent: 0.054026
+		Time ACK received: 0.124085
+		Estimated RTT: 0.033670
+	Segment 4
+		Sequence number: 3486
+		Time sent: 0.054690
+		Time ACK received: 0.169118
+		Estimated RTT: 0.043765
+	Segment 5
+		Sequence number: 4946
+		Time sent: 0.077405
+		Time ACK received: 0.217299
+		Estimated RTT: 0.055781
+	Segment 6
+		Sequence number: 6406
+		Time sent: 0.078157
+		Time ACK received: 0.267802
+		Estimated RTT: 0.072514
 
-6.
-The seqence number of the TCP segment containing HTTP POST is 1.
+8. What is the length of each of the first six TCP segments?
+	Segment 1 length: 565
+	Segment 2 length: 1460
+	Segment 3 length: 1460
+	Segment 4 length: 1460
+	Segment 5 length: 1460
+	Segment 6 length: 1460
 
-7.
+9. What is the minimum amount of available buffer space advertised at the received for the entire trace? Does the lack of receiver buffer space over throttle the sender?
+	The minimum size of the receiver window, as found in the first acknowledgement from the server, is 5840, and the user is never throttled by a lack of buffer space.
 
-Client segments:	4 5 7  8  10 11
-gaia.cs.umass.edu ACKS: 6 9 12 14 15 16
+10. Are there any retransmitted segments in the trace file? What did you check for (in the trace) in order to answer this question?
+	There were not any retransmitted segments in this trace file. We looked at the sequence numbers of the trace, and since all sequence numbers were increasing, we knew there was never a retransmitted segment.
 
-Segment:	Sequence Number:	ACK recieved time	RTT(ACKtime - Clienttime )
-1		1			.53937			.027460
-2		566			.0774294		.035557
-3		2026			.124085			.070059
-4		3486			.169118			.114428
-5		4946			.217299			.139894
-6		6406			.267802			.189645
+11. How much data does the receiver typically acknowledge in an ACK? Can you identify cases where the receiver is ACKing every other received segment?
+	The receiver is typically acknowledging about 1460 bytes, but the ACK at number 6 accepted 565 bytes. We could not find a place where the receiver was ACKing every other segment.
 
-EstimatedRTT = 0.875 * EstimatedRTT + 0.125 * SampleRTT
-
-Segment:	EstimatedRTT:
-1		.027460
-2		.028472
-3		.033670
-4		.043765
-5		.055781
-6		.072514
-
-8.
-
-Segment 1 length: 565
-Segment 2 length: 1460
-Segment 3 length: 1460
-Segment 4 length: 1460
-Segment 5 length: 1460
-Segment 6 length: 1460
-
-9.
-
-The minimum size of the receiver window, as found in the first acknowledgement from the server, is 5840.
-The user is never throttled by a lack of buffer space.
-
-10.
-
-There was not any retransmitted segments in this trace file. We know this because we checked the sequence numbers
-of the trace, and all sequence numbers sent from the client are increasing, which means that there was never a 
-restransmitted segment, because if there was, there would have been a dip in the value of the sequence numbers
-because a retranmistted segment would have a smaller sequence number than the other segments.
-
-11.
-
-The reciever is typically acknowledging about 1460 bytes most of the time, however the ack at number 6 accepted 565 bytes.
-It does not seem that the reciever was ACKing ever other segment.
-
-12.
-The throughput of this data would be the total bits per second, so if we take the time last ACK and subtract the time
-of the first segment being transmitted,
-Last ACT time: (no. 206) 5.651141
-First Segment: (no. 4) .023172
-
-Total Tranmission Time: 5.627969
+12. What is the throughput (bytes transferred per unit time) for the TCP connection? Explain how you calculated this value.
+	The throughput of the data is the total bits per second. We take the time of the last ACK and subtract the time of the first segment being transmitted.
+Last ACK time (number 206): 5.651141
+First segment (number 4): 0.23172
+Total transmission time: 5.627969
 Total bytes transmitted: 164091
+So, the throughput is 164091/5.627969 = 29156.3439671 bytes per second
 
-164091/5.627969 = 29156.3439671 bytes per second
+13. Use the Time-Sequence-Graph(Stevens) plotting tool to view the sequence number versus time plot of segments being sent from the client to the gaia.cs.umass.edu server. Can you identify where TCP’s slowstart phase begins and ends, and where congestion avoidance takes over? Comment on ways in which the measured data differs from the idealized behavior of TCP that we’ve studied in the text.
+	Slow start occurred from 0.0s to .09030s. Then congestion avoidance takes over from .09039s until the triple duplicate ACK at 0.4892s, and again at .6728s. Slow start begins again at .6728s and goes until 6.445s.
 
-13.
+14. Answer each of the two questions above for the trace that you have gathered when you transferred file from your computer to gaia.cs.umass.edu.
+	We only used the downloaded example trace, because I was in Florida and we were not able to meet up and use a trace that we both got.	
 
-Slow start occurs from 0.0s to .305s
-Congestion Advoidance then takes over from .305s till 5.651s
 
-One big thing about this tcp behavoir is that it never timed out or had 3 ACT duplicates. So, it never needed work
-arounds for those.
+--------------------------------
+
+What implementation of TCP is being used by your computer? How do you know?
+	TCP Reno is being used, because with after the triple duplicate ACK, the ssthresh is set to cwnd/2, and the swnd is set to ssthresh + 3.
+
 
 14.
 
