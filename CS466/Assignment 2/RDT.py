@@ -151,7 +151,7 @@ class RDT:
                 if rcvpkt.seq_num < self.seq_num:
                     output =("Duplicate, ACK\n")
                     ack = Packet(rcvpkt.seq_num, '1') #send ack again
-                    self.network.udt_send(rcvpkt.get_byte_S())
+                    self.network.udt_send(ack.get_byte_S())
                 elif rcvpkt.seq_num == self.seq_num:
                     output =("ACK\n")
                     ack = Packet(self.seq_num, '1')
