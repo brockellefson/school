@@ -115,7 +115,7 @@ class RDT:
                     ack = Packet(response.seq_num, '1') #ACK
                     self.network.udt_send(ack.get_byte_S())
                 if (response.msg_S == '1'): #ACK
-                    output =("ACK recieved\n") #succsesfully sent a packet
+                    #succsesfully sent a packet
                     self.seq_num += 1
                     break
                 elif (response.msg_S == '0'): #NAK
@@ -151,7 +151,7 @@ class RDT:
                 if (rcvpkt.msg_S != '1' and rcvpkt.msg_S != '0'): #if this packet is not an ACK or NAK
                         if rcvpkt.seq_num < self.seq_num:
                             #Duplicate, ACK
-                            ack = Packet(rcvpkt.seq_num, '1') 
+                            ack = Packet(rcvpkt.seq_num, '1')
                             self.network.udt_send(ack.get_byte_S())
                         elif rcvpkt.seq_num == self.seq_num:
                             #ACK
