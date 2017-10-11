@@ -104,13 +104,13 @@ class RDT:
                 rcvpkt = self.network.udt_receive() #response equals whatever the reciever responds
 
             length = int(rcvpkt[:Packet.length_S_length]) #length of packet
-            self.byte_buffer = rcvpkt[length:] #setting buffer
+            self.byte_buffer = rcvpkt#setting buffer
 
-            if Packet.corrupt(rcvpkt[:length]): #checking for corruption
+            if Packet.corrupt(self.byte_buffer[:length]): #checking for corruption
                 #ACK/NAK packet corrupted, need to resend packet
                 continue
             else: #packet is not corrupt
-                response = Packet.from_byte_S(rcvpkt[:length])
+                response = Packet.from_byte_S(self.byte_buffer[:length])
                 if response.seq_num < self.seq_num:
                     #reciever behind sender
                     #ACK
