@@ -1,4 +1,4 @@
-import Network
+import Network_3_0
 import argparse
 from time import sleep
 import hashlib
@@ -59,7 +59,7 @@ class RDT:
     byte_buffer = ''
 
     def __init__(self, role_S, server_S, port):
-        self.network = Network.NetworkLayer(role_S, server_S, port)
+        self.network = Network_3_0.NetworkLayer(role_S, server_S, port)
 
     def disconnect(self):
         self.network.disconnect()
@@ -123,6 +123,11 @@ class RDT:
                 continue
             else: #packet is not corrupt
                 response = Packet.from_byte_S(rcvpkt[:length])
+                if response.seq_num < self.seq_num:
+                    #reciever behind sender
+                    #ACK
+                    ack = Packet(response.seq_num, '1')
+                    self.network.udt_send(ack.get_byte_S())
                 if (response.msg_S == '1'): #ACK
                     #succsesfully sent a packet
                     self.seq_num += 1
@@ -155,7 +160,7 @@ class RDT:
                 self.network.udt_send(nak.get_byte_S())
             else: #packet not corrupted
                 #create packet from buffer content and add to return string
-                rcvpkt = Packet.from_byte_S(self.byte_buffer[ :length])
+                rcvpkt = Packet.from_byte_S(self.byte_buffer[:length])
                 if (rcvpkt.msg_S != '1' and rcvpkt.msg_S != '0'): #if this packet is not an ACK or NAK
                         if rcvpkt.seq_num < self.seq_num:
                             #Duplicate, ACK
