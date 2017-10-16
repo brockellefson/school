@@ -123,11 +123,7 @@ class RDT:
                 continue
             else: #packet is not corrupt
                 response = Packet.from_byte_S(self.byte_buffer[:length])
-                if response.seq_num < self.seq_num:
-                    #reciever behind sender
-                    #ACK
-                    ack = Packet(response.seq_num, '1')
-                    self.network.udt_send(ack.get_byte_S())
+
                 if (response.msg_S == '1'): #ACK
                     #succsesfully sent a packet
                     self.seq_num += 1
