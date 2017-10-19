@@ -118,12 +118,23 @@ class RDT:
             length = int(rcvpkt[:Packet.length_S_length]) #length of packet
             self.byte_buffer = rcvpkt#setting buffer
 
+            if(len(self.byte_buffer) < Packet.length_S_length):
+                break#not enough bytes to read packet length
+
+            #extract length of packet
+            if len(self.byte_buffer) < length:
+                break #not enough bytes to read the whole packet
+
             if Packet.corrupt(self.byte_buffer[:length]): #checking for corruption
                 #ACK/NAK packet corrupted, need to resend packet
                 continue
             else: #packet is not corrupt
                 response = Packet.from_byte_S(self.byte_buffer[:length])
-
+                if response.seq_num < self.seq_num:
+                    #reciever behind sender
+                    #ACK
+                    ack = Packet(response.seq_num, '1')
+                    self.network.udt_send(ack.get_byte_S())
                 if (response.msg_S == '1'): #ACK
                     #succsesfully sent a packet
                     self.seq_num += 1
@@ -140,7 +151,7 @@ class RDT:
         self.byte_buffer += byte_S
         loop_guard = self.seq_num
         # keep extracting packets - if reordered, could get more than one
-        while loop_guard == self.seq_num:
+        while True:
             # check if we have received enough bytes
             if len(self.byte_buffer) < Packet.length_S_length:
                 break  # not enough bytes to read packet length
