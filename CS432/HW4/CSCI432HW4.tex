@@ -17,9 +17,8 @@
 \author{Brock Ellefson}
 \title{CSCI432 HW4}
 \begin{document}
-
 \maketitle
-
+*With collaberation from Seth Severa*\\
 \section{Describe one thing
 that you already do well in your academic writing,
 and one thing that you will work on improving
@@ -38,7 +37,7 @@ However, I think a strength I possess in academic writing is my step by step pro
 \section{ Prove that the L$_{p}$ distance is a distance metric.}
 
 Prove that the L$_{p}$ distance is a distance metric.\\
-L$_{p}$ = d$_{p}$(x,y) = $\Vert$(x$_{1}$ - y$_{1}$)$^{p}$ + (x$_{2}$ - y$_{2}$)$^{p}$ $\Vert$$^{\frac{1}{p}}$ \\
+L$_{p} = d_{p}(x,y) = \Vert(x_{1} - y_{1})^{p} + (x_{2} - y_{2})^{p} \Vert^{\frac{1}{p}}$ \\
 To be a distance metric, you must satisfy 4 requirements:\\
 Let X = discrete space\\
 A metric is a function d: X x X $\rightarrow$ $\R$ such that:
@@ -49,53 +48,54 @@ A metric is a function d: X x X $\rightarrow$ $\R$ such that:
   \item d(x,y) $\geq$ 0
 \end{enumerate}
 So,\\
-Given p = 1, then\\
-d$_{1}$(x,y) = $\Vert$(x$_{1}$ - y$_{1}$)$^{1}$ + (x$_{2}$ - y$_{2}$)$^{1}$ $\Vert$$^{1}$ \\
-= $\Vert$(x$_{1}$ - y$_{1}$)$^{1}$ + (x$_{2}$ - y$_{2}$)$^{1}$$\Vert$\\
-= $\delta$\\
+Let $x,y$ in $\R^{n}$. Then $d(x,y) = max_{i} \Vert x_{i} - y_{i} \Vert$\\
+Then $d(y,x) = max_{i} \Vert y_{i} - x_{i} \Vert$\\
+$max_{i} \Vert x_{i} - y_{i} \Vert = max_{i} \Vert y_{i} - x_{i} \Vert$\\
+Therefore $d(x,y) = d(y,x)$\\
 \\
-d$_{1}$(y,x) = $\Vert$(y$_{1}$ - x$_{1}$)$^{1}$ + (y$_{2}$ - x$_{2}$)$^{1}$ $\Vert$$^{1}$ \\
-= $\Vert$(y$_{1}$ - x$_{1}$)$^{1}$ + (y$_{2}$ - x$_{2}$)$^{1}$$\Vert$\\
-= $\delta$\\
-$\forall$ x,y $\in$ L$_{p}$, d(x,y) = $\delta$ and d(y,x) = $\delta$. $\delta$ = $\delta$. This satisfies condition 1.\\
+For all x,y in $\R$, Then $d(x,y) = max_{i} \Vert x_{i} - y_{i} \Vert$, therefore by definition of absolute value, the distance can never be negative.\\
+Therefore, d(x,y) $\geq$ 0\\
+\\
+Given $d(x,z) = max_{i} \Vert x_{i} - z_{i} \Vert$\\ 
+Then, $max_{i} \Vert x_{i} - z_{i} \Vert$ less than or equal to $max_{i} \Vert x_{i} - y_{i} + max_{i} \Vert y_{i} - z_{i} \Vert$ by the definition of the triangle inequality\\
+Therefore, d(x,y) + d(y,z) $\geq$ d(x,z)\\
+\\
+For all $X = [x_{1}, x_{2}, ... x_{n}]$ and $Y = [y_{1}, y_{2}, ... y_{n}]$ in $\R$ if $max \Vert x_{i} - y_{i} \Vert$ = $min \Vert x_{i} - y_{i} \Vert$, then $X = Y$ for all $x_{i}$ in X and $y_{i}$ in Y. Therefore, if and only if X = Y then d(x,y) = 0\\
+Therefore d(x,y) = 0 $\Leftrightarrow$ x = y\\
+\\
+L$_{p}$ fulfills all these conditions, therefore the L$_{p}$ distance is a metric distance.
 
-$\forall$ x,y $\in$ L$_{p}$, if  d(x,y) = 0 then x and y are located at the same coordinates. Therefore x = y. This satisfies condition 2.
+\newpage
+\section{Recall the randomized quicksort algorithm}
 
+\subsection{Give pseudocode for a version of this algorithm that does not use recursion}
 
-\section{Recall the randomized
-quicksort algorithm}
+\begin{algorithm}
+\caption{Iterative Quicksort}\label{euclid}
+\begin{algorithmic}[1]
+\State INPUT: Array
+\State OUTPUT: Sorted Array
+\State $new Stack$
+\State $push(\$)$
+\State $push(A.length() - 1)$
+\While { $!Stack.isEmpty$}
 
-\subsection{Give pseudocode for a version of this algorithm
-that does not use recursion}
-
-
-\begin{algorithm}\caption{\textsc{Quicksort}}\label{alg:Quicksort}
- \begin{algorithmic}[1]
- \State \textbf{Procedure} Sort( \texttt{A})
-\State \texttt{maxdepth} = $2\lfloor \textit{log} \| \texttt{A} \|  \rfloor $
- \State Introsort( \texttt{A}, \texttt{maxdepth})
- \State ~
- \State \textbf{Procedure} Introsort( \texttt{A}, \texttt{maxdepth})
-   \State {\bf in:} \texttt{A}, \texttt{maxdepth}
-   
-
-\State {$n \leftarrow |\texttt{A}|$}
-\State ~
-
-\If{$n \leq 1$}
-	\State {\textbf{return}}
-\ElsIf{\texttt{maxdepth} = 0}
-	\State \textsc{heapsort}(\texttt{A})
-\Else
-	\State $p \leftarrow$ \textsc{partition}(\texttt{A})
-    \State \textsc{introsort}(\texttt{A}[0:$p$],\ \texttt{maxdepth - 1})
-    \State \textsc{introsort}(\texttt{A}[$p + 1$:$n$],\ \texttt{maxdepth} $- 1$)
-    
-\EndIf
-
- \end{algorithmic}
+\State head = pop()
+\State tail = pop()
+	\If {$tail - head \geq 3$} 
+    \State $partition = head + ((tail - head)/2)$
+    \State $partition = \bf{partition}(A, p, head, tail)$
+    \\
+    \State $push(partition + 1)$
+    \State $push(tail)$
+    \State $push(head)$
+    \State $push(partition)$
+    \EndIf
+\EndWhile
+\end{algorithmic}
 \end{algorithm}
 
+\subsection{Loop Invariant}
+All elements less than head and greater than tail are smaller steadily increasing
+$Referencing$ $https://en.wikibooks.org/wiki/Algorithm\_Implementation/Sorting/Quicksort$\\
 \end{document}
-
-
