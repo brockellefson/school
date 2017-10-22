@@ -123,6 +123,7 @@ class RDT:
                     #reciever behind sender
                     #ACK
                     ack = Packet(response.seq_num, '1')
+                    self.network.udt_send(ack.get_byte_S())
                 if response.msg_S == '1': #ACK
                     #succsesfully sent a packet
                     self.seq_num += 1
@@ -140,15 +141,15 @@ class RDT:
         self.byte_buffer += byte_S
         loop_guard = self.seq_num
         # keep extracting packets - if reordered, could get more than one
-        while loop_guard == self.seq_num:
+        while True:
             # check if we have received enough bytes
             if len(self.byte_buffer) < Packet.length_S_length:
-                break  # not enough bytes to read packet length
+                return ret_S  # not enough bytes to read packet length
 
             # extract length of packet
             length = int(self.byte_buffer[:Packet.length_S_length])
             if len(self.byte_buffer) < length:
-                break  # not enough bytes to read the whole packet
+                return ret_S  # not enough bytes to read the whole packet
 
             if Packet.corrupt(self.byte_buffer):
                 #packet corrupted send NAK
@@ -157,7 +158,7 @@ class RDT:
             else: #packet not corrupted
                 #create packet from buffer content and add to return string
                 rcvpkt = Packet.from_byte_S(self.byte_buffer[ :length])
-                if rcvpkt.msg_S != '1' and rcvpkt.msg_S != '0': #if this packet is not an ACK or NAK
+                if rcvpkt.msg_S != '1': #if this packet is not an ACK or NAK
                         if rcvpkt.seq_num < self.seq_num:
                             #Duplicate, ACK
                             ack = Packet(rcvpkt.seq_num, '1')
@@ -171,8 +172,7 @@ class RDT:
                         ret_S = rcvpkt.msg_S if (ret_S is None) else ret_S + rcvpkt.msg_S #build message
                 #remove the packet bytes from the buffer
             self.byte_buffer = self.byte_buffer[length:]
-        #if this was the last packet, will return on the next iteration
-        return ret_S
+            #if this was the last packet, will return on the next iteration
 
 
     def rdt_3_0_send(self, msg_S):
