@@ -5,9 +5,9 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 
-\usepackage{algorithm}
-\usepackage{algorithmicx}
-\usepackage{algpseudocode}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
+%\usepackage{algpseudocode}
 
 
 \newcommand{\R}{\mathbb{R}}
@@ -21,10 +21,7 @@
 \section{Prove that the Frechet distance is a distance metric}
 
 Prove that the Frechet distance is a distance metric.\\
-
-
-
-
+\\
 To be a distance metric, you must satisfy 4 requirements:\\
 Let X = discrete space\\
 A metric is a function d: X x X $\rightarrow$ $\R$ such that:
@@ -63,9 +60,24 @@ if f(n) = O(n$^{log_{b}a - \epsilon}$) for some $\epsilon > 0$ then T(n) = $\The
 Therefore, T(n) =  $\Theta$( n$^{2}$)
 
 \subsection{T(n) = 3T(2n/3) + 4n}
-
+Master's Theorem:\\
+T(n) = aT($\frac{n}{b}$) + f(n)\\
+Where, a $\geq$ 1, b $>$ 1, f(n) is asymptotically positive\\
+\\
+T(n) = 3T(2n/3) + 4n\\
+a = 3, b = 2/3, f(n) = 4n\\
+n$^{log_{b}a}$ $\Rightarrow$ n$^{log_{3/2}3}$ $\Rightarrow$ n$^{2.71}$\\
+Case 1:\\
+if f(n) = O(n$^{log_{b}a - \epsilon}$) for some $\epsilon > 0$ then T(n) = $\Theta$( n$^{2}$).\\
+Therefore, T(n) =  $\Theta$( n$^{2}$)
 
 \subsection{T(n) = T(n/2) + T(n/3)}
+
+\begin{figure}[h]
+	\includegraphics[scale = .25]{recurtree1hw5.png}
+\end{figure}
+\noindent Our longest path in this tree is the rightmost path, following a sequence: $log_{3}n$. So our initial guess is for this recurrence is $O(nlogn)$.\\
+\\
 
 
 \subsection{2T(n/2) + O(log n)}
