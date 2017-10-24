@@ -79,9 +79,19 @@ class Host:
     # @param dst_addr: destination address for the packet
     # @param data_S: data being transmitted to the network layer
     def udt_send(self, dst_addr, data_S):
-        p = NetworkPacket(dst_addr, data_S)
-        self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-        print('%s: sending packet "%s"' % (self, p))
+        if len(data_S) > 50:
+            p = NetworkPacket(dst_addr, data_S[:40])
+            self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
+            print('%s: sending packet "%s"' % (self, p))
+
+            p = NetworkPacket(dst_addr, data_S[40:])
+            self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
+            print('%s: sending packet "%s"' % (self, p))
+
+        else:
+            p = NetworkPacket(dst_addr, data_S)
+            self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
+            print('%s: sending packet "%s"' % (self, p))
 
     ## receive packet from the network layer
     def udt_receive(self):
