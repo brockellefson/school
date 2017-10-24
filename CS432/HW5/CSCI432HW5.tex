@@ -4,17 +4,15 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-
 %\usepackage{algorithm}
-%\usepackage{algorithmicx}
 %\usepackage{algpseudocode}
-
 
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 
 \author{Brock Ellefson}
 \title{CSCI432 HW5}
+
 \begin{document}
 \maketitle
 
@@ -56,8 +54,8 @@ T(n) = 4T(n/2) + n\\
 a = 4, b = 2, f(n) = n\\
 n$^{log_{b}a}$ $\Rightarrow$ n$^{log_{2}4}$ $\Rightarrow$ n$^{2}$\\
 Case 1:\\
-if f(n) = O(n$^{log_{b}a - \epsilon}$) for some $\epsilon > 0$ then T(n) = $\Theta$( n$^{2}$).\\
-Therefore, T(n) =  $\Theta$( n$^{2}$)
+if f(n) = O(n$^{log_{b}a - \epsilon}$) for some $\epsilon > 0$ then T(n) = $\theta$( n$^{2}$).\\
+Therefore, T(n) =  $\theta$( n$^{2}$)
 
 \subsection{T(n) = 3T(2n/3) + 4n}
 Master's Theorem:\\
@@ -68,14 +66,15 @@ T(n) = 3T(2n/3) + 4n\\
 a = 3, b = 2/3, f(n) = 4n\\
 n$^{log_{b}a}$ $\Rightarrow$ n$^{log_{3/2}3}$ $\Rightarrow$ n$^{2.71}$\\
 Case 1:\\
-if f(n) = O(n$^{log_{b}a - \epsilon}$) for some $\epsilon > 0$ then T(n) = $\Theta$( n$^{2}$).\\
-Therefore, T(n) =  $\Theta$( n$^{2}$)
+if f(n) = $O(n^{log_{b}a - \epsilon})$ for some $\epsilon > 0$ then T(n) = $\theta(n^{2.71})$.\\
+Therefore, T(n) =  $\theta(n^{2.71})$
 
 \subsection{T(n) = T(n/2) + T(n/3)}
 
 \begin{figure}[h]
 	\includegraphics[scale = .25]{recurtree1hw5.png}
 \end{figure}
+
 \noindent Our longest path in this tree is the rightmost path, following a sequence: $log_{3}n$. So our initial guess is for this recurrence is $O(nlogn)$.\\
 \\
 
