@@ -33,13 +33,17 @@ class Interface:
 class NetworkPacket:
     ## packet encoding lengths
     dst_addr_S_length = 5
-
+    dst_frag_flag_S_length = 1
+    dst_ident_S_length = 1
     ##@param dst_addr: address of the destination host
     # @param data_S: packet payload
-    def __init__(self, dst_addr, data_S):
+    # @param frag_flag: if the packet is part of a segmentation
+    # @param offset: where the offset is
+    def __init__(self, dst_addr, frag_flag, ident, data_S):
         self.dst_addr = dst_addr
         self.data_S = data_S
-
+        self.frag_flag = frag_flag
+        self.ident = ident
     ## called when printing the object
     def __str__(self):
         return self.to_byte_S()
@@ -47,6 +51,8 @@ class NetworkPacket:
     ## convert packet to a byte string for transmission over links
     def to_byte_S(self):
         byte_S = str(self.dst_addr).zfill(self.dst_addr_S_length)
+        byte_S += str(self.frag_flag).zfill(self.frag_flag)
+        byte_S += str(self.ident).zfill(self.ident)
         byte_S += self.data_S
         return byte_S
 
@@ -55,8 +61,10 @@ class NetworkPacket:
     @classmethod
     def from_byte_S(self, byte_S):
         dst_addr = int(byte_S[0 : NetworkPacket.dst_addr_S_length])
-        data_S = byte_S[NetworkPacket.dst_addr_S_length : ]
-        return self(dst_addr, data_S)
+        frag_flag = int(byte_S[NetworkPacket.dst_addr_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length])
+        ident = int(byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length + NetworkPacket.dst_ident_S_length ])
+        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length + NetworkPacket.dst_ident_S_length:]
+        return self(dst_addr, frag_flag, ident, data_S)
 
 
 
@@ -80,16 +88,16 @@ class Host:
     # @param data_S: data being transmitted to the network layer
     def udt_send(self, dst_addr, data_S):
         if len(data_S) > 50:
-            p = NetworkPacket(dst_addr, data_S[:40])
+            p = NetworkPacket(dst_addr, 0, 0, data_S[:40])
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
             print('%s: sending packet "%s"' % (self, p))
 
-            p = NetworkPacket(dst_addr, data_S[40:])
+            p = NetworkPacket(dst_addr, 0, 0, data_S[40:])
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
             print('%s: sending packet "%s"' % (self, p))
 
         else:
-            p = NetworkPacket(dst_addr, data_S)
+            p = NetworkPacket(dst_addr, 0, 0, data_S)
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
             print('%s: sending packet "%s"' % (self, p))
 

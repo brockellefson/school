@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     #add all the links
     link_layer.add_link(link_2.Link(client, 0, router_a, 0, 50))
-    link_layer.add_link(link_2.Link(router_a, 0, server, 0, 50))
+    link_layer.add_link(link_2.Link(router_a, 0, server, 0, 30))
 
 
     #start all the objects
@@ -48,8 +48,8 @@ if __name__ == '__main__':
 
 
     #create some send events
-    kanye_data = 'The plan was to drink until the pain over but whats worse the pain or the hangover'
-    client.udt_send(2, kanye_data)
+    kanye_data = 'The plan was to drink until the pain over but whats worse the pain or the hangover' #yeezy yeezy keep it wavy
+    client.udt_send(2, kanye_data) #send a fire bar
 
 
     #give the network sufficient time to transfer all packets before quitting
