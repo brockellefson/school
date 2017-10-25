@@ -4,8 +4,8 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-%\usepackage{algorithm}
-%\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
@@ -30,6 +30,13 @@ A metric is a function d: X x X $\rightarrow$ $\R$ such that:
   \item d(x,y) $\geq$ 0
 \end{enumerate}
 So,\\
+Let $A, B$ be two curves in a metric space, and t as a parameter in time. A and B are the infimum of all $\alpha$ and $\beta$ of [0,1] where t $\in$ [0,1]\\
+Then the Frechet Distance is:\\
+$F(A,B) = inf_{\alpha,\beta} max_{t\in[0,1]}\lbrace d(A(\alpha(t)),B(\beta(t)))\rbrace  $.\\
+\\
+So,\\
+$F(A,B) = inf_{\alpha,\beta} max_{t\in[0,1]}\lbrace d(A(\alpha(t)),B(\beta(t)))\rbrace  $, and\\
+$F(B,A) = inf_{\beta,\alpha} max_{t\in[0,1]}\lbrace d(B(\beta(t)),A(\alpha(t)))\rbrace  $.
 
 
 \section{Recurrence Relations}
@@ -84,6 +91,26 @@ Therefore, T(n) =  $\theta(n^{2.71})$
 
 \section{Climbing Stairs Problem}
 
+
+\begin{algorithm}
+\caption{Climbing Stairs}\label{euclid}
+\begin{algorithmic}[1]
+\State \textbf{Input:} n (number of stairs), k (max steps can advance at once)
+\State \textbf{Output:} Integer (Numbers of ways to reach destination)
+
+\State \textbf{Procedure:} $CountingStairs(n, k)$
+\State count $\leftarrow$ 0
+\If {n $\leq$ 1}
+	\State \textbf{return} 1
+\EndIf
+\For{$i \leftarrow 1...(n)$} 
+	\State $count \leftarrow COUNTINGSTAIRS(n-i, k)$
+\EndFor
+\State \textbf{return} count
+
+
+\end{algorithmic}
+\end{algorithm}
 
 
 \end{document}
