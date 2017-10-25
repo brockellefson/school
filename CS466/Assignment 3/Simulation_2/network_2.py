@@ -12,6 +12,7 @@ class Interface:
     ## @param maxsize - the maximum size of the queue storing packets
     def __init__(self, maxsize=0):
         self.queue = queue.Queue(maxsize);
+        self.mtu = None
 
     ##get packet from the queue interface
     def get(self):
@@ -67,7 +68,9 @@ class NetworkPacket:
         return self(dst_addr, frag_flag, ident, data_S)
 
 
-
+    def segment(mtu):
+        segments = self.data_S[i:i+mtu] for i in range(0,len(data_S), mtu):
+        return segments
 
 ## Implements a network host for receiving and transmitting data
 class Host:
@@ -87,19 +90,19 @@ class Host:
     # @param dst_addr: destination address for the packet
     # @param data_S: data being transmitted to the network layer
     def udt_send(self, dst_addr, data_S):
-        if len(data_S) > 50:
-            p = NetworkPacket(dst_addr, 0, 0, data_S[:40])
+        if (len(data_S) > self.out_intf_L[0].mtu):
+            p = NetworkPacket(dst_addr, 0, 0, data_S[:self.out_intf_L[0].mtu - 1])
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s"' % (self, p))
+            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
 
-            p = NetworkPacket(dst_addr, 0, 0, data_S[40:])
+            p = NetworkPacket(dst_addr, 0, 0, data_S[self.out_intf_L[0].mtu:])
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s"' % (self, p))
+            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
 
         else:
             p = NetworkPacket(dst_addr, 0, 0, data_S)
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s"' % (self, p))
+            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
 
     ## receive packet from the network layer
     def udt_receive(self):
@@ -148,11 +151,23 @@ class Router:
                 #if packet exists make a forwarding decision
                 if pkt_S is not None:
                     p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
-                    # HERE you will need to implement a lookup into the
-                    # forwarding table to find the appropriate outgoing interface
-                    # for now we assume the outgoing interface is also i
+                    if (p.data_S > self.out_intf_L[i].mtu):
+                        segments = p.segment(self.out_intf_L[i].mtu)
+                        for seg in segments:
+                            
+                            seg_p = NetworkPacket(p.dst_addr, 1, 0, seg])
+
+                            self.out_intf_L[i].put(seq_p.to_byte_S(), True)
+                            print('%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d' \
+                                % (self, p, i, i, self.out_intf_L[i].mtu))
+
+
+
+
+
                     self.out_intf_L[i].put(p.to_byte_S(), True)
-                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, i))
+                    print('%s: forwarding packet "%s" from interface %d to %d with mtu %d' \
+                        % (self, p, i, i, self.out_intf_L[i].mtu))
             except queue.Full:
                 print('%s: packet "%s" lost on interface %d' % (self, p, i))
                 pass
