@@ -34,9 +34,19 @@ Let $A, B$ be two curves in a metric space, and t as a parameter in time. A and 
 Then the Frechet Distance is:\\
 $F(A,B) = inf_{\alpha,\beta} max_{t\in[0,1]}\lbrace d(A(\alpha(t)),B(\beta(t)))\rbrace  $.\\
 \\
-So,\\
-$F(A,B) = inf_{\alpha,\beta} max_{t\in[0,1]}\lbrace d(A(\alpha(t)),B(\beta(t)))\rbrace  $, and\\
-$F(B,A) = inf_{\beta,\alpha} max_{t\in[0,1]}\lbrace d(B(\beta(t)),A(\alpha(t)))\rbrace  $.
+So, let\\
+$F(A,B) = inf_{\alpha,\beta} max_{t\in[0,1]}\lbrace d(A(\alpha(t)),B(\beta(t)))\rbrace $, and\\
+$F(B,A) = inf_{\beta,\alpha} max_{t\in[0,1]}\lbrace d(B(\beta(t)),A(\alpha(t)))\rbrace $ which is the same value.\\
+Therefore $F(A,B) = F(B,A), and d(x,y) = d(y,x)$\\
+\\
+If $F(A,B) = 0$ then $A(\alpha(t)$ and $B(\beta(t)$ then $A$ and $B$ are at the same x and y coordinates at the same t value, hence 
+$A(\alpha(t)$ equals $B(\beta(t)$, $therefore d(x,y) = 0$ and $x = y$\\
+\\
+Let $A, B, C$ be 3 curves in a metric space, and t as a parameter in time. A and B are the infimum of all $\alpha$, $\beta$, and $\delta$ of [0,1] where t $\in$ [0,1]. The distance of A to B and the distance of B to C is always going to be greater than or equal to the distance of A to C by the definition of the triangle inequality. Therefore d(x,y) + d(y,z) $\geq$ d(x,z)\\
+\\
+The frechet distance cannot be negitive because distances are calculated using the absolute value, therefore d(x,y) $\geq$ 0\\
+\\
+Therefore, the Frechet Distance is a metric distance.
 
 
 \section{Recurrence Relations}
@@ -84,10 +94,18 @@ Therefore, T(n) =  $\theta(n^{2.71})$
 
 \noindent Our longest path in this tree is the leftmost path, following a sequence: $log_{2}n$. So our initial guess is for this recurrence is $O(nlogn)$.\\
 \\
-
+Prove that $T(n) = T(n/2) + T(n/3)$ is in $O(nlogn)$ complexity.\\
+We begin by guessing that $T(n)$ is in $O(nlogn)$\\
+For the base case of n = 1, it's trivial to see that there exists a c where $1 < cnlogn$ \\
+For $ n > 1$, we have \\
+$T(n) = T(n/2) + T(n/3) \leq c(nlogn/2) + (nlogn/3)$\\
+We can see that this last simplification is less than $cnlogn$ for some positive n and c. Since we are limiting our $n > 1$ already, we meet the requirement that there does exist some c where $T(n) < c nlogn$. \\
+Thus, by induction, $T(n)$ is $O(nlogn).$
 
 \subsection{2T(n/2) + O(log n)}
-
+Prove the time complexity of 2T(n/2) + O(log n)\\
+2T(n/2) is a geometric series of $2n/2^{i}$ so our guess is $O(nlogn)$,\\
+which would make this algorithm approximently $O(nlogn)$ 
 
 \section{Climbing Stairs Problem}
 
@@ -103,8 +121,8 @@ Therefore, T(n) =  $\theta(n^{2.71})$
 \If {n $\leq$ 1}
 	\State \textbf{return} 1
 \EndIf
-\For{$i \leftarrow 1...(n)$} 
-	\State $count \leftarrow COUNTINGSTAIRS(n-i, k)$
+\For{$i \leftarrow 1...(k)$} 
+	\State $count \leftarrow count + COUNTINGSTAIRS(n-i, k)$
 \EndFor
 \State \textbf{return} count
 
@@ -112,5 +130,7 @@ Therefore, T(n) =  $\theta(n^{2.71})$
 \end{algorithmic}
 \end{algorithm}
 
+\noindent Loop Invariant:\\
+The loop invariant is that with each loop iteration, we will take one more step, adding on to our solution by 1 each time. 
 
 \end{document}

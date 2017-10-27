@@ -33,4 +33,24 @@ L and not X implies Q because once i equals A.size() we break our loop guard X (
 \\
 There our loop invariant L is true.
 
+\subsection{Graph}
+\begin{figure}[h]
+	\includegraphics[scale = .5]{graph.png}
+\section{Questions}
+\subsection{What is the Euler characteristic of the graph?}
+The Euler characteristic is $V - E \rightarrow 11 - 19 = -8$ 
+\subsection{What is the graph genus?}
+The graph genus of this graph is 13
+\subsection{Is an Eulerian tour possible?}
+A connected graph has an Eulerian cycle iff it has no graph vertices of odd degree.\\
+This graph has multiple vertices with an odd of edges, therefore an Eulerian tour is not possible.
+
+\subsection{Is a Hamiltonian path possible?}
+A Hamiltonian path is possible. The path is as follows:\\
+$v8 \rightarrow v10 \rightarrow v11 \rightarrow v9 \rightarrow v4 \rightarrow v7 \rightarrow v2 \rightarrow v3 \rightarrow v1 \rightarrow v6 \rightarrow v5$
+
+\subsection{What is the size of the largest clique?}
+The maximum clique is the clique of $v1$, $v2$, $v3$, $v5$, $v6$
+
+\end{figure}
 \end{document}
