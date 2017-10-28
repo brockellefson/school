@@ -33,9 +33,15 @@ class Interface:
 # the fields necessary for the completion of this assignment.
 class NetworkPacket:
     ## packet encoding lengths
+
+
+    #PACKET HEADER
+    #dst_addr:frag_flag:packetid:msg
+
+
     dst_addr_S_length = 5
-    dst_frag_flag_S_length = 1
-    dst_ident_S_length = 1
+    frag_flag_S_length = 1
+    ident_S_length = 5
     ##@param dst_addr: address of the destination host
     # @param data_S: packet payload
     # @param frag_flag: if the packet is part of a segmentation
@@ -52,8 +58,8 @@ class NetworkPacket:
     ## convert packet to a byte string for transmission over links
     def to_byte_S(self):
         byte_S = str(self.dst_addr).zfill(self.dst_addr_S_length)
-        byte_S += str(self.frag_flag).zfill(self.frag_flag)
-        byte_S += str(self.ident).zfill(self.ident)
+        byte_S += str(self.frag_flag).zfill(self.frag_flag_S_length)
+        byte_S += str(self.ident).zfill(self.ident_S_length)
         byte_S += self.data_S
         return byte_S
 
@@ -62,19 +68,19 @@ class NetworkPacket:
     @classmethod
     def from_byte_S(self, byte_S):
         dst_addr = int(byte_S[0 : NetworkPacket.dst_addr_S_length])
-        frag_flag = int(byte_S[NetworkPacket.dst_addr_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length])
-        ident = int(byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length + NetworkPacket.dst_ident_S_length ])
-        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.dst_frag_flag_S_length + NetworkPacket.dst_ident_S_length:]
+        frag_flag = int(byte_S[NetworkPacket.dst_addr_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length])
+        ident = int(byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length ])
+        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length:]
         return self(dst_addr, frag_flag, ident, data_S)
 
 
-    def segment(mtu):
-        segments = self.data_S[i:i+mtu] for i in range(0,len(data_S), mtu):
+    def segment(self, mtu):
+        segments = [self.data_S[i:i+mtu] for i in range(0,len(self.data_S), mtu)] #break packet into segments of mtu length
         return segments
 
 ## Implements a network host for receiving and transmitting data
 class Host:
-
+    segment_list = []
     ##@param addr: address of this node represented as an integer
     def __init__(self, addr):
         self.addr = addr
@@ -89,26 +95,46 @@ class Host:
     ## create a packet and enqueue for transmission
     # @param dst_addr: destination address for the packet
     # @param data_S: data being transmitted to the network layer
+    def multiPackets(self, data_S, mtu):
+        packets = [data_S[i:i+mtu] for i in range(0,len(data_S), mtu)]
+        return packets
+
+
     def udt_send(self, dst_addr, data_S):
-        if (len(data_S) > self.out_intf_L[0].mtu):
-            p = NetworkPacket(dst_addr, 0, 0, data_S[:self.out_intf_L[0].mtu - 1])
-            self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
-
-            p = NetworkPacket(dst_addr, 0, 0, data_S[self.out_intf_L[0].mtu:])
-            self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
-
+        if (len(data_S) > self.out_intf_L[0].mtu): #string bigger than mtu, send multiple packets
+            string_mtu =  self.out_intf_L[0].mtu - 11 #7 is the bit addr length
+            packets = self.multiPackets(data_S, string_mtu)
+            p_id = 10000 #packet id
+            for packet in packets:
+                p = NetworkPacket(dst_addr, 0, p_id, packet)
+                self.out_intf_L[0].put(p.to_byte_S())
+                print('\n%s: sending packet "%s" out interface with mtu=%d\n' % (self, p, self.out_intf_L[0].mtu))
+                p_id+= 10000
         else:
-            p = NetworkPacket(dst_addr, 0, 0, data_S)
+            p = NetworkPacket(dst_addr, 0, p_id, data_S)
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
-            print('%s: sending packet "%s" out interface with mtu=%d' % (self, p, self.out_intf_L[0].mtu))
+            print('\n%s: sending packet "%s" out interface with mtu=%d\n' % (self, p, self.out_intf_L[0].mtu))
+
+    def reconstruct(self, segments, pkt_id):
+        og_pkt = ''
+        for segment in segments:
+            if segment[6] == pkt_id:
+                og_pkt += segment[11:]
+        return og_pkt
 
     ## receive packet from the network layer
     def udt_receive(self):
         pkt_S = self.in_intf_L[0].get()
         if pkt_S is not None:
-            print('%s: received packet "%s"' % (self, pkt_S))
+            print('\n%s: received packet "%s"\n' % (self, pkt_S))
+            if pkt_S[5] == '1': #if a packet is actually a segment
+                self.segment_list.append(pkt_S)
+                if pkt_S[7] == pkt_S[9] and pkt_S[8] == pkt_S[10]:
+                    og_data = self.reconstruct(self.segment_list, pkt_S[6])
+                    p = NetworkPacket('00002', 0, pkt_S[6] + '0000', og_data)
+                    print('CONSTRUCTED PACKET: ' + p.to_byte_S())
+
+
 
     ## thread target for the host to keep receiving data
     def run(self):
@@ -151,25 +177,24 @@ class Router:
                 #if packet exists make a forwarding decision
                 if pkt_S is not None:
                     p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
-                    if (p.data_S > self.out_intf_L[i].mtu):
-                        segments = p.segment(self.out_intf_L[i].mtu)
+                    if (len(pkt_S) > self.out_intf_L[i].mtu):
+                        string_mtu =  self.out_intf_L[i].mtu - 11 #11 is the bit addr length
+                        segments = p.segment(string_mtu) #segment packet into segments
+                        seg_total = len(segments) * 100 #total amount of segments
+                        seg_count = 1
                         for seg in segments:
-                            
-                            seg_p = NetworkPacket(p.dst_addr, 1, 0, seg])
+                            seg_p = NetworkPacket(p.dst_addr, 1, p.ident + seg_total + seg_count, seg) #segment packet
+                            self.out_intf_L[i].put(seg_p.to_byte_S(), True) #send seg_p
+                            print('\n%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d\n' \
+                                % (self, seg_p, i, i, self.out_intf_L[i].mtu))
+                            seg_count += 1
 
-                            self.out_intf_L[i].put(seq_p.to_byte_S(), True)
-                            print('%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d' \
-                                % (self, p, i, i, self.out_intf_L[i].mtu))
-
-
-
-
-
-                    self.out_intf_L[i].put(p.to_byte_S(), True)
-                    print('%s: forwarding packet "%s" from interface %d to %d with mtu %d' \
-                        % (self, p, i, i, self.out_intf_L[i].mtu))
+                    else:
+                        self.out_intf_L[i].put(p.to_byte_S(), True)
+                        print('\n%s: forwarding packet "%s" from interface %d to %d with mtu %d\n' \
+                            % (self, p, i, i, self.out_intf_L[i].mtu))
             except queue.Full:
-                print('%s: packet "%s" lost on interface %d' % (self, p, i))
+                print('\n%s: packet "%s" lost on interface %d\n' % (self, p, i))
                 pass
 
     ## thread target for the host to keep forwarding data

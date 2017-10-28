@@ -4,13 +4,13 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-
+\usepackage{multirow}
 \author{Brock Ellefson}
 \title{CSCI466 HW3}
 \begin{document}
 \maketitle
 \section{What is the difference between routing and forwarding?}
-The difference between routing and forwarding is that routing is finding an optimal path from the sender to the receiver to send packets. Forwarding is the process of sending packets along the route until it eventually gets to the reciever. 
+The difference between routing and forwarding is that routing is finding an optimal path from the sender to the receiver to send packets. Forwarding is the process of sending packets along the route until it eventually gets to the receiver. 
 
 \section{Describe how packet loss can occur and be eliminated at:}
 \subsection{Router input ports?}
@@ -28,7 +28,7 @@ accumulated, although this can't be avoided, it can be minimized. We can drop a 
 
 
 \section{Consider a datagram network using 32-bit host addresses.}
-\subsection{Translate  the  above  forwarding  rules  into  a  forwarding  table  that  uses  longest  pre x  matchingto  forward  packets  to  the  correct  interface.   Your  table  should  list  pre x  match  and  forwarding interface} 
+\subsection{Translate  the  above  forwarding  rules  into  a  forwarding  table  that  uses  longest  pre x  matching to  forward  packets  to  the  correct  interface.   Your  table  should  list  pre x  match  and  forwarding interface} 
 
 \begin{table}[h]
 \centering
@@ -59,4 +59,74 @@ destination addr & interface port \\
 
 \section{}
 \subsection{How a hierarchical organization of the Internet allows it to scale to millions of users?}
+Autonomous systems. Essentially, Routers are grouped into different AS's, and these routers only need to know information about the other routers in the AS and the gateway. So all routers within the AS dont actually need to store a ton of information.
+
+\subsection{Why are there different inter-AS and intra-AS routing protocols used in the Internet?}
+Different inter and intra AS protocols improves scalability, having multiple protocols allows whoever is making the system to use protocols that suits them
+
+\section{Consider the network shown below. Suppose AS3 and AS2 are running OSPF, and AS1 and AS4, RIP. Supposed eBGP and iBGP are used for the inter-AS routing protocol. Initially suppose there is no physical link between AS2 and AS4}
+
+\subsection{Router 3c learns about prefix x from which routing protocol?}
+Router 3c learns about prefix x from eBGP
+
+\subsection{Router 3a learns about prefix x from which routing protocol?}
+Router 3a learns about prefix x from iBGP
+
+\subsection{Router 4b learns about prefix x from which routing protocol?}
+Router 4b learns about prefix x from iBGP
+
+\subsection{Once router 1d learns about x it will put an entry (x,I) in its forwarding table. Will I be equal to I1 or I2 for this entry?  Explain why.}
+$I_{1}$ because it has the lowest cost path with the least hops
+
+\subsection{Suppose  the  there  is  a  physical  link  between  AS2  and  AS4,  shown  by  the  dotted  line. Suppose router 1d learns that x is accessible via AS2 as well as via AS3. Will I be equal to I1 or I2? Explain why?}
+
+$I_{2}$ because it has the least hops
+
+
+\subsection{Consider the network shown below, and assume that each node initially knows the costs to each of its neighbors.  Consider the distance-vector algorithm and show the evolution of the routing tables at nodes in each round of the algorithm}
+
+\begin{table}[h]
+\centering
+\caption{Routing Table}
+\label{my-label}
+\begin{tabular}{llllll}
+  & U   & V   & X   & Y   & Z   \\
+U & INF & INF & INF & INF & INF \\
+V & INF & INF & INF & INF & INF \\
+X & INF & INF & INF & INF & INF \\
+Y & INF & INF & INF & INF & INF \\
+Z & INF & 6   & 3   & INF & 0  
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Routing Table}
+\label{my-label}
+\begin{tabular}{llllll}
+  & U   & V   & X   & Y   & Z   \\
+U & 0   & 1   & INF & 2   & INF \\
+V & 1   & 0   & 3   & INF & 6   \\
+X & INF & 3   & 0   & 3   & 2   \\
+Y & 2   & INF & 3   & 0   & INF \\
+Z & INF & 6   & 3   & INF & 0  
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Routing Table Complete}
+\label{my-label}
+\begin{tabular}{llllll}
+  & U & V & X & Y & Z \\
+U & 0 & 1 & 4 & 2 & 6 \\
+V & 1 & 0 & 3 & 3 & 6 \\
+X & 4 & 3 & 0 & 3 & 2 \\
+Y & 2 & 3 & 3 & 0 & 5 \\
+Z & 6 & 6 & 3 & 5 & 0
+\end{tabular}
+\end{table}
+
+\section{Argue that for the distance-vector algorithm in Figure 5.6 in your textbook (below), each value in the distance vector D(x) is non-increasing and will eventually stabilize in a finite number of steps.}
+The amount of steps correlates with the amount of edges. The table is filled when the two nodes with the largest distance from each other are filled in. Since the algorithm can only update path cost values if a lower value exists.The table has a finite number of paths, therefore the table will only be able to hold a finite number of steps.
 \end{document}

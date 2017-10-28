@@ -36,8 +36,8 @@ class Link:
         if pkt_S is None:
             return #return if no packet to transfer
         if len(pkt_S) > self.out_intf.mtu:
-+           print('%s: packet "%s" length greater then link mtu (%d)' % (self, pkt_S, self.out_intf.mtu))
-            return #return without transmitting if packet too big
+           print('%s: packet "%s" length %s greater then link mtu (%d)' % (self, pkt_S, len(pkt_S), self.out_intf.mtu))
+           return #return without transmitting if packet too big
         #otherwise transmit the packet
         try:
             self.out_intf.put(pkt_S)
