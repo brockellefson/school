@@ -118,8 +118,8 @@ class Host:
     def reconstruct(self, segments, pkt_id):
         og_pkt = ''
         for segment in segments:
-            if segment[6] == pkt_id:
-                og_pkt += segment[11:]
+            if segment[6] == pkt_id: #for all segments that share the same id
+                og_pkt += segment[11:] #add all segments into return string
         return og_pkt
 
     ## receive packet from the network layer
@@ -128,11 +128,11 @@ class Host:
         if pkt_S is not None:
             print('\n%s: received packet "%s"\n' % (self, pkt_S))
             if pkt_S[5] == '1': #if a packet is actually a segment
-                self.segment_list.append(pkt_S)
-                if pkt_S[7] == pkt_S[9] and pkt_S[8] == pkt_S[10]:
-                    og_data = self.reconstruct(self.segment_list, pkt_S[6])
-                    p = NetworkPacket('00002', 0, pkt_S[6] + '0000', og_data)
-                    print('CONSTRUCTED PACKET: ' + p.to_byte_S())
+                self.segment_list.append(pkt_S) #add to list of all segmented packets
+                if pkt_S[7] == pkt_S[9] and pkt_S[8] == pkt_S[10]: #if the total segments equals the latest packet part of the id
+                    og_data = self.reconstruct(self.segment_list, pkt_S[6]) #reconstruct original string
+                    p = NetworkPacket(pkt_S[:5], 0, pkt_S[6] + '0000', og_data) #reconstruct original packet
+                    print('\nCONSTRUCTED PACKET: ' + p.to_byte_S() + '\n')
 
 
 
