@@ -38,15 +38,16 @@ class NetworkPacket:
     #PACKET HEADER
     #dst_addr:frag_flag:packetid:msg
 
-
-    dst_addr_S_length = 5
+    src_addr_S_length = 3
+    dst_addr_S_length = 2
     frag_flag_S_length = 1
     ident_S_length = 5
     ##@param dst_addr: address of the destination host
     # @param data_S: packet payload
     # @param frag_flag: if the packet is part of a segmentation
     # @param offset: where the offset is
-    def __init__(self, dst_addr, frag_flag, ident, data_S):
+    def __init__(self, src_addr, dst_addr, frag_flag, ident, data_S):
+        self.src_addr = src_addr
         self.dst_addr = dst_addr
         self.data_S = data_S
         self.frag_flag = frag_flag
@@ -57,7 +58,8 @@ class NetworkPacket:
 
     ## convert packet to a byte string for transmission over links
     def to_byte_S(self):
-        byte_S = str(self.dst_addr).zfill(self.dst_addr_S_length)
+        byte_S = str(self.src_addr).zfill(self.src_addr_S_length)
+        byte_S += str(self.dst_addr).zfill(self.dst_addr_S_length)
         byte_S += str(self.frag_flag).zfill(self.frag_flag_S_length)
         byte_S += str(self.ident).zfill(self.ident_S_length)
         byte_S += self.data_S
@@ -67,11 +69,12 @@ class NetworkPacket:
     # @param byte_S: byte string representation of the packet
     @classmethod
     def from_byte_S(self, byte_S):
-        dst_addr = int(byte_S[0 : NetworkPacket.dst_addr_S_length])
-        frag_flag = int(byte_S[NetworkPacket.dst_addr_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length])
-        ident = int(byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length ])
-        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length:]
-        return self(dst_addr, frag_flag, ident, data_S)
+        src_addr = int(byte_S[0 : NetworkPacket.src_addr_S_length])
+        dst_addr = int(byte_S[NetworkPacket.src_addr_S_length :NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length])
+        frag_flag = int(byte_S[NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length :NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length])
+        ident = int(byte_S[NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length : NetworkPacket.src_addr_S_length +NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length ])
+        data_S = byte_S[NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length + NetworkPacket.frag_flag_S_length + NetworkPacket.ident_S_length:]
+        return self(src_addr, dst_addr, frag_flag, ident, data_S)
 
 
     def segment(self, mtu):
@@ -106,12 +109,12 @@ class Host:
             packets = self.multiPackets(data_S, string_mtu)
             p_id = 10000 #packet id
             for packet in packets:
-                p = NetworkPacket(dst_addr, 0, p_id, packet)
+                p = NetworkPacket(self.addr, dst_addr, 0, p_id, packet)
                 self.out_intf_L[0].put(p.to_byte_S())
                 print('\n%s: sending packet "%s" out interface with mtu=%d\n' % (self, p, self.out_intf_L[0].mtu))
                 p_id+= 10000
         else:
-            p = NetworkPacket(dst_addr, 0, p_id, data_S)
+            p = NetworkPacket(self.addr, dst_addr, 0, p_id, data_S)
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
             print('\n%s: sending packet "%s" out interface with mtu=%d\n' % (self, p, self.out_intf_L[0].mtu))
 
@@ -183,7 +186,7 @@ class Router:
                         seg_total = len(segments) * 100 #total amount of segments
                         seg_count = 1
                         for seg in segments:
-                            seg_p = NetworkPacket(p.dst_addr, 1, p.ident + seg_total + seg_count, seg) #segment packet
+                            seg_p = NetworkPacket(p.src_addr, p.dst_addr, 1, p.ident + seg_total + seg_count, seg) #segment packet
                             self.out_intf_L[i].put(seg_p.to_byte_S(), True) #send seg_p
                             print('\n%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d\n' \
                                 % (self, seg_p, i, i, self.out_intf_L[i].mtu))
