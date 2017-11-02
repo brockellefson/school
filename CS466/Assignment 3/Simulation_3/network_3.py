@@ -134,8 +134,8 @@ class Host:
                 self.segment_list.append(pkt_S) #add to list of all segmented packets
                 if pkt_S[7] == pkt_S[9] and pkt_S[8] == pkt_S[10]: #if the total segments equals the latest packet part of the id
                     og_data = self.reconstruct(self.segment_list, pkt_S[6]) #reconstruct original string
-                    p = NetworkPacket(pkt_S[:5], 0, pkt_S[6] + '0000', og_data) #reconstruct original packet
-                    print('\nCONSTRUCTED PACKET: ' + p.to_byte_S() + '\n')
+                    p = NetworkPacket(pkt_S[:3],pkt_S[3:5], 0, pkt_S[6] + '0000', og_data) #reconstruct original packet
+                    print('\n' + 'Host_' + str(self.addr) + ' CONSTRUCTED PACKET: ' + p.to_byte_S() + '\n')
 
 
 

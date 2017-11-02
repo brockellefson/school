@@ -10,7 +10,7 @@ from time import sleep
 
 ##configuration parameters
 router_queue_size = 0 #0 means unlimited
-simulation_time = 1 #give the network sufficient time to transfer all packets before quitting
+simulation_time = 100 #give the network sufficient time to transfer all packets before quitting
 
 
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
     #create some send events
     kanye_data = 'The plan was to drink until the pain over but whats worse the pain or the hangover' #yeezy yeezy keep it wavy
-    host_1.udt_send(2, kanye_data) #send a fire bar
+    host_2.udt_send(4, kanye_data) #send a fire bar
 
 
     #give the network sufficient time to transfer all packets before quitting
