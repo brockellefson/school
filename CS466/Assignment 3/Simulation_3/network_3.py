@@ -158,9 +158,10 @@ class Router:
     ##@param name: friendly router name for debugging
     # @param intf_count: the number of input and output interfaces
     # @param max_queue_size: max queue length (passed to Interface)
-    def __init__(self, name, intf_count, max_queue_size):
+    def __init__(self, name, intf_count, max_queue_size, rtable):
         self.stop = False #for thread termination
         self.name = name
+        self.rtable = rtable
         #create a list of interfaces
         self.in_intf_L = [Interface(max_queue_size) for _ in range(intf_count)]
         self.out_intf_L = [Interface(max_queue_size) for _ in range(intf_count)]
@@ -169,9 +170,52 @@ class Router:
     def __str__(self):
         return 'Router_%s' % (self.name)
 
+    def forward(self, pkt_S, interface):
+        i = interface
+        p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
+        if (len(pkt_S) > self.out_intf_L[i].mtu):
+            string_mtu =  self.out_intf_L[i].mtu - 11 #11 is the bit addr length
+            segments = p.segment(string_mtu) #segment packet into segments
+            seg_total = len(segments) * 100 #total amount of segments
+            seg_count = 1
+            for seg in segments:
+                seg_p = NetworkPacket(p.src_addr, p.dst_addr, 1, p.ident + seg_total + seg_count, seg) #segment packet
+                self.out_intf_L[i].put(seg_p.to_byte_S(), True) #send seg_p
+                print('\n%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d\n' \
+                    % (self, seg_p, i, i, self.out_intf_L[i].mtu))
+                seg_count += 1
+
+        else:
+            self.out_intf_L[i].put(p.to_byte_S(), True)
+            print('\n%s: forwarding packet "%s" from interface %d to %d with mtu %d\n' \
+                % (self, p, i, i, self.out_intf_L[i].mtu))
+
+
+
+
+
+
+    def route(self, pkt_S):
+        if (len(self.in_intf_L) is 1):
+            self.forward(pkt_S, 0)
+        else:
+            interface = 0
+            for route in self.rtable:
+                if self.name == 'A':
+                    if pkt_S[2] == '1'and route == 'B':
+                        self.forward(pkt_S, 0)
+                        break
+                    elif pkt_S[2] == '2'and route == 'C':
+                        self.forward(pkt_S, 1)
+                        break
+                elif route == pkt_S[4]:
+                    self.forward(pkt_S, interface)
+                    break
+                interface += 1
+
     ## look through the content of incoming interfaces and forward to
     # appropriate outgoing interfaces
-    def forward(self):
+    def recieve(self):
         for i in range(len(self.in_intf_L)):
             pkt_S = None
             try:
@@ -179,23 +223,7 @@ class Router:
                 pkt_S = self.in_intf_L[i].get()
                 #if packet exists make a forwarding decision
                 if pkt_S is not None:
-                    p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
-                    if (len(pkt_S) > self.out_intf_L[i].mtu):
-                        string_mtu =  self.out_intf_L[i].mtu - 11 #11 is the bit addr length
-                        segments = p.segment(string_mtu) #segment packet into segments
-                        seg_total = len(segments) * 100 #total amount of segments
-                        seg_count = 1
-                        for seg in segments:
-                            seg_p = NetworkPacket(p.src_addr, p.dst_addr, 1, p.ident + seg_total + seg_count, seg) #segment packet
-                            self.out_intf_L[i].put(seg_p.to_byte_S(), True) #send seg_p
-                            print('\n%s: forwarding segmented packet "%s" from interface %d to %d with mtu %d\n' \
-                                % (self, seg_p, i, i, self.out_intf_L[i].mtu))
-                            seg_count += 1
-
-                    else:
-                        self.out_intf_L[i].put(p.to_byte_S(), True)
-                        print('\n%s: forwarding packet "%s" from interface %d to %d with mtu %d\n' \
-                            % (self, p, i, i, self.out_intf_L[i].mtu))
+                    self.route(pkt_S)
             except queue.Full:
                 print('\n%s: packet "%s" lost on interface %d\n' % (self, p, i))
                 pass
@@ -204,7 +232,7 @@ class Router:
     def run(self):
         print (threading.currentThread().getName() + ': Starting ')
         while True:
-            self.forward()
+            self.recieve()
             if self.stop:
                 print (threading.currentThread().getName() + ': Ending ')
                 return

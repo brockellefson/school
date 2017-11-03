@@ -10,12 +10,18 @@ from time import sleep
 
 ##configuration parameters
 router_queue_size = 0 #0 means unlimited
-simulation_time = 100 #give the network sufficient time to transfer all packets before quitting
+simulation_time = 50 #give the network sufficient time to transfer all packets before quitting
 
 
 
 
 if __name__ == '__main__':
+
+    routing_table_A = ['B' , 'C']
+    routing_table_B = ['D']
+    routing_table_C = ['D']
+    routing_table_D = ['3','4']
+
     object_L = [] #keeps track of objects, so we can kill their threads
 
     #create network nodes
@@ -31,16 +37,16 @@ if __name__ == '__main__':
     host_4 = network_3.Host(4) #Host 4
     object_L.append(host_4)
 
-    router_a = network_3.Router(name='A', intf_count=2, max_queue_size=router_queue_size) #Router A
+    router_a = network_3.Router(name='A', intf_count=2, max_queue_size=router_queue_size, rtable=routing_table_A) #Router A
     object_L.append(router_a)
 
-    router_b = network_3.Router(name='B', intf_count=1, max_queue_size=router_queue_size) #Router B
+    router_b = network_3.Router(name='B', intf_count=1, max_queue_size=router_queue_size, rtable=routing_table_B) #Router B
     object_L.append(router_b)
 
-    router_c = network_3.Router(name='C', intf_count=1, max_queue_size=router_queue_size) #Router C
+    router_c = network_3.Router(name='C', intf_count=1, max_queue_size=router_queue_size, rtable=routing_table_C) #Router C
     object_L.append(router_c)
 
-    router_d = network_3.Router(name='D', intf_count=2, max_queue_size=router_queue_size) #Router D
+    router_d = network_3.Router(name='D', intf_count=2, max_queue_size=router_queue_size, rtable=routing_table_D) #Router D
     object_L.append(router_d)
 
 
@@ -82,7 +88,7 @@ if __name__ == '__main__':
 
     #create some send events
     kanye_data = 'The plan was to drink until the pain over but whats worse the pain or the hangover' #yeezy yeezy keep it wavy
-    host_2.udt_send(4, kanye_data) #send a fire bar
+    host_2.udt_send(3, kanye_data) #send a fire bar
 
 
     #give the network sufficient time to transfer all packets before quitting
