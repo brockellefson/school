@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EGEN310GUI</string>
+    <string name="up">Up</string>
+    <string name="right">Right</string>
+    <string name="down">Down</string>
+    <string name="left">Left</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="scan">Scan</string>
+</resources>

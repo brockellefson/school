@@ -87,8 +87,8 @@ if __name__ == '__main__':
 
 
     #create some send events
-    kanye_data = 'The plan was to drink until the pain over but whats worse the pain or the hangover' #yeezy yeezy keep it wavy
-    host_2.udt_send(3, kanye_data) #send a fire bar
+    kanye_data = 'They say I was the abomination of Obamas nation Well that’s a pretty bad way to start the conversation' #yeezy yeezy keep it wavy
+    host_2.udt_send(4, kanye_data) #send a fire bar
 
 
     #give the network sufficient time to transfer all packets before quitting

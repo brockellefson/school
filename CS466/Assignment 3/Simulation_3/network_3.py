@@ -190,11 +190,6 @@ class Router:
             print('\n%s: forwarding packet "%s" from interface %d to %d with mtu %d\n' \
                 % (self, p, i, i, self.out_intf_L[i].mtu))
 
-
-
-
-
-
     def route(self, pkt_S):
         if (len(self.in_intf_L) is 1):
             self.forward(pkt_S, 0)
