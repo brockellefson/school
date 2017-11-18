@@ -197,7 +197,9 @@ class Router:
         for route in routes:
             if route != '':
                 node = route.split("/")
-                self.rt_tbl_D.update({int(node[0]) : {int(node[1]):int(node[2])}})
+                if node[0] not in self.rt_tbl_D:
+                    self.rt_tbl_D.update({int(node[0]) : {int(node[1]):int(node[2])}})
+
 
     ## send out route update
     # @param i Interface number on which to send out a routing update
