@@ -153,7 +153,7 @@ class Router:
             self.intf_L.append(Interface(max_queue_size))
         #set up the routing table for connected hosts
         self.rt_tbl_D = rt_tbl_D
-
+        self.neighbors = rt_tbl_D.copy()
     ## called when printing the object
     def __str__(self):
         return 'Router_%s' % (self.name)
@@ -180,11 +180,13 @@ class Router:
     #  @param i Incoming interface number for packet p
     def forward_packet(self, p, i):
         try:
-            # TODO: Here you will need to implement a lookup into the
-            # forwarding table to find the appropriate outgoing interface
-            # for now we assume the outgoing interface is (i+1)%2
-            self.intf_L[(i+1)%2].put(p.to_byte_S(), 'out', True)
-            print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, (i+1)%2))
+            j = self.rt_tbl_D.get(str(p.dst_addr)) #look up destination in routing table
+            for link, cost in j.items(): #look up which interface to forward to
+                i = int(link)
+                break
+
+            self.intf_L[i].put(p.to_byte_S(), 'out', True)
+            print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, (i)))
         except queue.Full:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
             pass
@@ -192,33 +194,52 @@ class Router:
     ## forward the packet according to the routing table
     #  @param p Packet containing routing information
     def update_routes(self, p, i):
-        print('%s: Received routing update %s from interface %d' % (self, p, i))
-        table = p.data_S
-        routes = table.split("//")
-        for route in routes:
+        updated = False #we have not updated
+        table = p.data_S.split("///") #decode packet
+        name = table[0]
+        routes = table[1].split("//")
+        for route in routes: #for all routes in this routing table
             if route != '':
                 node = route.split("/")
-                if int(node[0]) not in self.rt_tbl_D:
-                    self.rt_tbl_D[int(node[0])] = {int(node[1]):int(node[2])}
-                    if self.name == 'A':
-                        self.send_routes(1)
-                    if self.name == 'B':
-                        self.send_routes(0)
+
+                if node[0] == self.name: #if this node is this current router, skip
+                    continue
+
+            if node[0] not in self.neighbors and  node[0] not in self.rt_tbl_D: #if this node is not a neighbor nor is it already in our table
+                n  = list(self.neighbors[name].values()) #the distance of neighbor
+                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
+                self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
+                updated = True #we have updated our list
+
+            elif node[0] not in self.neighbors and  node[0] in self.rt_tbl_D: #if this node is not a neighbor but is in the table, check to see if this new distance is closer
+                n  = list(self.neighbors[name].values()) #the distance of neighbor
+                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
+                curr = list(self.rt_tbl_D[node[0]].values()) #current distance
+                if curr[0] > int(n[0]) + int(node[2]): #if the current distance is greater than new distance
+                    self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
+                    updated = True #we have updated our list
+
+        if updated: #if we've updated, tell all neighbors
+            if self.name == 'A':
+                self.send_routes(2)
+                self.send_routes(3)
+            if self.name == 'B' or self.name =='C':
+                self.send_routes(0)
+                self.send_routes(1)
+            if self.name == 'D':
+                self.send_routes(0)
+                self.send_routes(1)
 
 
     ## send out route update
     # @param i Interface number on which to send out a routing update
-    def send_routes(self, i):
-        # a sample route update packet
-        routing_S = ''
+    def send_routes(self, i): #ENCODING: NAME///NODE/LINK/COST//NODE/LINK/COST//....
+        routing_S = self.name + "///" #encode name of router
         for k,j in self.rt_tbl_D.items():
             for link, cost in j.items():
                 routing_S += str(k) + "/" + str(link) + "/" + str(cost) + "//" #one '/' seperates route from link and cost, two '/' seperates route from other route
-
         p = NetworkPacket(0, 'control', routing_S)
         try:
-            #TODO: add logic to send out a route update
-            print('%s: sending routing update "%s" from interface %d' % (self, p, i))
             self.intf_L[i].put(p.to_byte_S(), 'out', True)
         except queue.Full:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
@@ -226,6 +247,7 @@ class Router:
 
     ## Print routing table
     def print_routes(self):
+        print('\n')
         print('%s: routing table' % self)
         print('\t\tCost to')
         sort_tbl = OrderedDict(sorted(self.rt_tbl_D.items()))
@@ -247,10 +269,9 @@ class Router:
 
         for interface in interfaces:
             if interfaces.index(interface) == 0:
-                print("From \t " + str(interface) + "\t", end='')
+                print("From \t  " + str(interface) + "\t", end='')
             else:
                 print("\t  " + str(interface) + "\t", end='')
-
             for i, j in sort_tbl.items():
                 if not interface in j.keys():
                     print("~\t", end='')
@@ -258,8 +279,9 @@ class Router:
                     for link,cost in j.items():
                         if link == interface:
                             print(str(cost) + "\t", end='')
+            print('\n')
         print("\n")
-        print(self.rt_tbl_D, "\n")
+        print(self.neighbors, "\n")
 
 
 
