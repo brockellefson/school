@@ -17,7 +17,7 @@ if __name__ == '__main__':
     host_2 = network_3.Host('H2')
     object_L.append(host_2)
     host_3 = network_3.Host('H3')
-    object_L.append(host_2)
+    object_L.append(host_3)
 
     #create routers and cost tables for reaching neighbors
     cost_D = {'H1': {0: 1}, 'H2': {1: 1}, 'RB': {2: 5}, 'RC': {3: 4}} # {neighbor: {interface: cost}}
