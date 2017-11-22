@@ -1,8 +1,3 @@
-'''
-Created on Oct 12, 2016
-
-@author: mwitt_000
-'''
 import queue
 import threading
 from collections import OrderedDict, defaultdict
@@ -11,10 +6,9 @@ import re
 ## wrapper class for a queue of packets
 class Interface:
     ## @param maxsize - the maximum size of the queue storing packets
-    #  @param cost - of the interface used in routing
     def __init__(self, maxsize=0):
-        self.in_queue = queue.Queue(maxsize);
-        self.out_queue = queue.Queue(maxsize);
+        self.in_queue = queue.Queue(maxsize)
+        self.out_queue = queue.Queue(maxsize)
 
     ##get packet from the queue interface
     # @param in_or_out - use 'in' or 'out' interface
@@ -22,13 +16,13 @@ class Interface:
         try:
             if in_or_out == 'in':
                 pkt_S = self.in_queue.get(False)
-#                 if pkt_S is not None:
-#                     print('getting packet from the IN queue')
+                # if pkt_S is not None:
+                #     print('getting packet from the IN queue')
                 return pkt_S
             else:
                 pkt_S = self.out_queue.get(False)
-#                 if pkt_S is not None:
-#                     print('getting packet from the OUT queue')
+                # if pkt_S is not None:
+                #     print('getting packet from the OUT queue')
                 return pkt_S
         except queue.Empty:
             return None
@@ -39,27 +33,24 @@ class Interface:
     # @param block - if True, block until room in queue, if False may throw queue.Full exception
     def put(self, pkt, in_or_out, block=False):
         if in_or_out == 'out':
-#             print('putting packet in the OUT queue')
+            # print('putting packet in the OUT queue')
             self.out_queue.put(pkt, block)
         else:
-#             print('putting packet in the IN queue')
+            # print('putting packet in the IN queue')
             self.in_queue.put(pkt, block)
 
 
-## Implements a network layer packet (different from the RDT packet
-# from programming assignment 2).
-# NOTE: This class will need to be extended to for the packet to include
-# the fields necessary for the completion of this assignment.
+## Implements a network layer packet.
 class NetworkPacket:
     ## packet encoding lengths
-    dst_addr_S_length = 5
+    dst_S_length = 5
     prot_S_length = 1
 
-    ##@param dst_addr: address of the destination host
+    ##@param dst: address of the destination host
     # @param data_S: packet payload
     # @param prot_S: upper layer protocol for the packet (data, or control)
-    def __init__(self, dst_addr, prot_S, data_S):
-        self.dst_addr = dst_addr
+    def __init__(self, dst, prot_S, data_S):
+        self.dst = dst
         self.data_S = data_S
         self.prot_S = prot_S
 
@@ -69,7 +60,7 @@ class NetworkPacket:
 
     ## convert packet to a byte string for transmission over links
     def to_byte_S(self):
-        byte_S = str(self.dst_addr).zfill(self.dst_addr_S_length)
+        byte_S = str(self.dst).zfill(self.dst_S_length)
         if self.prot_S == 'data':
             byte_S += '1'
         elif self.prot_S == 'control':
@@ -83,16 +74,16 @@ class NetworkPacket:
     # @param byte_S: byte string representation of the packet
     @classmethod
     def from_byte_S(self, byte_S):
-        dst_addr = int(byte_S[0 : NetworkPacket.dst_addr_S_length])
-        prot_S = byte_S[NetworkPacket.dst_addr_S_length : NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length]
+        dst = byte_S[0 : NetworkPacket.dst_S_length].strip('0')
+        prot_S = byte_S[NetworkPacket.dst_S_length : NetworkPacket.dst_S_length + NetworkPacket.prot_S_length]
         if prot_S == '1':
             prot_S = 'data'
         elif prot_S == '2':
             prot_S = 'control'
         else:
             raise('%s: unknown prot_S field: %s' %(self, prot_S))
-        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length : ]
-        return self(dst_addr, prot_S, data_S)
+        data_S = byte_S[NetworkPacket.dst_S_length + NetworkPacket.prot_S_length : ]
+        return self(dst, prot_S, data_S)
 
 
 
@@ -108,13 +99,13 @@ class Host:
 
     ## called when printing the object
     def __str__(self):
-        return 'Host_%s' % (self.addr)
+        return self.addr
 
     ## create a packet and enqueue for transmission
-    # @param dst_addr: destination address for the packet
+    # @param dst: destination address for the packet
     # @param data_S: data being transmitted to the network layer
-    def udt_send(self, dst_addr, data_S):
-        p = NetworkPacket(dst_addr, 'data', data_S)
+    def udt_send(self, dst, data_S):
+        p = NetworkPacket(dst, 'data', data_S)
         print('%s: SENDING PACKET "%s"' % (self, p))
         self.intf_L[0].put(p.to_byte_S(), 'out') #send packets always enqueued successfully
 
@@ -123,6 +114,8 @@ class Host:
         pkt_S = self.intf_L[0].get('in')
         if pkt_S is not None:
             print('%s: RECIEVED PACKET "%s"' % (self, pkt_S))
+            if self.addr is 'H2':
+                self.udt_send('H1', 'The way you look should be a sin, you my sinsation')
 
     ## thread target for the host to keep receiving data
     def run(self):
@@ -137,26 +130,33 @@ class Host:
 
 
 
-## Implements a multi-interface router described in class
+## Implements a multi-interface router
 class Router:
 
+
     ##@param name: friendly router name for debugging
-    # @param num_intf: number of bidirectional interfaces
-    # @param rt_tbl_D: routing table dictionary (starting reachability), eg. {1: {1: 1}} # packet to host 1 through interface 1 for cost 1
+    # @param cost_D: cost table to neighbors {neighbor: {interface: cost}}
     # @param max_queue_size: max queue length (passed to Interface)
-    def __init__(self, name, num_intf, rt_tbl_D, max_queue_size):
+    def __init__(self, name, cost_D, max_queue_size):
         self.stop = False #for thread termination
         self.name = name
         #create a list of interfaces
-        self.intf_L = []
-        for i in range(num_intf):
-            self.intf_L.append(Interface(max_queue_size))
-        #set up the routing table for connected hosts
-        self.rt_tbl_D = rt_tbl_D
-        self.neighbors = rt_tbl_D.copy()
+        self.intf_L = [Interface(max_queue_size) for _ in range(len(cost_D))]
+        #save neighbors and interfeces on which we connect to them
+        self.neighbors = cost_D    # {neighbor: {interface: cost}}
+        self.rt_tbl_D = cost_D.copy()      # {destination: {router: cost}}
+        self.total_rt = defaultdict(dict)
+        for neighbor_name, neighbor_info in self.neighbors.items():
+                for interface,cost in neighbor_info.items():
+                    self.total_rt[name][neighbor_name] = [cost]
+        print('%s: Initialized routing table' % self)
+        self.print_routes()
+
+
     ## called when printing the object
     def __str__(self):
-        return 'Router_%s' % (self.name)
+        return self.name
+
 
     ## look through the content of incoming interfaces and
     # process data and control packets
@@ -175,60 +175,22 @@ class Router:
                 else:
                     raise Exception('%s: Unknown packet type in packet %s' % (self, p))
 
+
     ## forward the packet according to the routing table
     #  @param p Packet to forward
     #  @param i Incoming interface number for packet p
     def forward_packet(self, p, i):
         try:
-            j = self.rt_tbl_D.get(str(p.dst_addr)) #look up destination in routing table
-            for link, cost in j.items(): #look up which interface to forward to
-                i = int(link)
+            route = self.rt_tbl_D.get(str(p.dst)) #look up destination in routing table
+            for interface, cost in route.items(): #look up which interface to forward to
+                j = int(interface)
                 break
-
-            self.intf_L[i].put(p.to_byte_S(), 'out', True)
-            print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, (i)))
+            self.intf_L[j].put(p.to_byte_S(), 'out', True)
+            print('%s: forwarding packet "%s" from interface %d to %d' % \
+                (self, p, i, j))
         except queue.Full:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
             pass
-
-    ## forward the packet according to the routing table
-    #  @param p Packet containing routing information
-    def update_routes(self, p, i):
-        updated = False #we have not updated
-        table = p.data_S.split("///") #decode packet
-        name = table[0]
-        routes = table[1].split("//")
-        for route in routes: #for all routes in this routing table
-            if route != '':
-                node = route.split("/")
-
-                if node[0] == self.name: #if this node is this current router, skip
-                    continue
-
-            if node[0] not in self.neighbors and  node[0] not in self.rt_tbl_D: #if this node is not a neighbor nor is it already in our table
-                n  = list(self.neighbors[name].values()) #the distance of neighbor
-                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
-                self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
-                updated = True #we have updated our list
-
-            elif node[0] not in self.neighbors and  node[0] in self.rt_tbl_D: #if this node is not a neighbor but is in the table, check to see if this new distance is closer
-                n  = list(self.neighbors[name].values()) #the distance of neighbor
-                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
-                curr = list(self.rt_tbl_D[node[0]].values()) #current distance
-                if curr[0] > int(n[0]) + int(node[2]): #if the current distance is greater than new distance
-                    self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
-                    updated = True #we have updated our list
-
-        if updated: #if we've updated, tell all neighbors
-            if self.name == 'A':
-                self.send_routes(2)
-                self.send_routes(3)
-            if self.name == 'B' or self.name =='C':
-                self.send_routes(0)
-                self.send_routes(1)
-            if self.name == 'D':
-                self.send_routes(0)
-                self.send_routes(1)
 
 
     ## send out route update
@@ -245,12 +207,55 @@ class Router:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
             pass
 
+
+
+    ## forward the packet according to the routing table
+    #  @param p Packet containing routing information
+    def update_routes(self, p, i):
+        updated = False #we have not updated
+        table = p.data_S.split("///") #decode packet
+        name = table[0]
+        routes = table[1].split("//")
+        for route in routes: #for all routes in this routing table
+            if route != '':
+                node = route.split("/")
+
+            self.total_rt[name][node[0]] = [int(node[2])] #add to global table
+
+            if node[0] == self.name: #if this node is this current router, set distance, then skip
+                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
+                self.rt_tbl_D[node[0]] = {int(inf[0]):0} #distance to new node is the distance to neighbor + distance from neighbor to node
+                self.total_rt[self.name][node[0]] = [0] #add to global table
+                continue
+
+            if node[0] not in self.neighbors and  node[0] not in self.rt_tbl_D: #if this node is not a neighbor nor is it already in our table
+                n  = list(self.neighbors[name].values()) #the distance of neighbor
+                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
+                self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
+                self.total_rt[self.name][node[0]] = [int(node[2]) + n[0]] #add to global table
+                updated = True #we have updated our list
+
+            elif node[0] not in self.neighbors and  node[0] in self.rt_tbl_D: #if this node is not a neighbor but is in the table, check to see if this new distance is closer
+                n  = list(self.neighbors[name].values()) #the distance of neighbor
+                inf =  list(self.neighbors[name].keys()) #interface of that neighbor
+                curr = list(self.rt_tbl_D[node[0]].values()) #current distance
+                if curr[0] > int(n[0]) + int(node[2]): #if the current distance is greater than new distance
+                    self.rt_tbl_D[node[0]] = {int(inf[0]):int(node[2]) + n[0]} #distance to new node is the distance to neighbor + distance from neighbor to node
+                    self.total_rt[self.name][node[0]] = [int(node[2]) + n[0]] #add to global table
+                    updated = True #we have updated our list
+
+        if updated: #if we've updated, tell all neighbors
+            for neighbor_name, neighbor_info in self.neighbors.items():
+                for interface,cost in neighbor_info.items():
+                    if 'H' not in neighbor_name: #if neighbor is not a host
+                        self.send_routes(interface)
+
     ## Print routing table
     def print_routes(self):
         print('\n')
         print('%s: routing table' % self)
-        print('\t\tCost to')
-        sort_tbl = OrderedDict(sorted(self.rt_tbl_D.items()))
+        print('\t\tFrom')
+        sort_tbl = OrderedDict(sorted(self.total_rt.items()))
         oop = 1
         for i, j in sort_tbl.items():
             if oop == 1 :
@@ -269,7 +274,7 @@ class Router:
 
         for interface in interfaces:
             if interfaces.index(interface) == 0:
-                print("From \t  " + str(interface) + "\t", end='')
+                print("Cost \t  " + str(interface) + "\t", end='')
             else:
                 print("\t  " + str(interface) + "\t", end='')
             for i, j in sort_tbl.items():
@@ -281,8 +286,6 @@ class Router:
                             print(str(cost) + "\t", end='')
             print('\n')
         print("\n")
-        print(self.neighbors, "\n")
-
 
 
     ## thread target for the host to keep forwarding data
