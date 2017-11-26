@@ -6,68 +6,90 @@
 \usepackage{graphicx}
 \author{Brock Ellefson}
 \begin{document}
-Context-free languages are closed under the following operations. That is, if L and P are context-free languages, the following languages are context-free as well:
-\\\\
-the union  L and P\\
-the reversal of L\\
-the concatenation of L and P\\
-the Kleene star of L\\
-the image of L under a homomorphism\\
-the image of L under an inverse homomorphism\\
-the cyclic shift of L
+\begin{lstlisting}
+#include <string.h>
+#include <Arduino.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+#include "Adafruit_BLE.h"
+#include "Adafruit_BluefruitLE_SPI.h"
+#include "Adafruit_BluefruitLE_UART.h"
 
-\section*{Context-Free Grammers}
-\subsection*{$\lbrace$ a$^{n}$b$^{m}$ $\mid$ n $\neq$ 2m $\rbrace$}
-	S $\rightarrow$ aaSb $\mid$ A $\mid$ B \\
-	A $\rightarrow$ aA $\mid$ a \\
-	B $\rightarrow$ bB $\mid$ b
-	
-\section*{CFG to PDA}
-	\begin{figure}[h]
-		\includegraphics[scale = .2]{CFGtoPDA.png}
-  		\label{fig:cfgtopda}
-	\end{figure}
-\section*{Chomsky Normal Form}
-	A $\rightarrow$ BAB $\mid$ B $\mid$ $\epsilon$\\
-	B $\rightarrow$ 00 $\mid$ $\epsilon$\\
-	Add new start variable S$_{1}$ :\\
-		S$_{0}$	$\rightarrow$ A\\
-		A $\rightarrow$ BAB $\mid$ B $\mid$ $\epsilon$\\
-		B $\rightarrow$ 00 $\mid$ $\epsilon$\\		
-	Remove all $\epsilon$ :\\
-		S$_{0}$	$\rightarrow$ A\\
-		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ A $\mid$ B \\
-		B $\rightarrow$ 00\\
-	Remove unit rules:\\
-		S$_{0}$	$\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		B $\rightarrow$ 00\\
-	Add 'U' :\\
-		S$_{0}$	$\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		A $\rightarrow$ BAB $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		B $\rightarrow$ UU\\
-		U $\rightarrow$ 0\\
-	Simplify: \\
-		S$_{0}$	$\rightarrow$ BA$_{1}$ $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		A $\rightarrow$ BA$_{2}$ $\mid$ BB $\mid$ AB $\mid$ BA $\mid$ 00\\
-		B $\rightarrow$ UU\\
-		U $\rightarrow$ 0\\
-		A$_{1}$ $\rightarrow$ SB\\
-		A$_{2}$ $\rightarrow$ SB\\
-		
-\section*{Pumping Lemma with Context-Free Languages}
-\subsection*{L = $\lbrace$ a$^{n}$ b$^{j}$ c$^{k}$ $\mid$ k = nj $\rbrace$}
-	Assume L is a context free language. S = a$^{p}$ b$^{p}$ c$^{p^{2}}$\\
-	S can be decomposed into S = uv$^{i}$xy$^{i}$z such that:\\
-	1. uv$^{i}$xy$^{i}$z $\in$ L\\
-	2. $\mid$ uy $\mid$ $\>$ 0 \\
-	3. $\mid$ uxy $\mid$ $\leq$ P\\
-	\\
-	Cases:\\
-	i. v contains b's or a's and y contains only c's. i = 0 so uv$^{0}$xy$^{0}$z 	thus making the string a$^{p}$ b$^{p}$ c$^{p^{2}-1}$ which is not in the language\\
-	ii. v and y both contain a's and b's. i = 0 so uv$^{0}$xy$^{0}$z thus making the string a$^{p}$ b$^{p-k}$ c$^{p^{2}}$ or  a$^{p-k}$ b$^{p}$ c$^{p^{2}}$ which is not in the 		language\\ 
-	iii. v and y both contain c's i = 0 making a$^{p}$ b$^{p}$ c$^{p^{2}-k}$ which is not in the language.\\
-	iv. v and y contain 2 symbols. i = 2 uv$^{2}$xy$^{2}$z however the characters will be out of order and not in the language\\
-	Thus L is not a CFG
+#include "BluefruitConfig.h"
+
+Adafruit_MotorShield AFMS = Adafruit_MotorShield(); //create shield
+//Create Motors
+Adafruit_DCMotor *RMotor = AFMS.getMotor(3);
+Adafruit_DCMotor *LMotor = AFMS.getMotor(4);
+
+int state = 0;
+
+
+void setup(void)
+{
+
+  Serial.begin(9600);
+  Serial.println(F("Jaquel is online"));
+  Serial.println(F("-----------------------------------------"));
+  Serial.println("Requesting Bluefruit info:");
+
+  
+   //Start Motors
+  AFMS.begin();  // create with the default frequency 1.6KHz
+  Serial.println(F("----------------------------------------"));
+  LMotor->setSpeed(150);
+  LMotor->run(FORWARD);
+  LMotor->run(RELEASE);
+  Serial.println(F("Motor 1 Running"));
+
+  RMotor->setSpeed(150);
+  RMotor->run(FORWARD);
+  RMotor->run(RELEASE);
+  Serial.println(F("Motor 2 Running"));
+  Serial.println(F("----------------------------------------"));
+
+  Serial.println(F("----------------------------------------"));
+
+}
+
+void loop(void)
+{
+ if(Serial.available() > 0){ // Checks whether data is comming from the serial port
+  state = Serial.read(); // Reads the data from the serial port
+  Serial.println(state);
+ }
+ if (state == '0') {
+  RMotor->run(RELEASE);
+  LMotor->run(RELEASE);
+  Serial.println("Jaquel has stopped"); // Send back, to the phone
+  state = 0;
+ }
+ else if (state == '1') {
+  RMotor->run(FORWARD);
+  LMotor->run(FORWARD);
+  Serial.println("Jaquel is running forward");
+ } 
+ else if (state == '2') {
+  RMotor->run(FORWARD);
+  LMotor->run(BACKWARD);
+  Serial.println("Jaquel is turning left");
+ }
+  else if (state == '3') {
+  LMotor->run(FORWARD);
+  RMotor->run(BACKWARD);
+  Serial.println("Jaquel is turning right");
+  }
+  else if (state == '4') {
+  RMotor->run(BACKWARD);
+  LMotor->run(BACKWARD);
+  Serial.println("Jaquel is going backwards");
+  }
+  else{
+  RMotor->run(RELEASE);
+  LMotor->run(RELEASE);  
+  }
+}
+\end{lstlisting}
 
 \end{document}
