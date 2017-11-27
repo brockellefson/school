@@ -12,5 +12,24 @@ Thanks for the free 5 points
 \section{Choose the problem in M-2 that you did the worst on and re-do the problem.}
 Prove that the Levenshtein Distance satisifies the identity of indiscernibles (that $E(x,y) = 0$ iff $x=y$)\\
 \\
+\section{What is the loop invariant of the sweepline algorithm.}
+
+
+The loop invariant, L, for the sweepline algorithm is that all line segments to the left of the sweepline have already been computed and do not intersect, and all line segments to the right of the sweepline needs to still be computed.\\
+If a loop invariant is true it must hold for the following conditions:
+\begin{enumerate}
+  \item P $\Rightarrow$ L 
+  \item L $\wedge$ X $\Rightarrow$ L
+  \item L $\wedge$ $\sim$ X $\Rightarrow$ Q
+\end{enumerate}
+
+Where our precondition P is that our sweepline starts at the leftmost point, our loopguard x is our amount of endpoints that we traverse through, and our postcondition Q is whether there was a line segment that intersected with another line segment.
+
+When before we enter the loop, our sweepline starts at the leftmost point, which implies L because there's nothing thats been computed yet, so there is nothing to the left of the sweepline. As we enter the loop, we will go to each endpoint and compute whether or not a line segment intersected with another line segment or not. So either a line will intersect, and we will break out of the loop by returning a true, or we will go through the entire set without finding an intersection and return a false. With each of these iterations through the loop the sweepline will compute more and more endpoints and it's leftside become bigger and bigger, therefore 
+L $\wedge$ X $\Rightarrow$ L. After we breakout of the loop we have our postcondition, that whether or not a line segment intersected with another, proving L $\wedge$ $\sim$ X $\Rightarrow$ Q. Therefore our loop invariant L is true.
+
+\section{Concurrency is not Parallelism}
+\subsection{In your own words, define concurrency}
+\subsection{In your own words, define parallelism}
 
 \end{document}
