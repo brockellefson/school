@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Brock Ellefson}
+\title{CSCI466 HW4}
+\begin{document}
+\maketitle
+\section{Why is an ARP query sent within a broadcast frame? Why is an ARP response sent within a frame with a specific destination MAC address?}
+
+ARP queries are sent within a frame because the host needs the IP address and the MAC address
+
+
+\section{Consider the above campus network.}
+
+\subsection{Suppose that all links are 100 Mbps full duplex. What is the maximum total aggregate throughput that can be achieved among the 9 hosts and 2 servers in this network? You can assume that any host or server can send to any other host or server.}
+
+11 x 100 = 1100 Mbps
+
+\subsection{ Suppose the three departmental switches are now hubs. All links are 100 Mbps. What is the total aggregate throughput now?}
+
+5 x 100 = 500 Mbps
+
+\subsection{Suppose that all the switches are replaced by hubs. All links are 100 Mbps. What is the total aggregate throughput?}
+
+100 Mbps
+
+\section{}
+
+\subsection{What are the differences between the following types of wireless channel impairments: path loss, multipath propagation, interference from other sources?}
+
+\textbf{Path Loss:} When signals travel long distances it loses its power, like a water ripple. \\
+\textbf{Multipath Propagation:} When signals reach the tower via multiple paths.\\
+\textbf{Interference:} When signals on the same wavelength or frequency and interrupt on another.\\
+
+\subsection{As a mobile node gets farther and farther away from a base station, what are two actions that a base station could take to ensure that the loss probability of a transmitted frame does not increase?}
+
+You could either increase the transmission power or decrease the transmission rate to insure that all frame loss probability does not increase.
+
+\section{In mobile IP, what effect will mobility have on end-to-end delays of datagrams between the source and destination? Describe different sources of delay.}
+
+In mobile IP, there is more information in datagrams that needs to be sent from node to node then there is in direct routing, which ultimately will lead to more delay.
+
+\end{document}
