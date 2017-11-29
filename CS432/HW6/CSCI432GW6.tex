@@ -1,0 +1,75 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Brock Ellefson, Seth Severa}
+\title{CSCI432 GW6}
+
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\begin{document}
+\maketitle
+\section{Diversify your group}
+We talked about this earlier, we will diversify for the next assignment.
+\section{Recall the Skyline problem. Give pseudocode for the sweepline algorithm}
+\section*{SkyLine sweep-line algorithm}
+\begin{algorithm}
+\caption{Skyline}\label{euclid}
+\begin{algorithmic}[1]
+
+\State List buildings
+\State PriorityQueue events
+\While {$currentBuilding \neq null$}
+\State events.add(currentBuilding, currentBuilding.left)
+\State events.add(currentBuilding, currentBuilding.right)
+\State currentBuilding = currentBuilding.next
+\EndWhile \\
+\State List skyline
+\State List currSkyline
+\State double maxHeight = 0
+\While {$events.peek()\neq null$}
+\If{event.peek().isLeft()}
+    \State currSkyline.add(event.peek())
+    \If {$maxheight \neq checkMaxHeight(currSkyline)$}
+    skyline.add(event.pop().left, checkmaxHeight(currSkyline))
+    \EndIf
+\Else
+    \State currSkyline.remove(event.peek())
+    \If {$maxheight \neq checkMaxHeight(currSkyline)$}
+    skyline.add(event.pop().right, checkmaxHeight(currSkyline))
+    \EndIf
+\EndIf
+\EndWhile
+\State return skyline
+\end{algorithmic}
+\end{algorithm}
+The loop invariant of this algorithm is that as the sweepline goes from left to right we always use the height of the current tallest building. 
+\section{For the sweepline algorithm that computes whether there exist two line segments that intersect, explain how a line segment is added to or removed from T (the data structure that keeps track of the lines that intersect the sweep line).}
+T is a red-black tree, we sweep through the graph from left to right, stopping at endpoints to check for intersections and add or remove line segments to T. Every time we stop at an endpoint, we check the order of T, if the order of T is different than the order of T from the previous enpoint we stopped at, then there was an intersection. After this check, if the endpoint of the line segment the sweepline is on is the leftmost endpoint of the line, then we add that line segment to the red-black tree. If the endpoint of the line segment the sweepline is on is the rightmost endpoint of the line, then we remove that line segment from the red-black tree.
+\section{Union and Path Compression}
+This iteration has 3 components all with rank 0
+
+	\includegraphics[scale = .5]{boi1.PNG}
+
+This iteration combines two components now giving g a rank of 1. We now only have 2 components
+
+	\includegraphics[scale = .5]{boi2.PNG}
+
+This iteration uses the second heuristic, path compression, along the find path. They now point directly to the root. We still have 2 components
+
+	\includegraphics[scale = .5]{boi3.PNG}
+
+This iteration adds the two components together, since the g component has a higher rank than the a component, a will be added to g, however the rank will not be increased. There is now only one component
+
+	\includegraphics[scale = .5]{boi4.PNG}
+
+This iteration uses the second heuristic, path compression, along the find path. They now point directly to the root. We still have 1 component
+
+	\includegraphics[scale = .5]{boi4.PNG}
+
+\end{document}

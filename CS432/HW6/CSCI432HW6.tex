@@ -10,8 +10,12 @@
 \section{Free 5 Points}
 Thanks for the free 5 points
 \section{Choose the problem in M-2 that you did the worst on and re-do the problem.}
-Prove that the Levenshtein Distance satisifies the identity of indiscernibles (that $E(x,y) = 0$ iff ($x=y$)\\
+Prove that the Levenshtein Distance satisifies the identity of indiscernibles (that $E(x,y) = 0$ iff ($x=y$))\\
 \\
+Base Case: Both strings are empty sets, hence $E(x,y) = 0$ and ($x=y$)\\
+Induction Hypothesis: Assume that the distance of two strings of length k is 0.\\
+Inductive Step : Then to have a string become k + 1 in length one of multiple things can happen. Either both strings can add the same +1 character to the string, one string can add a +1 character and the other string is unchanged, or both strings can add a different +1 character. If the second or third option are chosen then the distance of x to y becomes 1 and x will not equal y. Therefore for the distance to be 0 x must equal y.\\
+
 \section{What is the loop invariant of the sweepline algorithm.}
 
 What is the loop invatiant of the sweepline algorithm?
