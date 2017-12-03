@@ -20,7 +20,7 @@ if __name__ == '__main__':
     object_L.append(host_3)
 
     #create routers and cost tables for reaching neighbors
-    cost_D = {'H1': {0: 1}, 'H2': {1: 1}, 'RB': {2: 5}, 'RC': {3: 4}} # {neighbor: {interface: cost}}
+    cost_D = {'H1': {0: 1}, 'H2': {1: 1}, 'RB': {2: 5}, 'RC': {3: 40}} # {neighbor: {interface: cost}}
     router_a = network_3.Router(name='RA',
                               cost_D = cost_D,
                               max_queue_size=router_queue_size)
@@ -32,7 +32,7 @@ if __name__ == '__main__':
                               max_queue_size=router_queue_size)
     object_L.append(router_b)
 
-    cost_D = {'RA': {0: 4}, 'RD': {1: 4}} # {neighbor: {interface: cost}}
+    cost_D = {'RA': {0: 40}, 'RD': {1: 4}} # {neighbor: {interface: cost}}
     router_c = network_3.Router(name='RC',
                               cost_D = cost_D,
                               max_queue_size=router_queue_size)
@@ -75,7 +75,7 @@ if __name__ == '__main__':
             obj.print_routes()
 
     #send packet from host 1 to host 2
-    host_1.udt_send('H3', 'Put your hands to the constellations')
+    host_3.udt_send('H1', 'The way you look should be a sin you my sinsation')
     sleep(simulation_time)
 
 
