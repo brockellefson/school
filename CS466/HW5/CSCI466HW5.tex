@@ -1,0 +1,73 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Brock Ellefson}
+\title{CSCI466 HW5}
+\begin{document}
+\maketitle
+\section{Why is a packet that is received after its scheduled playout time considered lost?}
+A packet cannot be used if it is already past the playout time, which basically means the packet is not of any use and is 'lost'
+
+\section{}
+\subsection{For each time slot, identify the packets that are in the queue and the number of tokens in the bucket, immediately after the arrivals have been processed, but before any of the packets have passed through the queue and removed a token. Thus, for the t=0 time slot in the example above, packets 1, 2, and 3 are in the queue, and there are two tokens in the buffer.}
+\begin{enumerate} 
+	\item{t=0: in queue: packets 1, 2, 3. Two tokens in buffer.}
+	\item{t=1: in queue: packets 3, 4. One token in buffer.}
+	\item{t=2: in queue: packets 4, 5. One token in buffer.}
+	\item{t=3: in queue: packets 5, 6. One token in buffer.}
+	\item{t=4: in queue: packet 6. One token in buffer.}
+	\item{t=5: in queue: None. One token in buffer.}
+	\item{t=6: in queue: packets 7, 8. Two tokens in buffer.}
+	\item{t=7: in queue: packets 9, 10. One token in buffer.}
+	\item{t=8: in queue: packet 10. One token in buffer.}
+\end{enumerate}	
+	
+\subsection{For each time slot, indicate which packets appear on the output after the token(s) have been removed from the queue. Thus, for the t=0 time slot in the example above, packets 1 and 2 appear on the output link from the leaky buffer during slot 0.}
+\begin{enumerate} 
+	\item{t=0: output: packets 1, 2}
+	\item{t=1: output: packet 3}
+	\item{t=2: no output}
+	\item{t=3: output: packet 4}
+	\item{t=4: output: packet 5}
+	\item{t=5: output: packet 6}
+	\item{t=6: output: packets 7, 8}
+	\item{t=7: output: packet 9}
+	\item{t=8: output: packet 10}
+\end{enumerate}	
+
+\section{}
+\subsection{What is the second message?}
+KDC will send $\lbrace K_{s}, K_{b-kdc} \rbrace_{a-kdc} $ in response to Alice
+
+\subsection{What is the third message?}
+Alice will send the session key, $K_{sb-kdc}$ to Bob
+
+\section{Compute a third message, different from the two messages, that also has that checksum.}
+\begin{table}[h]
+\centering
+\caption{Message}
+\label{my-label}
+\begin{tabular}{llll}
+d & {]} & i & V \\
+N & d   & i & V
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{ASCII}
+\label{my-label}
+\begin{tabular}{llll}
+64   & 5D   & 69   & 56   \\
+4E   & 64   & 69   & 56   \\
+\_\_ & \_\_ & \_\_ & \_\_ \\
+B2   & C1   & D2   & AC  
+\end{tabular}
+\end{table}
+
+\section{Describe a simple scheme that allows peers to verify the integrity of blocks.}
+The torrent file that the peer gets from the source will have checksum that will be used to compute the integrity of all incoming blocks .
+\end{document}
