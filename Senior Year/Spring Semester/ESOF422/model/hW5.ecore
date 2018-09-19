@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hW5" nsURI="http://www.example.org/hW5" nsPrefix="hW5">
+  <eClassifiers xsi:type="ecore:EClass" name="Customer">
+    <eOperations name="addRental">
+      <eParameters name="rental" eType="#//Rental"/>
+    </eOperations>
+    <eOperations name="statement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numRen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalCharges" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rental" lowerBound="1"
+        upperBound="-1" eType="#//Rental"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="charge" lowerBound="1"
+        upperBound="-1" eType="#//Charge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rental">
+    <eOperations name="getCharge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="daysRented" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="movieRental" lowerBound="1"
+        eType="#//Movie"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Movie">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priceCode" eType="#//PriceCode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PriceCode">
+    <eLiterals name="regular"/>
+    <eLiterals name="family" value="1"/>
+    <eLiterals name="newRelease" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Charge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chVal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

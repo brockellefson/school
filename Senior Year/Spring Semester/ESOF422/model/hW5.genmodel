@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/HW5/src-gen" creationIcons="false" editDirectory="/HW5.edit/src-gen"
+    editorDirectory="/HW5.editor/src-gen" modelPluginID="HW5" modelName="HW5" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>hW5.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="HW5" disposableProviderFactory="true" ecorePackage="hW5.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="hW5.ecore#//PriceCode">
+      <genEnumLiterals ecoreEnumLiteral="hW5.ecore#//PriceCode/regular"/>
+      <genEnumLiterals ecoreEnumLiteral="hW5.ecore#//PriceCode/family"/>
+      <genEnumLiterals ecoreEnumLiteral="hW5.ecore#//PriceCode/newRelease"/>
+    </genEnums>
+    <genClasses ecoreClass="hW5.ecore#//Customer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Customer/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Customer/numRen"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Customer/totalCharges"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hW5.ecore#//Customer/rental"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hW5.ecore#//Customer/charge"/>
+      <genOperations ecoreOperation="hW5.ecore#//Customer/addRental">
+        <genParameters ecoreParameter="hW5.ecore#//Customer/addRental/rental"/>
+      </genOperations>
+      <genOperations ecoreOperation="hW5.ecore#//Customer/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="hW5.ecore#//Rental">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Rental/daysRented"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hW5.ecore#//Rental/movieRental"/>
+      <genOperations ecoreOperation="hW5.ecore#//Rental/getCharge"/>
+    </genClasses>
+    <genClasses ecoreClass="hW5.ecore#//Movie">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Movie/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Movie/priceCode"/>
+    </genClasses>
+    <genClasses ecoreClass="hW5.ecore#//Charge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Charge/chVal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hW5.ecore#//Charge/chT"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

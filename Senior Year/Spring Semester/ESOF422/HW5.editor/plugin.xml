@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated hW5 -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="hW5.presentation.HW5ModelWizardID"
+            name="%_UI_HW5ModelWizard_label"
+            class="hW5.presentation.HW5ModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/HW5ModelFile.gif">
+         <description>%_UI_HW5ModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated hW5 -->
+      <editor
+            id="hW5.presentation.HW5EditorID"
+            name="%_UI_HW5Editor_label"
+            icon="icons/full/obj16/HW5ModelFile.gif"
+            extensions="hw5"
+            class="hW5.presentation.HW5Editor"
+            contributorClass="hW5.presentation.HW5ActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
