@@ -20,10 +20,10 @@ def read_maze(filename):
                 element.neighbors.append(maze[i][j+1])
             if j-1 >= 0:
                 element.neighbors.append(maze[i][j-1])
-            if i+1 <= len(maze)-1:
-                element.neighbors.append(maze[i+1][j])
             if i-1 >= 0:
                 element.neighbors.append(maze[i-1][j])
+            if i+1 <= len(maze)-1:
+                element.neighbors.append(maze[i+1][j])
     return maze
 
 def print_maze(maze):
@@ -40,6 +40,7 @@ class Node:
         self.x = x
         self.y = y
         self.neighbors = []
+        self.previous = None
         #if this node is a wall, treat as visited
         if val is '%':
             self.visited = True
