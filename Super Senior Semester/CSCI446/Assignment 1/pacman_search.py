@@ -36,13 +36,31 @@ class Search:
         for neighbor in curr_node.neighbors:
             if neighbor not in visited_nodes and neighbor.value is not '%':
                 neighbor.previous = curr_node
-                if self.depth_first_search(neighbor, '*', visited_nodes, moves):
+                if self.depth_first_search(neighbor, finish, visited_nodes, moves):
                     return True
 
         return False
 
     def breadth_first_search(self,curr_node,finish,visited_nodes, moves):
-        pass
+       queue = deque([curr_node])
+
+       while len(queue) > 0:
+          node = queue.pop()
+          if node in visited_nodes:
+             continue
+
+          visited_nodes.append(node)
+          if node.value == finish:
+              self.print_results("Bredth First Search: ", node, moves)
+              return True
+
+          for neighbor in node.neighbors:
+             if neighbor not in visited_nodes and neighbor.value is not '%':
+                moves += 1
+                neighbor.previous = node
+                queue.appendleft(neighbor)
+       return False
+
 
     def greedy_search(self):
         pass
@@ -72,11 +90,11 @@ if __name__=='__main__':
     moves = 0
 
     open_search = Search(open_maze)
-    open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
-    #open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
+    #open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
+    open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
 
     medium_search = Search(medium_maze)
-    medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
+    #medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
 
     large_search = Search(large_maze)
-    large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
+    #large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
