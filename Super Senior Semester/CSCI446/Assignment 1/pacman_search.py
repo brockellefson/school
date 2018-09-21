@@ -1,5 +1,5 @@
 from collections import deque
-
+import time
 import mazes
 
 
@@ -23,8 +23,6 @@ class Search:
                     print("finish is at {},{}".format(self.fx, self.fy))
 
     def depth_first_search(self,curr_node,finish,visited_nodes, moves):
-        #print("x= {} y= {}".format(curr_node.x,curr_node.y))
-
         #if current node is end, save solution and cost
         if curr_node.value is finish:
             self.print_results("Depth First Search: ", curr_node, moves)
@@ -42,7 +40,9 @@ class Search:
         return False
 
     def breadth_first_search(self,curr_node,finish,visited_nodes, moves):
+       #create queue, visited_nodes needs to be reset
        queue = deque([curr_node])
+       visited_nodes = []
 
        while len(queue) > 0:
           node = queue.pop()
@@ -53,10 +53,9 @@ class Search:
           if node.value == finish:
               self.print_results("Bredth First Search: ", node, moves)
               return True
-
+          moves += 1
           for neighbor in node.neighbors:
              if neighbor not in visited_nodes and neighbor.value is not '%':
-                moves += 1
                 neighbor.previous = node
                 queue.appendleft(neighbor)
        return False
@@ -71,6 +70,8 @@ class Search:
     def print_results(self, search, curr_node, cost):
         print("{} \nCoord: {},{} \nCost: {}".format(search, curr_node.x, curr_node.y, cost))
         print("Solution:")
+
+        #print path
         node = curr_node
         while node.previous is not None:
             if node.value is not 'P' and node.value is not '*':
@@ -79,6 +80,13 @@ class Search:
             node = node.previous
         mazes.print_maze(self.maze)
 
+        #clean maze
+        node = curr_node
+        while node.previous is not None:
+            if node.value is not 'P' and node.value is not '*':
+                node.value = ' '
+
+            node = node.previous
 
 if __name__=='__main__':
     #create mazes
@@ -90,11 +98,13 @@ if __name__=='__main__':
     moves = 0
 
     open_search = Search(open_maze)
-    #open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
+    open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
     open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
 
     medium_search = Search(medium_maze)
-    #medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
+    medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
+    medium_search.breadth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
 
     large_search = Search(large_maze)
-    #large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
+    large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
+    large_search.breadth_first_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)
