@@ -103,7 +103,7 @@ class Search:
             node = heapq.heappop(queue)[2]
 
             if node.value == finish:
-                self.print_results("A* Best First Search: ", node, moves)
+                self.print_results("A* Search: ", node, moves)
                 return True
 
             moves += 1
