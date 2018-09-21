@@ -1,5 +1,5 @@
 from collections import deque
-import time
+import heapq
 import mazes
 
 
@@ -39,7 +39,7 @@ class Search:
 
         return False
 
-    def breadth_first_search(self,curr_node,finish,visited_nodes, moves):
+    def breadth_first_search(self, curr_node, finish, visited_nodes, moves):
        #create queue, visited_nodes needs to be reset
        queue = deque([curr_node])
        visited_nodes = []
@@ -51,7 +51,7 @@ class Search:
 
           visited_nodes.append(node)
           if node.value == finish:
-              self.print_results("Bredth First Search: ", node, moves)
+              self.print_results("Breadth First Search: ", node, moves)
               return True
           moves += 1
           for neighbor in node.neighbors:
@@ -60,12 +60,38 @@ class Search:
                 queue.appendleft(neighbor)
        return False
 
+    def greedy_search(self,curr_node, finish, visited_nodes, moves):
+        #create heap queue for priority
+        queue = []
+        visited_nodes = []
+        heapq.heapify(queue)
+        #variable to always give unique identifiers to (priority, node) tuple
+        task = 0
+        heapq.heappush(queue, (0, task, curr_node))
+        task += 1
 
-    def greedy_search(self):
-        pass
+        while len(queue) > 0:
+            node = heapq.heappop(queue)[2]
+
+            if node.value == finish:
+                self.print_results("Greedy Best First Search: ", node, moves)
+                return True
+
+            moves += 1
+            visited_nodes.append(node)
+            for neighbor in node.neighbors:
+                if neighbor not in visited_nodes and neighbor.value is not '%':
+                    neighbor.previous = node
+                    heapq.heappush(queue, (self.manhattan_d(neighbor), task, neighbor))
+                    task += 1
+        return False
+
 
     def a_search(self):
         pass
+
+    def manhattan_d(self, curr_node):
+        return abs(curr_node.x - self.fx) + abs(curr_node.y - self.fy)
 
     def print_results(self, search, curr_node, cost):
         print("{} \nCoord: {},{} \nCost: {}".format(search, curr_node.x, curr_node.y, cost))
@@ -100,11 +126,14 @@ if __name__=='__main__':
     open_search = Search(open_maze)
     open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
     open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
+    open_search.greedy_search(open_search.maze[open_search.px][open_search.py], '*', visited_nodes, moves)
 
     medium_search = Search(medium_maze)
     medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
     medium_search.breadth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
+    medium_search.greedy_search(medium_search.maze[medium_search.px][medium_search.py], '*', visited_nodes, moves)
 
     large_search = Search(large_maze)
     large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
     large_search.breadth_first_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)
+    large_search.greedy_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)

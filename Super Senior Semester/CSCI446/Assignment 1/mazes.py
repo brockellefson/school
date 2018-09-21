@@ -10,7 +10,7 @@ def read_maze(filename):
         for j, row in enumerate(column):
             for element in row:
                 #make each element a node
-                newnode = Node(element, i , j)
+                newnode = Node(element, i, j)
                 row_nodes.append(newnode)
         maze.append(row_nodes)
     #give each node knowledge on its neighbors
