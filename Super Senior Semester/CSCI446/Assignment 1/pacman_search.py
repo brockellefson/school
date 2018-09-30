@@ -22,24 +22,29 @@ class Search:
                     self.fy = j
                     print("finish is at {},{}".format(self.fx, self.fy))
 
-    def depth_first_search(self,curr_node,finish,visited_nodes, moves):
-        #if current node is end, save solution and cost
-        if curr_node.value is finish:
-            self.print_results("Depth First Search: ", curr_node, moves)
-            return True
+    def depth_first_search(self,curr_node,finish, moves):
+        queue = [curr_node]
+        visited_nodes = []
 
-        #else, continue searching, adding '.' and counting along the way
-        moves += 1
-        visited_nodes.append(curr_node)
-        for neighbor in curr_node.neighbors:
-            if neighbor not in visited_nodes and neighbor.value is not '%':
-                neighbor.previous = curr_node
-                if self.depth_first_search(neighbor, finish, visited_nodes, moves):
-                    return True
+        while len(queue) > 0:
+            node = queue.pop()
+            if node in visited_nodes:
+                continue
+
+            visited_nodes.append(node)
+            if node.value == finish:
+                self.print_results("Depth First Search: ", node, moves)
+                return True
+            moves += 1
+            for neighbor in node.neighbors:
+                if neighbor not in visited_nodes and neighbor.value is not '%':
+                    neighbor.previous = node
+                    queue.append(neighbor)
+        return False
 
         return False
 
-    def breadth_first_search(self, curr_node, finish, visited_nodes, moves):
+    def breadth_first_search(self, curr_node, finish, moves):
        #create queue, visited_nodes needs to be reset
        queue = deque([curr_node])
        visited_nodes = []
@@ -60,7 +65,7 @@ class Search:
                 queue.appendleft(neighbor)
        return False
 
-    def greedy_search(self,curr_node, finish, visited_nodes, moves):
+    def greedy_search(self,curr_node, finish, moves):
         #create heap queue for priority
         queue = []
         visited_nodes = []
@@ -87,7 +92,7 @@ class Search:
         return False
 
 
-    def a_search(self,curr_node, finish, visited_nodes, moves):
+    def a_search(self,curr_node, finish, moves):
         #create heap queue for priority
         queue = []
         visited_nodes = []
@@ -149,23 +154,22 @@ if __name__=='__main__':
     medium_maze = mazes.read_maze("medium maze.txt")
     open_maze = mazes.read_maze("open maze.txt")
 
-    visited_nodes = []
     moves = 0
 
     open_search = Search(open_maze)
-    open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
-    open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*',visited_nodes, moves)
-    open_search.greedy_search(open_search.maze[open_search.px][open_search.py], '*', visited_nodes, moves)
-    open_search.a_search(open_search.maze[open_search.px][open_search.py], '*', visited_nodes, moves)
+    open_search.depth_first_search(open_search.maze[open_search.px][open_search.py],'*', moves)
+    open_search.breadth_first_search(open_search.maze[open_search.px][open_search.py],'*', moves)
+    open_search.greedy_search(open_search.maze[open_search.px][open_search.py], '*', moves)
+    open_search.a_search(open_search.maze[open_search.px][open_search.py], '*', moves)
 
     medium_search = Search(medium_maze)
-    medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
-    medium_search.breadth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*',visited_nodes, moves)
-    medium_search.greedy_search(medium_search.maze[medium_search.px][medium_search.py], '*', visited_nodes, moves)
-    medium_search.a_search(medium_search.maze[medium_search.px][medium_search.py], '*', visited_nodes, moves)
+    medium_search.depth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*', moves)
+    medium_search.breadth_first_search(medium_search.maze[medium_search.px][medium_search.py],'*', moves)
+    medium_search.greedy_search(medium_search.maze[medium_search.px][medium_search.py], '*', moves)
+    medium_search.a_search(medium_search.maze[medium_search.px][medium_search.py], '*', moves)
 
     large_search = Search(large_maze)
-    large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*',visited_nodes, moves)
-    large_search.breadth_first_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)
-    large_search.greedy_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)
-    large_search.a_search(large_search.maze[large_search.px][large_search.py], '*', visited_nodes, moves)
+    large_search.depth_first_search(large_search.maze[large_search.px][large_search.py],'*', moves)
+    large_search.breadth_first_search(large_search.maze[large_search.px][large_search.py], '*', moves)
+    large_search.greedy_search(large_search.maze[large_search.px][large_search.py], '*', moves)
+    large_search.a_search(large_search.maze[large_search.px][large_search.py], '*', moves)
